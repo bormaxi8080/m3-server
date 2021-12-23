@@ -1,0 +1,35 @@
+{
+  "name": "m3server",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./lib/Server.js",
+  "dependencies": {
+    "async": "*",
+    "bunyan": "*",
+    "formidable": "*",
+    "hiredis": "^0.1.17",
+    "js-yaml": "*",
+    "knex": "*",
+    "lodash": "*",
+    "node-uuid": "*",
+    "node-v8-clone": "*",
+    "pg": "*",
+    "redis": "^0.11.0",
+    "request": "^2.36.0",
+    "underscore.string": "^2.3.3",
+    "ws": "^0.4.32"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "memory-streams": "^0.1.0",
+    "mocha": "*",
+    "mocha-subject": "*",
+    "node-dev": "*",
+    "node-inspector": "*",
+    "sinon": "*",
+    "sinon-chai": "*",
+    "fibers": "^1.0.2",
+    "fibrous": "^0.3.3",
+    "mocha-fibers": "^1.0.3"
+  }
+}

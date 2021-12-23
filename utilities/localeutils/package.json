@@ -1,0 +1,15 @@
+{
+  "name": "m3server",
+  "version": "0.0.1",
+  "private": true,
+  "main": "loader.js",
+  "dependencies": {
+    "async": "*",
+    "lodash": "*",
+    "google-spreadsheet": "*",
+    "csv-parse": "*",
+    "commander": "^2.2.0"
+  },
+  "devDependencies": {
+  }
+}

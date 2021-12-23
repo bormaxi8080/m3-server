@@ -1,0 +1,416 @@
+{
+    "cafe_stall": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "cafe_table": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "cafe_floor": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "payment_desk": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "kitchen_oven": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "kitchen_table": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "kitchen_floor": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "windows": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "walls": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "cafe_lights": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "cupboard": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "showcase": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "cafe_pot_plant": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "cafe_door": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "terrace_floor": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "terrace_table": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "terrace_pot_plant": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "terrace_fence": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "terrace_exit": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "grass": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "parking": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "parking_fountain": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "garden_pond": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "garden_bench": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "garden_lane": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "garden_flowerbed": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "garden_light": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "garden_statue": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "garden_fence": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": [{
+            "name": "*",
+            "desc": "*",
+            "price": {
+                "game_balance": 300
+            }
+        }]
+    },
+    "gold_sign": {
+        "name": "*",
+        "default_grade": {
+            "name": "*",
+            "desc": "*"
+        },
+        "grades": []
+    }
+}

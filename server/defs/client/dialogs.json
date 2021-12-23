@@ -1,0 +1,113 @@
+{
+    "chapter_1_start": {
+        "character": "ch_0_grandparents",
+        "steps": [{
+            "text": "*",
+            "emotion": "sad"
+        }, {
+            "text": "*",
+            "emotion": "sad"
+        }, {
+            "text": "*",
+            "emotion": "sad"
+        }]
+    },
+    "chapter_1_end": {
+        "character": "ch_0_grandparents",
+        "steps": [{
+            "text": "*",
+            "emotion": "happy"
+        }, {
+            "text": "*",
+            "emotion": "happy"
+        }, {
+            "text": "*",
+            "emotion": "happy"
+        }]
+    },
+    "chapter_2_start": {
+        "character": "ch_1_muffin",
+        "steps": [{
+            "text": "*",
+            "emotion": "sad"
+        }, {
+            "text": "*",
+            "emotion": "sad"
+        }]
+    },
+    "chapter_2_end": {
+        "character": "ch_1_muffin",
+        "steps": [{
+            "text": "*",
+            "emotion": "happy"
+        }]
+    },
+    "chapter_3_start": {
+        "character": "ch_2_red_girl",
+        "steps": [{
+            "text": "*",
+            "emotion": "sad"
+        }, {
+            "text": "*",
+            "emotion": "sad"
+        }]
+    },
+    "chapter_3_end": {
+        "character": "ch_2_red_girl",
+        "steps": [{
+            "text": "*",
+            "emotion": "happy"
+        }]
+    },
+    "chapter_4_start": {
+        "character": "ch_3_zefir",
+        "steps": [{
+            "text": "*",
+            "emotion": "sad"
+        }, {
+            "text": "*",
+            "emotion": "sad"
+        }]
+    },
+    "chapter_4_end": {
+        "character": "ch_3_zefir",
+        "steps": [{
+            "text": "*",
+            "emotion": "happy"
+        }]
+    },
+    "chapter_5_start": {
+        "character": "ch_4_farm_master",
+        "steps": [{
+            "text": "*",
+            "emotion": "sad"
+        }, {
+            "text": "*",
+            "emotion": "sad"
+        }]
+    },
+    "chapter_5_end": {
+        "character": "ch_4_farm_master",
+        "steps": [{
+            "text": "*",
+            "emotion": "happy"
+        }]
+    },
+    "chapter_6_start": {
+        "character": "ch_5_lady_captain",
+        "steps": [{
+            "text": "*",
+            "emotion": "sad"
+        }, {
+            "text": "*",
+            "emotion": "sad"
+        }]
+    },
+    "chapter_6_end": {
+        "character": "ch_5_lady_captain",
+        "steps": [{
+            "text": "*",
+            "emotion": "happy"
+        }]
+    }
+}

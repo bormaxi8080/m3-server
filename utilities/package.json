@@ -1,0 +1,14 @@
+{
+  "name": "m3highload-utilities",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "js-yaml": "*",
+    "request": "*",
+    "commander": "^2.2.0",
+    "fibers": "^1.0.1",
+    "node-uuid": "^1.4.1",
+    "lodash": "^2.4.1"
+  },
+  "devDependencies": {}
+}

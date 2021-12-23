@@ -1,0 +1,12 @@
+---
+  http_port: 3100
+  ws_port: 50000
+  logger:
+    app_name: "m3cluster"
+    console:
+      level: "trace"
+    file:
+      level: "warn"
+      path: "logs/cluster.log"
+  shedule:
+    check_period: 30

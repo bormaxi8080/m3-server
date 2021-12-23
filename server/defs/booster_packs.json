@@ -1,0 +1,98 @@
+{
+    "pastry_tongs": {
+        "contents": {
+            "pastry_tongs": 1
+        },
+        "price": {
+            "real_balance": 10
+        }
+    },
+    "gingerbread_man": {
+        "contents": {
+            "gingerbread_man": 1
+        },
+        "price": {
+            "real_balance": 10
+        }
+    },
+    "confectionery_blade": {
+        "contents": {
+            "confectionery_blade": 1
+        },
+        "price": {
+            "real_balance": 10
+        }
+    },
+    "rainbow_cake": {
+        "contents": {
+            "rainbow_cake": 1
+        },
+        "price": {
+            "real_balance": 10
+        }
+    },
+    "custard": {
+        "contents": {
+            "custard": 1
+        },
+        "price": {
+            "real_balance": 10
+        }
+    },
+    "reverse_move": {
+        "contents": {
+            "reverse_move": 1
+        },
+        "price": {
+            "real_balance": 10
+        }
+    },
+    "change_cakes_places": {
+        "contents": {
+            "change_cakes_places": 1
+        },
+        "price": {
+            "real_balance": 10
+        }
+    },
+    "extra_time": {
+        "contents": {
+            "extra_time": 1
+        },
+        "price": {
+            "real_balance": 10
+        }
+    },
+    "striped_cake_on_plate": {
+        "contents": {
+            "striped_cake_on_plate": 1
+        },
+        "price": {
+            "real_balance": 10
+        }
+    },
+    "cafetiere": {
+        "contents": {
+            "cafetiere": 1
+        },
+        "price": {
+            "real_balance": 10
+        }
+    },
+    "boss_protection": {
+        "contents": {
+            "boss_protection": 1
+        },
+        "price": {
+            "real_balance": 10
+        }
+    },
+    "extra_moves": {
+        "contents": {
+            "extra_moves": 1
+        },
+        "price": {
+            "real_balance": 10
+        }
+    }
+}

@@ -1,0 +1,3 @@
+module.exports = function(message) {
+    this.addOutgoing(message.from_user_id, 'life', {}, true);
+};

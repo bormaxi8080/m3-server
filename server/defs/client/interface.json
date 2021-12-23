@@ -1,0 +1,524 @@
+{
+    "start_level": {
+        "title": "*",
+        "target": "*",
+        "special_offer": {
+            "discount": "*",
+            "present": "*"
+        },
+        "buttons": {
+            "play": "*",
+            "sendlives": "*"
+        },
+        "top_title": "*",
+        "popups": {
+            "booster": {
+                "prohibited": "*"
+            },
+            "top": {
+                "send_life": "*",
+                "already_send_life": "*"
+            }
+        }
+    },
+    "level": {
+        "moves": "*",
+        "time": "*",
+        "score": "*",
+        "combo_animation": {
+            "step_1": "*",
+            "step_2": "*",
+            "step_3": "*",
+            "step_4": "*",
+            "step_5": "*"
+        },
+        "popups": {
+            "friend_avatar": "*",
+            "one_star": "*",
+            "two_star": "*",
+            "three_star": "*",
+            "moves": "*",
+            "time": "*",
+            "score": "*",
+            "buttons": {
+                "sound_off": "*",
+                "sound_on": "*",
+                "music_off": "*",
+                "music_on": "*",
+                "exit": "*"
+            }
+        }
+    },
+    "level_lose": {
+        "title": "*",
+        "score": "*",
+        "legend": "*",
+        "buttons": {
+            "retry": "*"
+        },
+        "lose_conditions": "*",
+        "popups": {
+            "top": {
+                "send_life": "*",
+                "already_send_life": "*"
+            },
+            "score": "*",
+            "lose_conditions": "*"
+        }
+    },
+    "level_win": {
+        "title": "*",
+        "reward": "*",
+        "scores": "*",
+        "legend_1": "*",
+        "legend_2": "*",
+        "legend_3": "*",
+        "buttons": {
+            "next": "*"
+        },
+        "share": "*",
+        "no_share": "*",
+        "popups": {
+            "top": {
+                "send_life": "*",
+                "already_send_life": "*"
+            }
+        }
+    },
+    "mapscreen": {
+        "buttons": {
+            "cafe": "*",
+            "event": "*",
+            "secret": "*",
+            "play_mobile": "*"
+        },
+        "life_score": {
+            "full": "*"
+        },
+        "popups": {
+            "posting_prize": "*",
+            "silver_coins": "*",
+            "posting_prize_ready": "*",
+            "buttons": {
+                "sound_off": "*",
+                "sound_on": "*",
+                "music_off": "*",
+                "music_on": "*",
+                "exit": "*",
+                "play_mobile": "*",
+                "cafe": "*",
+                "event": "*",
+                "secret": "*",
+                "like_us": "*",
+                "achievements": "*",
+                "prize": "*",
+                "inbox": "*"
+            },
+            "life": {
+                "complete": "*",
+                "plus": "*",
+                "incomplete": "*"
+            },
+            "gold_donuts": {
+                "text": "*",
+                "plus": "*"
+            },
+            "invite_friends": {
+                "friend_avatar": "*"
+            },
+            "help_friends": {
+                "friend_avatar": "*"
+            }
+        },
+        "up_hub": {
+            "buttons": {
+                "play": "*",
+                "free_gifts": "*",
+                "invite": "*",
+                "community": "*",
+                "how_to_play": "*",
+                "earn_donuts": "*",
+                "buy_donuts": "*",
+                "language_1_ru": "*",
+                "language_2_en": "*",
+                "language_3_fr": "*",
+                "language_4_de": "*",
+                "language_5_sp": "*",
+                "language_6_it": "*",
+                "language_7_pt": "*",
+                "language_8_zh_1": "*",
+                "language_9_zh_2": "*",
+                "language_10_ja": "*",
+                "language_11_tr": "*",
+                "language_12_ko": "*"
+            }
+        },
+        "friend_position": {
+            "title": "*",
+            "leader_title": "*"
+        },
+        "friend_events": {
+            "event": {
+                "first_place": "*",
+                "overtake_level": "*",
+                "overtake_score": "*",
+                "secret_level": "*",
+                "bonus_level": "*",
+                "end_level": "*",
+                "end_location": "*"
+            },
+            "buttons": {
+                "congratulation": "*"
+            }
+        },
+        "invite_friends": {
+            "title": "*",
+            "buttons": {
+                "invite": "*"
+            },
+            "condition": "*"
+        },
+        "help_friends": {
+            "title": "*",
+            "ask_1": "*",
+            "buttons": {
+                "send_life": "*",
+                "already_send_life": "*"
+            }
+        },
+        "special_offer_invite": {
+            "title": "*",
+            "condition": "*",
+            "friend_name": "*",
+            "buttons": {
+                "invite": "*"
+            }
+        }
+    },
+    "lose_level_ribbon": {
+        "title": {
+            "time": "*",
+            "moves": "*"
+        },
+        "special_offer": "*",
+        "buttons": {
+            "use": "*"
+        },
+        "text": "*"
+    },
+    "exit_level_ribbon": {
+        "text": "*",
+        "buttons": {
+            "exit": "*",
+            "stay": "*"
+        }
+    },
+    "win_level_ribbon": {
+        "win": "*"
+    },
+    "bank": {
+        "title": {
+            "gold_donuts": "*"
+        },
+        "special_offer": "*",
+        "best_seller": "*",
+        "great_value": "*",
+        "free": "*"
+    },
+    "booster_buy": {
+        "special_offer": "*",
+        "discount": "*",
+        "prepare_special_offer": "*"
+    },
+    "ask_lives": {
+        "title": "*",
+        "buy_offer": "*",
+        "middle_text": "*",
+        "ask_offer": "*",
+        "buttons": {
+            "ask": "*",
+            "connect": "*"
+        },
+        "wait_offer": "*",
+        "friend_list": {
+            "title": "*",
+            "checkbox_sent_all": "*",
+            "buttons": {
+                "sent": "*"
+            }
+        }
+    },
+    "secret_level": {
+        "title": "*",
+        "open": {
+            "text": "*",
+            "amount": "*",
+            "buttons": {
+                "tip": "*",
+                "play": "*"
+            }
+        },
+        "tip": {
+            "buttons": {
+                "open": "*"
+            },
+            "text": "*"
+        }
+    },
+    "bonus_level_start": {
+        "title": "*",
+        "popups": {
+            "info": "*"
+        },
+        "target": "*",
+        "buttons": {
+            "dig": "*"
+        }
+    },
+    "bonus_start_level": {
+        "target": "*"
+    },
+    "bonus_level": {
+        "score": "*",
+        "target": "*",
+        "popups": {
+            "info": "*",
+            "time": "*",
+            "time_line": "*"
+        }
+    },
+    "bonus_level_end": {
+        "title": "*",
+        "legend": "*",
+        "reward": "*",
+        "scores": "*",
+        "buttons": {
+            "next": "*"
+        },
+        "share": "*",
+        "no_share": "*"
+    },
+    "inbox": {
+        "title": "*",
+        "checkbox_sent_all": "*",
+        "message": {
+            "title": {
+                "friend": "*",
+                "friend_request": "*",
+                "old_folk": "*"
+            }
+        },
+        "buttons": {
+            "accept": "*"
+        }
+    },
+    "invite_friends": {
+        "title": "*",
+        "text": "*",
+        "checkbox_sent_all": "*",
+        "buttons": {
+            "invite": "*"
+        }
+    },
+    "gasoline_station": {
+        "title": "*",
+        "ask_friends": {
+            "text": {
+                "fbconnect": "*",
+                "no_fbconnect": "*"
+            },
+            "buttons": {
+                "fbconnect": "*",
+                "no_fbconnect": "*"
+            }
+        },
+        "buy_gasoline": {
+            "text": {
+                "all": "*",
+                "take_2": "*",
+                "take_1": "*"
+            }
+        },
+        "free_gasoline": {
+            "text": "*",
+            "timer": {
+                "days": "*",
+                "hour": "*",
+                "minutes": "*"
+            }
+        }
+    },
+    "episode_complete": {
+        "title": "*",
+        "text": "*",
+        "buttons": {
+            "next": "*"
+        },
+        "share": "*",
+        "no_share": "*"
+    },
+    "overtake_by_level": {
+        "title": "*",
+        "text": "*",
+        "buttons": {
+            "next": "*"
+        },
+        "share": "*",
+        "no_share": "*"
+    },
+    "first_place": {
+        "title": "*",
+        "text": "*",
+        "text_under_avatar": "*",
+        "buttons": {
+            "next": "*"
+        },
+        "share": "*",
+        "no_share": "*"
+    },
+    "overtake_by_score": {
+        "title": "*",
+        "text": "*",
+        "text_under_avatar_friendname": "*",
+        "text_under_avatar_friendnumber": "*",
+        "buttons": {
+            "next": "*"
+        },
+        "share": "*",
+        "no_share": "*"
+    },
+    "send_to_friends": {
+        "moves": {
+            "title": "*"
+        },
+        "lives": {
+            "title": "*"
+        },
+        "title": "*",
+        "friend_box": "*",
+        "buttons": {
+            "send_moves": "*",
+            "send_lives": "*"
+        }
+    },
+    "bonus_level_open": {
+        "title": "*",
+        "text": "*",
+        "buttons": {
+            "play_now": "*"
+        },
+        "share": "*",
+        "no_share": "*"
+    },
+    "secret_level_open": {
+        "title": "*",
+        "text": "*",
+        "buttons": {
+            "play_now": "*"
+        },
+        "share": "*",
+        "no_share": "*"
+    },
+    "modal_window": {
+        "buttons": {
+            "next": "*",
+            "yes": "*",
+            "no": "*",
+            "update": "*",
+            "continue": "*"
+        },
+        "not_enough_silver": "*",
+        "not_enough_gold": "*",
+        "confirm_inner_purchase": "*",
+        "restart_required": "*",
+        "connection_lost": "*",
+        "update_available": "*",
+        "level_not_available": "*",
+        "cafe_item_not_available": "*",
+        "purchase_failed": "*",
+        "progress_server_higher": "*",
+        "progress_server_lower": "*",
+        "life_limit": "*",
+        "datetime_mismatch": "*",
+        "confirm_secret_level_exit": "*",
+        "sharing_bonus": "*",
+        "connection_required": "*",
+        "no_more_content": "*",
+        "next_chapter_allready_unlocked": "*",
+        "free_gasoline": "*"
+    },
+    "start_event": {
+        "title": "*",
+        "buttons": {
+            "next": "*",
+            "play": "*"
+        },
+        "share": "*",
+        "no_share": "*"
+    },
+    "settings": {
+        "title": "*",
+        "buttons": {
+            "language": "*",
+            "faq": "*",
+            "help": "*",
+            "support": "*",
+            "fb_connect": "*",
+            "language_1_ru": "*",
+            "language_2_en": "*",
+            "language_3_fr": "*",
+            "language_4_de": "*",
+            "language_5_es": "*",
+            "language_6_it": "*",
+            "language_7_pt": "*",
+            "language_8_zh_1": "*",
+            "language_9_zh_2": "*",
+            "language_10_ja": "*",
+            "language_11_tr": "*",
+            "language_12_ko": "*",
+            "language_restore": "*"
+        },
+        "checkbox_notifications": "*",
+        "checkbox_purchase_confirmation": "*"
+    },
+    "rate_us": {
+        "title": "*",
+        "text": "*",
+        "buttons": {
+            "no": "*",
+            "yes": "*"
+        }
+    },
+    "achievements": {
+        "prize": "*",
+        "progress": "*",
+        "buttons": {
+            "take_prize": "*",
+            "already_take_all": "*",
+            "achievement_cout": "*"
+        },
+        "share": "*",
+        "no_share": "*"
+    },
+    "main_menu": {
+        "buttons": {
+            "play": "*",
+            "play_as_guest": "*"
+        },
+        "live": "*",
+        "sync": "*",
+        "leader_board": "*"
+    },
+    "jukebox": {
+        "title": "*",
+        "wait": "*",
+        "timer": {
+            "ready": "*"
+        },
+        "buttons": {
+            "play": "*",
+            "wait": "*",
+            "prize": "*"
+        }
+    }
+}

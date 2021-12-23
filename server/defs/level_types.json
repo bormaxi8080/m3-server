@@ -1,0 +1,47 @@
+{
+    "moves_limit": {
+        "desc": "*",
+        "short_desc": "*",
+        "ribbon_desc": "*",
+        "hint": "*"
+    },
+    "time_limit": {
+        "desc": "*",
+        "short_desc": "*",
+        "ribbon_desc": "*",
+        "hint": "*"
+    },
+    "clearbacks": {
+        "desc": "*",
+        "short_desc": "*",
+        "ribbon_desc": "*",
+        "hint": "*"
+    },
+    "get_colors": {
+        "desc": "*",
+        "short_desc": "*",
+        "ribbon_desc": "*",
+        "hint": "*"
+    },
+    "toys": {
+        "desc": "*",
+        "short_desc": "*",
+        "ribbon_desc": "*",
+        "hint": "*"
+    },
+    "get_ingredients": {
+        "desc": "*",
+        "short_desc": "*",
+        "ribbon_desc": "*",
+        "hint": "*"
+    },
+    "boss_level": {
+        "desc": "*",
+        "short_desc": "*",
+        "ribbon_desc": "*",
+        "hint": "*"
+    },
+    "bonus_level": {
+        "ribbon_desc": "*"
+    }
+}

@@ -1,0 +1,146 @@
+{
+    "pastry_tongs": {
+        "name": "*",
+        "desc": "*",
+        "hints": {
+            "level": {
+                "not_available": "*",
+                "available": "*"
+            }
+        },
+        "require": {
+            "level": 5
+        }
+    },
+    "gingerbread_man": {
+    },
+    "confectionery_blade": {
+        "name": "*",
+        "desc": "*",
+        "hints": {
+            "level_start": {
+                "not_available": "*",
+                "available": "*",
+                "in_use": "*"
+            }
+        },
+        "require": {
+            "level": 10
+        }
+    },
+    "rainbow_cake": {
+        "name": "*",
+        "desc": "*",
+        "hints": {
+            "level_start": {
+                "not_available": "*",
+                "available": "*",
+                "in_use": "*"
+            }
+        },
+        "require": {
+            "level": 13
+        }
+    },
+    "pastry_bag": {
+        "name": "*",
+        "desc": "*",
+        "hints": {
+            "level_start": {
+                "not_available": "*",
+                "available": "*",
+                "in_use": "*"
+            }
+        },
+        "require": {
+            "level": 15
+        }
+    },
+    "reverse_move": {
+        "name": "*",
+        "desc": "*",
+        "hints": {
+            "level": {
+                "not_available": "*",
+                "available": "*"
+            }
+        },
+        "require": {
+            "level": 17
+        }
+    },
+    "change_cakes_places": {
+        "name": "*",
+        "desc": "*",
+        "hints": {
+            "level": {
+                "not_available": "*",
+                "available": "*"
+            }
+        },
+        "require": {
+            "level": 19
+        }
+    },
+    "extra_time": {
+        "name": "*",
+        "desc": "*",
+        "hints": {
+            "level_start": {
+                "not_available": "*",
+                "available": "*",
+                "in_use": "*"
+            }
+        },
+        "require": {
+            "level": 27
+        }
+    },
+    "striped_cake_on_plate": {
+        "name": "*",
+        "desc": "*",
+        "hints": {
+            "level_start": {
+                "not_available": "*",
+                "available": "*",
+                "in_use": "*"
+            }
+        },
+        "require": {
+            "level": 35
+        }
+    },
+    "cafetiere": {
+        "name": "*",
+        "desc": "*",
+        "hints": {
+            "level": {
+                "not_available": "*",
+                "available": "*"
+            }
+        },
+        "require": {
+            "level": 52
+        }
+    },
+    "boss_protection": {
+        "name": "*",
+        "desc": "*",
+        "hints": {
+            "level": {
+                "not_available": "*",
+                "available": "*"
+            }
+        },
+        "require": {
+            "level": 60
+        }
+    },
+    "extra_moves": {
+        "name": "*",
+        "desc": "*",
+        "require": {
+            "level": 6
+        }
+    }
+}

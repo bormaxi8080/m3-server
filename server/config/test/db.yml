@@ -1,0 +1,23 @@
+---
+  shardable:
+    db:
+      common:
+        user: "postgres"
+        password: ""
+        host: "127.0.0.1"
+        port: "5432"
+        pool:
+          max: 10
+    shards:
+      shard_0:
+        db: "m3_test_0"
+        db_cfg: "common"
+      shard_1:
+        db: "m3_test_1"
+        db_cfg: "common"
+  standalone:
+    user: "postgres"
+    password: ""
+    host: "127.0.0.1"
+    port: "5432"
+    database: "m3_test_extra"

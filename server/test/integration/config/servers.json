@@ -1,0 +1,15 @@
+{
+    "local": {
+        "url": "127.0.0.1:4000",
+        "token_secret": "gghdfuuw9oll;[-&66wtgg00091835gfbns76dferRREjqls,,cll;0,cnnsggsiwuwiiwhhfbdsfkhkhkjhkjiuoiueqeroiujfkb",
+        "networks": {
+            "device": {
+                "secret": "gFdsrte55UIEEWgsggagtq998joOQ"
+            },
+            "GC": {
+                "secret": "gFdsrte55UIEEWgsggagtq998joOQ"
+            },
+            "FB": {}
+        }
+    }
+}

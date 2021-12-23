@@ -1,0 +1,29 @@
+---
+  port: 4000
+  token_secret: "gghdfuuw9oll;[-&66wtgg00091835gfbns76dferRREjqls,,cll;0,cnnsggsiwuwiiwhhfbdsfkhkhkjhkjiuoiueqeroiujfkb"
+  production: false
+  cluster:
+    host: "127.0.0.1"
+    port: 50003
+    reconnect: 10
+  logger:
+    app_name: "m3"
+    console:
+      level: "trace"
+    file:
+      level: "warn"
+      path: "logs/server.log"
+  networks:
+    device:
+      authorize:
+        secret: "gFdsrte55UIEEWgsggagtq998joOQ"
+    FB:
+      authorize:
+        url: "https://graph.facebook.com/me?access_token=<%= accessToken %>"
+    GC:
+      authorize:
+        secret: "gFdsrte55UIEEWgsggagtq998joOQ"
+    MM:
+      authorize:
+    OK:
+      authorize:

@@ -1,0 +1,1220 @@
+{
+    "collect_blue_cakes": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 100,
+                "reward": {
+                    "game_balance": 50
+                }
+            },
+            "silver": {
+                "goal": 500,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 2500,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "platinum": {
+                "goal": 7500,
+                "reward": {
+                    "boosters": {
+                        "extra_moves": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 10000,
+                "reward": {
+                    "boosters": {
+                        "pastry_tongs": 1
+                    }
+                }
+            }
+        }
+    },
+    "collect_green_cakes": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 100,
+                "reward": {
+                    "game_balance": 50
+                }
+            },
+            "silver": {
+                "goal": 500,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 2500,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "platinum": {
+                "goal": 7500,
+                "reward": {
+                    "boosters": {
+                        "extra_moves": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 10000,
+                "reward": {
+                    "boosters": {
+                        "pastry_tongs": 1
+                    }
+                }
+            }
+        }
+    },
+    "collect_purple_cakes": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 100,
+                "reward": {
+                    "game_balance": 50
+                }
+            },
+            "silver": {
+                "goal": 500,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 2500,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "platinum": {
+                "goal": 7500,
+                "reward": {
+                    "boosters": {
+                        "extra_moves": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 10000,
+                "reward": {
+                    "boosters": {
+                        "pastry_tongs": 1
+                    }
+                }
+            }
+        }
+    },
+    "collect_orange_cakes": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 100,
+                "reward": {
+                    "game_balance": 50
+                }
+            },
+            "silver": {
+                "goal": 500,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 2500,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "platinum": {
+                "goal": 7500,
+                "reward": {
+                    "boosters": {
+                        "extra_moves": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 10000,
+                "reward": {
+                    "boosters": {
+                        "pastry_tongs": 1
+                    }
+                }
+            }
+        }
+    },
+    "collect_red_cakes": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 100,
+                "reward": {
+                    "game_balance": 50
+                }
+            },
+            "silver": {
+                "goal": 500,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 2500,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "platinum": {
+                "goal": 7500,
+                "reward": {
+                    "boosters": {
+                        "extra_moves": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 10000,
+                "reward": {
+                    "boosters": {
+                        "pastry_tongs": 1
+                    }
+                }
+            }
+        }
+    },
+    "collect_yellow_cakes": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 100,
+                "reward": {
+                    "game_balance": 50
+                }
+            },
+            "silver": {
+                "goal": 500,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 2500,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "platinum": {
+                "goal": 7500,
+                "reward": {
+                    "boosters": {
+                        "extra_moves": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 10000,
+                "reward": {
+                    "boosters": {
+                        "pastry_tongs": 1
+                    }
+                }
+            }
+        }
+    },
+    "collect_any_cakes": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 1000,
+                "reward": {
+                    "game_balance": 100
+                }
+            },
+            "silver": {
+                "goal": 5000,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "gold": {
+                "goal": 25000,
+                "reward": {
+                    "real_balance": 3
+                }
+            },
+            "platinum": {
+                "goal": 75000,
+                "reward": {
+                    "boosters": {
+                        "rainbow_cake": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 100000,
+                "reward": {
+                    "boosters": {
+                        "reverse_move": 1
+                    }
+                }
+            }
+        }
+    },
+    "combine_chips_got_striped_chip": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 10,
+                "reward": {
+                    "game_balance": 100
+                }
+            },
+            "silver": {
+                "goal": 15,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 20,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "platinum": {
+                "goal": 30,
+                "reward": {
+                    "boosters": {
+                        "pastry_tongs": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 40,
+                "reward": {
+                    "boosters": {
+                        "reverse_move": 1
+                    }
+                }
+            }
+        }
+    },
+    "combine_chips_got_cake_on_plate": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 5,
+                "reward": {
+                    "game_balance": 100
+                }
+            },
+            "silver": {
+                "goal": 10,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 15,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "platinum": {
+                "goal": 25,
+                "reward": {
+                    "boosters": {
+                        "pastry_tongs": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 35,
+                "reward": {
+                    "boosters": {
+                        "reverse_move": 1
+                    }
+                }
+            }
+        }
+    },
+    "combine_chips_got_rainbow_cake": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 5,
+                "reward": {
+                    "game_balance": 100
+                }
+            },
+            "silver": {
+                "goal": 10,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "gold": {
+                "goal": 15,
+                "reward": {
+                    "real_balance": 3
+                }
+            },
+            "platinum": {
+                "goal": 25,
+                "reward": {
+                    "boosters": {
+                        "reverse_move": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 35,
+                "reward": {
+                    "boosters": {
+                        "pastry_bag": 1
+                    }
+                }
+            }
+        }
+    },
+    "align_striped_supercakes": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 10,
+                "reward": {
+                    "game_balance": 100
+                }
+            },
+            "silver": {
+                "goal": 20,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 40,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "platinum": {
+                "goal": 50,
+                "reward": {
+                    "boosters": {
+                        "rainbow_cake": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 70,
+                "reward": {
+                    "boosters": {
+                        "pastry_bag": 1
+                    }
+                }
+            }
+        }
+    },
+    "align_sweet_bombs": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 10,
+                "reward": {
+                    "game_balance": 100
+                }
+            },
+            "silver": {
+                "goal": 20,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 40,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "platinum": {
+                "goal": 50,
+                "reward": {
+                    "boosters": {
+                        "rainbow_cake": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 70,
+                "reward": {
+                    "boosters": {
+                        "reverse_move": 1
+                    }
+                }
+            }
+        }
+    },
+    "align_rainbow_supercakes": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 10,
+                "reward": {
+                    "game_balance": 150
+                }
+            },
+            "silver": {
+                "goal": 20,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "gold": {
+                "goal": 40,
+                "reward": {
+                    "real_balance": 3
+                }
+            },
+            "platinum": {
+                "goal": 50,
+                "reward": {
+                    "boosters": {
+                        "pastry_bag": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 70,
+                "reward": {
+                    "boosters": {
+                        "striped_cake_on_plate": 3
+                    }
+                }
+            }
+        }
+    },
+    "combine_striped_chips_sweet_bombs": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 10,
+                "reward": {
+                    "game_balance": 100
+                }
+            },
+            "silver": {
+                "goal": 20,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 40,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "platinum": {
+                "goal": 50,
+                "reward": {
+                    "boosters": {
+                        "extra_time": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 70,
+                "reward": {
+                    "boosters": {
+                        "boss_protection": 1
+                    }
+                }
+            }
+        }
+    },
+    "combine_striped_chips_rainbow_cakes": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 10,
+                "reward": {
+                    "game_balance": 100
+                }
+            },
+            "silver": {
+                "goal": 20,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 40,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "platinum": {
+                "goal": 50,
+                "reward": {
+                    "boosters": {
+                        "extra_time": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 70,
+                "reward": {
+                    "boosters": {
+                        "boss_protection": 1
+                    }
+                }
+            }
+        }
+    },
+    "combine_square_chips_rainbow_cakes": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 10,
+                "reward": {
+                    "game_balance": 100
+                }
+            },
+            "silver": {
+                "goal": 20,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 40,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "platinum": {
+                "goal": 50,
+                "reward": {
+                    "boosters": {
+                        "extra_time": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 35,
+                "reward": {
+                    "boosters": {
+                        "boss_protection": 1
+                    }
+                }
+            }
+        }
+    },
+    "release_liquid_chocolate_bunnies": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 100,
+                "reward": {
+                    "game_balance": 100
+                }
+            },
+            "silver": {
+                "goal": 150,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 300,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "platinum": {
+                "goal": 450,
+                "reward": {
+                    "boosters": {
+                        "confectionery_blade": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 600,
+                "reward": {
+                    "boosters": {
+                        "confectionery_blade": 3
+                    }
+                }
+            }
+        }
+    },
+    "free_toys": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 5,
+                "reward": {
+                    "game_balance": 100
+                }
+            },
+            "silver": {
+                "goal": 6,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 8,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "platinum": {
+                "goal": 10,
+                "reward": {
+                    "boosters": {
+                        "pastry_bag": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 15,
+                "reward": {
+                    "boosters": {
+                        "striped_cake_on_plate": 1
+                    }
+                }
+            }
+        }
+    },
+    "destroy_waffle": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 75,
+                "reward": {
+                    "game_balance": 50
+                }
+            },
+            "silver": {
+                "goal": 300,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 700,
+                "reward": {
+                    "boosters": {
+                        "reverse_move": 1
+                    }
+                }
+            }
+        }
+    },
+    "destroy_honey": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 75,
+                "reward": {
+                    "game_balance": 50
+                }
+            },
+            "silver": {
+                "goal": 300,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 700,
+                "reward": {
+                    "boosters": {
+                        "cafetiere": 1
+                    }
+                }
+            }
+        }
+    },
+    "destroy_dome": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 75,
+                "reward": {
+                    "game_balance": 50
+                }
+            },
+            "silver": {
+                "goal": 300,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 700,
+                "reward": {
+                    "boosters": {
+                        "reverse_move": 1
+                    }
+                }
+            }
+        }
+    },
+    "destroy_jelly": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 75,
+                "reward": {
+                    "game_balance": 50
+                }
+            },
+            "silver": {
+                "goal": 400,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 900,
+                "reward": {
+                    "boosters": {
+                        "cafetiere": 1
+                    }
+                }
+            }
+        }
+    },
+    "hold_on_bonus_level": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 3,
+                "reward": {
+                    "game_balance": 100
+                }
+            },
+            "silver": {
+                "goal": 5,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 10,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "platinum": {
+                "goal": 15,
+                "reward": {
+                    "boosters": {
+                        "change_cakes_places": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 20,
+                "reward": {
+                    "boosters": {
+                        "cafetiere": 3
+                    }
+                }
+            }
+        }
+    },
+    "spy_on_secret_level": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 1,
+                "reward": {
+                    "game_balance": 100
+                }
+            },
+            "silver": {
+                "goal": 5,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 10,
+                "reward": {
+                    "boosters": {
+                        "boss_protection": 2
+                    }
+                }
+            },
+            "platinum": {
+                "goal": 15,
+                "reward": {
+                    "boosters": {
+                        "pastry_bag": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 20,
+                "reward": {
+                    "boosters": {
+                        "change_cakes_places": 3
+                    }
+                }
+            }
+        }
+    },
+    "get_achievements": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 1,
+                "reward": {
+                    "game_balance": 100
+                }
+            },
+            "silver": {
+                "goal": 5,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 10,
+                "reward": {
+                    "boosters": {
+                        "reverse_move": 2
+                    }
+                }
+            }
+        }
+    },
+    "activate_cafe_slot_machine": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 3,
+                "reward": {
+                    "game_balance": 100
+                }
+            },
+            "silver": {
+                "goal": 6,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "gold": {
+                "goal": 9,
+                "reward": {
+                    "boosters": {
+                        "pastry_bag": 2
+                    }
+                }
+            }
+        }
+    },
+    "buy_cafe_items": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 5,
+                "reward": {
+                    "cafe": [
+                        "gold_sign"
+                    ]
+                }
+            },
+            "silver": {
+                "goal": 10,
+                "reward": {
+                    "real_balance": 2
+                }
+            },
+            "gold": {
+                "goal": 15,
+                "reward": {
+                    "boosters": {
+                        "rainbow_cake": 2
+                    }
+                }
+            }
+        }
+    },
+    "invite_lot_of_friends": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 10,
+                "reward": {
+                    "real_balance": 1
+                }
+            },
+            "silver": {
+                "goal": 25,
+                "reward": {
+                    "real_balance": 3
+                }
+            },
+            "gold": {
+                "goal": 50,
+                "reward": {
+                    "real_balance": 5
+                }
+            }
+        }
+    },
+    "pass_tutorial": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "diamond": {
+                "goal": 5,
+                "reward": {
+                    "boosters": {
+                        "pastry_tongs": 1,
+                        "extra_moves": 1
+                    }
+                }
+            }
+        }
+    },
+    "buy_boster_pack": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "diamond": {
+                "goal": 5,
+                "reward": {
+                    "boosters": {
+                        "pastry_tongs": 1,
+                        "extra_moves": 1
+                    }
+                }
+            }
+        }
+    },
+    "repair_cafe_entirely": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "diamond": {
+                "goal": 5,
+                "reward": {
+                    "boosters": {
+                        "change_cakes_places": 3,
+                        "pastry_bag": 2,
+                        "cafetiere": 2
+                    }
+                }
+            }
+        }
+    },
+    "10m_score_for_entire_game": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "bronze": {
+                "goal": 500000,
+                "reward": {
+                    "game_balance": 500
+                }
+            },
+            "silver": {
+                "goal": 1000000,
+                "reward": {
+                    "real_balance": 800
+                }
+            },
+            "gold": {
+                "goal": 1500000,
+                "reward": {
+                    "boosters": {
+                        "reverse_move": 1
+                    }
+                }
+            },
+            "platinum": {
+                "goal": 3000000,
+                "reward": {
+                    "boosters": {
+                        "pastry_bag": 1
+                    }
+                }
+            },
+            "diamond": {
+                "goal": 4000000,
+                "reward": {
+                    "boosters": {
+                        "cafetiere": 3
+                    }
+                }
+            }
+        }
+    },
+    "pass_chapter_1": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "diamond": {
+                "goal": 1,
+                "reward": {
+                    "game_balance": 1
+                }
+            }
+        }
+    },
+    "pass_chapter_2": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "diamond": {
+                "goal": 1,
+                "reward": {
+                    "game_balance": 1
+                }
+            }
+        }
+    },
+    "pass_chapter_3": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "diamond": {
+                "goal": 1,
+                "reward": {
+                    "game_balance": 1
+                }
+            }
+        }
+    },
+    "pass_chapter_4": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "diamond": {
+                "goal": 1,
+                "reward": {
+                    "game_balance": 1
+                }
+            }
+        }
+    },
+    "pass_chapter_5": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "diamond": {
+                "goal": 1,
+                "reward": {
+                    "game_balance": 1
+                }
+            }
+        }
+    },
+    "pass_chapter_6": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "diamond": {
+                "goal": 1,
+                "reward": {
+                    "game_balance": 1
+                }
+            }
+        }
+    },
+    "pass_chapter_7": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "diamond": {
+                "goal": 1,
+                "reward": {
+                    "game_balance": 1
+                }
+            }
+        }
+    },
+    "pass_chapter_8": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "diamond": {
+                "goal": 1,
+                "reward": {
+                    "game_balance": 1
+                }
+            }
+        }
+    },
+    "pass_chapter_9": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "diamond": {
+                "goal": 1,
+                "reward": {
+                    "game_balance": 1
+                }
+            }
+        }
+    },
+    "pass_chapter_10": {
+        "name": "*",
+        "desc": "*",
+        "grades": {
+            "diamond": {
+                "goal": 1,
+                "reward": {
+                    "game_balance": 1
+                }
+            }
+        }
+    }
+}

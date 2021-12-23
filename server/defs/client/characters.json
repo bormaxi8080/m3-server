@@ -1,0 +1,18 @@
+{
+    "names": [
+        "ch_0_grandparents",
+        "ch_1_muffin",
+        "ch_2_red_girl",
+        "ch_3_zefir",
+        "ch_4_farm_master",
+        "ch_5_lady_captain",
+        "ch_6_milkman",
+        "ch_7_ekler_mistress",
+        "ch_8_clown",
+        "ch_9_italian_coock",
+        "ch_10_boss_fatman"
+    ],
+    "emotions": [
+        "idle", "sad", "happy"
+    ]
+}

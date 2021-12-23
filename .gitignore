@@ -1,0 +1,6 @@
+.DS_Store
+.idea
+
+server/node_modules
+server/logs
+server/tmp

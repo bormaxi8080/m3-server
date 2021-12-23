@@ -1,0 +1,5 @@
+#!/bin/sh
+
+IP=`curl 'http://devlogs.plamee/m3highload_master_default_ipaddress.txt'`
+
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ./m3highload_ssh_key  root@$IP

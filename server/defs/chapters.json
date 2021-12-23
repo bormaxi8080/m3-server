@@ -1,0 +1,12 @@
+{
+    "1": {"unlocks_count": 0, "unlock_interval": 259200},
+    "2": {"unlocks_count": 0, "unlock_interval": 259200},
+    "3": {"unlocks_count": 2, "unlock_interval": 259200},
+    "4": {"unlocks_count": 3, "unlock_interval": 259200},
+    "5": {"unlocks_count": 3, "unlock_interval": 259200},
+    "6": {"unlocks_count": 3, "unlock_interval": 259200},
+    "7": {"unlocks_count": 3, "unlock_interval": 259200},
+    "8": {"unlocks_count": 3, "unlock_interval": 259200},
+    "9": {"unlocks_count": 3, "unlock_interval": 259200},
+    "10": {"unlocks_count": 3, "unlock_interval": 259200}
+}

@@ -1,0 +1,20 @@
+{
+    "chapters": {
+        "1": {
+            "id": 1,
+            "unlocked": true
+        }
+    },
+    "cafe": {
+        "items": {
+        }
+    },
+    "achievements": {},
+    "bonus_levels": {},
+    "social_networks": {
+        "FB": {}
+    },
+    "secret_levels": {
+        "current": 1
+    }
+}

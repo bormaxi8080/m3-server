@@ -1,0 +1,42 @@
+{
+    "local": {
+        "url": "127.0.0.1:3000",
+        "token_secret": "gghdfuuw9oll;[-&66wtgg00091835gfbns76dferRREjqls,,cll;0,cnnsggsiwuwiiwhhfbdsfkhkhkjhkjiuoiueqeroiujfkb",
+        "networks": {
+            "device": {
+                "secret": "gFdsrte55UIEEWgsggagtq998joOQ"
+            },
+            "GC": {
+                "secret": "gFdsrte55UIEEWgsggagtq998joOQ"
+            },
+            "FB": {}
+        }
+    },
+    "test": {
+        "url": "m3highload-master.test.nsk.plamee.com",
+        "token_secret": "gghdfuuw9oll;[-&66wtgg00091835gfbns76dferRREjqls,,cll;0,cnnsggsiwuwiiwhhfbdsfkhkhkjhkjiuoiueqeroiujfkb",
+        "networks": {
+            "device": {
+                "secret": "gFdsrte55UIEEWgsggagtq998joOQ"
+            },
+            "GC": {
+                "secret": "gFdsrte55UIEEWgsggagtq998joOQ"
+            },
+            "FB": {}
+        }
+    },
+    "amazon": {
+        "_url": "m3highload-391268467.eu-west-1.elb.amazonaws.com",
+        "url": "54.171.150.167",
+        "token_secret": "gghdfuuw9oll;[-&66wtgg00091835gfbns76dferRREjqls,,cll;0,cnnsggsiwuwiiwhhfbdsfkhkhkjhkjiuoiueqeroiujfkb",
+        "networks": {
+            "device": {
+                "secret": "gFdsrte55UIEEWgsggagtq998joOQ"
+            },
+            "GC": {
+                "secret": "gFdsrte55UIEEWgsggagtq998joOQ"
+            },
+            "FB": {}
+        }
+    }
+}

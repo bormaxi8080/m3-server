@@ -1,0 +1,141 @@
+{
+    "action_1": {
+        "start_time": 1415350514719,
+        "end_time": 1415640526217,
+        "effects": {
+            "products": {
+                "tier_1": {
+                    "presentation": {
+                        "price": 100,
+                        "bonus": 10,
+                        "reward": {
+                            "boosters": {
+                                "pastry_tongs": 1
+                            }
+                        },
+                        "bestseller": true
+                    },
+                    "reward": {
+                        "real_balance": 110,
+                        "boosters": {
+                            "pastry_tongs": 1
+                        }
+                    }
+                },
+                "tier_2": {
+                    "presentation": {
+                        "price": 250,
+                        "bonus": 50,
+                        "reward": {
+                            "boosters": {
+                                "pastry_tongs": 1
+                            }
+                        },
+                        "special_offer": true
+                    },
+                    "reward": {
+                        "real_balance": 300,
+                        "boosters": {
+                            "pastry_tongs": 1
+                        }
+                    }
+                },
+                "tier_3": {
+                    "presentation": {
+                        "price": 600,
+                        "bonus": 100,
+                        "reward": {
+                            "boosters": {
+                                "pastry_tongs": 1
+                            }
+                        },
+                        "great_value": true
+                    },
+                    "reward": {
+                        "real_balance": 700,
+                        "boosters": {
+                            "pastry_tongs": 1
+                        }
+                    }
+                }
+            },
+            "booster_packs": {
+                "pastry_tongs": {
+                    "presentation": {
+                        "price": {
+                            "real_balance": 5
+                        },
+                        "tag": "*",
+                        "tag_level": "*"
+                    },
+                    "price": {
+                        "real_balance": 5
+                    }
+                },
+                "gingerbread_man": {
+                    "presentation": {
+                        "contents": {
+                            "gingerbread_man": 1,
+                            "pastry_tongs": 1
+                        },
+                        "tag": "*",
+                        "tag_level": "*"
+                    },
+                    "contents": {
+                        "gingerbread_man": 1,
+                        "pastry_tongs": 1
+                    }
+                },
+                "rainbow_cake": {
+                    "presentation": {
+                        "preparing": true
+                    }
+                }
+            },
+            "unlocks": {
+                "2": {
+                    "presentation": {
+                        "price": {
+                            "real_balance": 10
+                        }
+                    },
+                    "price": {
+                        "real_balance": 10
+                    }
+                },
+                "3": {
+                    "presentation": {
+                        "price": {
+                            "real_balance": 15
+                        }
+                    },
+                    "price": {
+                        "real_balance": 15
+                    }
+                }
+            },
+            "life": {
+                "presentation": {
+                    "price": {
+                        "real_balance": 30
+                    },
+                    "tag": "*",
+                    "special_offer": true
+                },
+                "price": {
+                    "real_balance": 30
+                }
+            },
+            "invite": {
+                "presentation": {
+                    "reward": {
+                        "real_balance": 10
+                    }
+                },
+                "reward": {
+                    "real_balance": 10
+                }
+            }
+        }
+    }
+}

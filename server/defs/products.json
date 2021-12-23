@@ -1,0 +1,107 @@
+{
+    "tier_1": {
+        "presentation": {
+            "price": 100,
+            "bonus": 10
+        },
+        "reward": {
+            "real_balance": 110
+        },
+        "store": {
+            "appstore": {
+                "id": "com.plamee.cakestory.tier1",
+                "cost": "1.99"
+            }
+        }
+    },
+    "tier_2": {
+        "presentation": {
+            "price": 250,
+            "bonus": 50
+        },
+        "reward": {
+            "real_balance": 300
+        },
+        "store": {
+            "appstore": {
+                "id": "com.plamee.cakestory.tier2",
+                "cost": "4.99"
+            }
+        }
+    },
+    "tier_3": {
+        "presentation": {
+            "price": 600,
+            "bonus": 100
+        },
+        "reward": {
+            "real_balance": 700
+        },
+        "store": {
+            "appstore": {
+                "id": "com.plamee.cakestory.tier3",
+                "cost": "9.99"
+            }
+        }
+    },
+    "tier_4": {
+        "presentation": {
+            "price": 1500,
+            "bonus": 200
+        },
+        "reward": {
+            "real_balance": 1700
+        },
+        "store": {
+            "appstore": {
+                "id": "com.plamee.cakestory.tier4",
+                "cost": "19.99"
+            }
+        }
+    },
+    "tier_5": {
+        "presentation": {
+            "price": 3500,
+            "bonus": 400
+        },
+        "reward": {
+            "real_balance": 3900
+        },
+        "store": {
+            "appstore": {
+                "id": "com.plamee.cakestory.tier5",
+                "cost": "49.99"
+            }
+        }
+    },
+    "tier_6": {
+        "presentation": {
+            "price": 7000,
+            "bonus": 1000
+        },
+        "reward": {
+            "real_balance": 8000
+        },
+        "store": {
+            "appstore": {
+                "id": "com.plamee.cakestory.tier6",
+                "cost": "99.99"
+            }
+        }
+    },
+    "tier_7": {
+        "presentation": {
+            "price": 11000,
+            "bonus": 2500
+        },
+        "reward": {
+            "real_balance": 13500
+        },
+        "store": {
+            "appstore": {
+                "id": "com.plamee.cakestory.tier7",
+                "cost": "149.99"
+            }
+        }
+    }
+}

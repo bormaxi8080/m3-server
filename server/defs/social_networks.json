@@ -1,0 +1,14 @@
+{
+    "FB": {
+        "like": {
+            "reward": {
+                "real_balance": 1
+            }
+        },
+        "invite": {
+            "reward": {
+                "real_balance": 1
+            }
+        }
+    }
+}

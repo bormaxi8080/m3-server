@@ -1,0 +1,9 @@
+[
+    { "count": 1, "reward": { "real_balance": 1 } },
+    { "count": 3, "reward": { "real_balance": 1 } },
+    { "count": 5, "reward": { "real_balance": 1 } },
+    { "count": 10, "reward": { "real_balance": 1 } },
+    { "count": 25, "reward": { "real_balance": 1 } },
+    { "count": 50, "reward": { "real_balance": 1 } },
+    { "count": 100, "reward": { "real_balance": 1 } }
+]
