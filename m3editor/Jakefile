@@ -1,0 +1,9 @@
+jake.addListener('complete', function() { process.exit(); });
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+require('./server/tasks/db');
+require('./server/tasks/import');
+require('./server/tasks/flash');
+require('./server/tasks/server');
+
+task('default', ['server']);

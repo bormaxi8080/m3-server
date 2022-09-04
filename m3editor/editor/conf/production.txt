@@ -1,0 +1,1 @@
+host=http://match3test.plamee.com

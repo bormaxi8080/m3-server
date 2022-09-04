@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml"  borderColor="#e2e2e2" borderStyle="solid" verticalAlign="middle" >
+	<mx:Script>
+		<![CDATA[
+			import org.plamee.managers.AssetsManager;
+			
+			private function onRemoveClick():void
+			{
+				this.parentDocument.removeStatisticsFromList(data);
+			}
+		]]>
+	</mx:Script>
+	<mx:Image width="{Match3Editor.CELL_WIDTH/2}" height="{Match3Editor.CELL_WIDTH/2}" source="{AssetsManager.getInstance().getImageClass(data.source)}"/>
+	<mx:Label text="{String(data.col)}" width="50" />
+	<mx:Label text="%"/>
+	<mx:Button styleName="minusButton" click="onRemoveClick()" />
+</mx:HBox>

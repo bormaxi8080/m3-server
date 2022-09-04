@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" 
+				layout="vertical" 
+				title="Chapter settings"
+				width="880" height="500" showCloseButton="true" close="closeWindow()"
+				creationComplete="onCreateComplete()">
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.collections.XMLListCollection;
+			import mx.controls.Alert;
+			import mx.core.UIComponent;
+			import mx.events.CloseEvent;
+			import mx.events.DragEvent;
+			import mx.events.ListEvent;
+			import mx.managers.DragManager;
+			import mx.managers.PopUpManager;
+			import mx.messaging.AbstractConsumer;
+			
+			import org.plamee.view.events.ChapterWindowEvent;
+			import org.plamee.view.events.ChaptersWindowEvent;
+			import org.plamee.view.events.SaveWindowEvent;
+			import org.plamee.view.events.SecretLevelWindowEvent;
+			
+			public var opened:Boolean = false;
+			
+			public var sourseArray:Array;
+			public var levelsAC:ArrayCollection;
+			
+			public var needExport:Boolean = false;
+			
+			private var xmllcTreeTestData:XMLListCollection;
+			private var exportAr:Array;
+			
+			[Bindable]
+			[Embed("/../assets/folder-flower-blue-icon.png")]
+			private var folderIcon:Class;
+			
+			[Bindable]
+			[Embed("/../assets/Places-folder-favorites-icon.png")]
+			private var levelsIcon:Class;
+
+			
+			private function onCreateComplete():void
+			{
+				xmllcTreeTestData = new XMLListCollection();
+				/*xmllcTreeTestData.addItem(
+					
+						<node type="chapter" id="1" name="Chapter1" file="chapter1.xml">
+							<node type="levels" name="Levels">
+							</node>
+							<node type="bonus" name="Bonus">
+							</node>				
+						</node>
+					);*/
+				
+				//chapterTree.dataProvider = xmllcTreeTestData;
+				
+				
+				
+			}
+			
+			public function openWindow(app:DisplayObject):void
+			{
+				if(opened == false)
+				{
+					opened = true;
+					PopUpManager.addPopUp(this, app, true);
+					PopUpManager.centerPopUp(this);
+					this.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+					this.enabled = false;
+					needExport = false;
+					exportAr = null;
+					sourseArray = null;
+					levelsAC = null;
+					
+					dispatchEvent(new ChaptersWindowEvent(ChaptersWindowEvent.GET_CHAPTER_SETTINGS));
+				}
+			}
+			
+			public function closeWindow():void
+			{
+				if(opened == true)
+				{
+					opened = false;
+					PopUpManager.removePopUp(this);
+					this.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+				}
+			}
+			
+			private function onKeyDown(e:KeyboardEvent):void
+			{
+				if(e.keyCode == 27) // ESC
+					closeWindow();
+			}
+			
+			
+			public function initList(value:Array):void
+			{
+				sourseArray = value.slice(); //clone array
+				levelsAC = new ArrayCollection(value);
+				levelsDG.dataProvider = levelsAC;
+				
+				upgrateTree();
+				
+			}
+			
+			private function upgrateTree():void
+			{
+				if((exportAr != null)&&(levelsAC != null))
+				{
+					createTreeFromXML();
+					this.enabled = true;
+				}
+			}
+			
+			public function createXMLfromTree():Boolean
+			{
+				var exportArTemp:Array = new Array();
+				var temp:XML;
+				var tempLevel:XML;
+				var tempLevelExport:Object;
+				var tempExport:Object;
+
+				
+				for(var i:int=0; i<xmllcTreeTestData.length; i++)
+				{
+					temp = xmllcTreeTestData.getItemAt(i) as XML;
+					tempExport = new Object();
+					tempExport.id = i+1; 
+					tempExport.order = tempExport.id;
+					tempExport.data = new Object();
+					tempExport.data.levels = [];
+					
+					for (var j:int = 0; j < temp.node[0].node.length(); j++)
+					{
+						tempLevel = temp.node[0].node[j];
+						
+						tempLevelExport = new Object();
+						
+						for(var k:int=0;k<tempLevel.node.length(); k++)
+						{
+							if(tempLevel.node[k].node.length() == 1)
+							{
+								tempLevelExport[tempLevel.node[k].@name] = int(tempLevel.node[k].node[0].@id);
+							}
+							else
+							{
+								Alert.show("Add level into '"+tempLevel.@name+"' -> '"+temp.@name+"' -> "+tempLevel.node[k].@name);
+								return false;		
+							}
+						}
+						
+						tempExport.data.levels.push(tempLevelExport);
+					}
+					
+					if(j == 0)
+					{
+						Alert.show("Insert levels into chapter "+temp.@name);
+						return false;
+					}
+					
+					if( temp.node[1].node.length() == 0)
+					{
+						//Alert.show("Insert bonus level into chapter "+temp.@name);
+						//return false;						
+					}
+					else
+					{
+						tempLevel = temp.node[1];
+						tempLevelExport = new Object();
+						
+						for(k=0;k<tempLevel.node.length(); k++)
+						{
+							if(tempLevel.node[k].node.length() == 1)
+							{
+								tempLevelExport[tempLevel.node[k].@name] = int(tempLevel.node[k].node[0].@id);
+							}
+							else
+							{
+								if(tempLevel.@name!="Bonus"){
+									Alert.show("Add level into '"+tempLevel.@name+"' -> '"+temp.@name+"' -> "+tempLevel.node[k].@name);
+									return false;		
+								}
+							}
+						}
+						
+												
+						tempExport.data.bonus_level = tempLevelExport;
+					}
+					
+					exportArTemp.push(tempExport);
+				}
+				
+				if(i == 0)
+				{
+					Alert.show("Insert chapter");
+					return false;
+				}				
+				
+				exportAr = exportArTemp;
+				
+				return true;
+			}
+			private function lengthObject(inObj:Object):int {
+				var aCount:int=0;
+				for (var aKey:String in inObj) aCount++;
+				return aCount;
+			}
+			public function createTreeFromXML():void
+			{
+				var temp:XMLListCollection = new XMLListCollection();
+				var tempExport:XML;
+				var tempLevelExport:XML;
+				var nameStr:String;
+				var objectTest:Object;
+				
+				
+				for(var i:int=0; i<exportAr.length; i++)
+				{
+					tempExport = new XML('<node type="chapter" name="Chapter'+(i+1).toString()+'"><node type="levels" name="Levels"></node><node type="bonus" name="Bonus"></node></node>');
+					
+					for (var j:int = 0; j < exportAr[i].data.levels.length; j++)
+					{
+						tempLevelExport = new XML('<node type="levelTypes" name="Level'+(j+1).toString()+'"></node>');
+						
+						for (nameStr in exportAr[i].data.levels[j])
+						{
+							objectTest = removeFromGridById(exportAr[i].data.levels[j][nameStr])
+							if(objectTest != null)	
+							tempLevelExport.appendChild(new XML('<node type="abtest" name="'+nameStr+'"><node type="level" id="'+objectTest.id+'" name="'+objectTest.name+'" /></node>'));
+						}
+						tempExport.node[0].appendChild(tempLevelExport);
+					}
+					
+					for (nameStr in exportAr[i].data.bonus_level)
+					{
+						objectTest = removeFromGridById(exportAr[i].data.bonus_level[nameStr])
+						if(objectTest != null)	
+							tempExport.node[1].appendChild(new XML('<node type="abtest" name="'+nameStr+'"><node type="level" id="'+objectTest.id+'" name="'+objectTest.name+'" /></node>'));
+					}
+					if(lengthObject(exportAr[i].data.bonus_level)==0){
+						tempExport.node[1].appendChild(new XML('<node type="abtest" name="default"></node>'));						
+					}
+					
+					temp.addItem(tempExport);
+				}
+				
+				xmllcTreeTestData = temp;
+				chapterTree.dataProvider = xmllcTreeTestData;
+			}			
+			
+			private function saveChapter():void
+			{
+				if(createXMLfromTree() == true)
+				{
+					dispatchEvent(new ChapterWindowEvent(ChapterWindowEvent.SAVE_CHAPTERS, exportAr));
+					this.enabled = false;
+				}
+			}
+			
+			public function savedChapters(chaptersXML:String):void
+			{
+				if(needExport == true)
+				{
+					//need export
+				}
+				this.enabled = true;
+			}
+			
+			public function gotChapters(value:Array):void
+			{
+				if(value == null)
+				{
+					exportAr = new Array();
+				}
+				else
+				{	
+					exportAr = value;
+				}
+				
+				upgrateTree();
+			}
+			
+			
+			private function onAddChapter():void
+			{
+				var numOf:int = xmllcTreeTestData.length;
+				numOf++;
+				
+				
+				xmllcTreeTestData.addItem(new XML(
+					
+						'<node type="chapter" name="Chapter'+numOf.toString()+'">'+
+							'<node type="levels" name="Levels">'+
+								'<node type="levelTypes" name="Level1">'+
+									'<node type="abtest" name="default">'+
+									'</node>'+									
+								'</node>'+
+							'</node>'+
+							'<node type="bonus" name="Bonus">'+
+								'<node type="abtest" name="default">'+
+								'</node>'+
+							'</node>'+
+						'</node>'));
+				
+				chapterTree.invalidateList();
+			}
+			
+			private function onDeleteChapter():void
+			{
+				var temp:XML = chapterTree.selectedItem as XML;
+				if ((temp != null)&&(temp.@type == "chapter"))
+				{	
+					temp=xmllcTreeTestData.removeItemAt(chapterTree.selectedIndex) as XML;
+					var tempList:XMLList = XML(temp.node[0]).node;
+					for(var i:int = 0; i< tempList.length(); i++)
+					{
+						insertLevelsIntoGrid(tempList[i]);
+					}
+					
+					insertLevelsIntoGrid(temp.node[1]);
+					
+					for(i=0; i<xmllcTreeTestData.length; i++)
+					{
+						temp = xmllcTreeTestData.getItemAt(i) as XML;
+						temp.@name = "Chapter"+(i+1).toString();
+					}
+					
+					chapterTree.invalidateList();
+				}
+				else
+					Alert.show("Select chapter");
+			}
+			
+			private function onLeftClick():void
+			{
+				var tempO:Object = levelsDG.selectedItem;
+				var tempXML:XML = chapterTree.selectedItem as XML;
+				if((tempO != null)&&(tempXML != null)&&(tempXML.@type == "abtest"))
+				{
+					if(tempXML.children().length() == 0)
+					{	
+						tempXML.appendChild(new XML('<node type="level" id="'+tempO.id+'" name="'+tempO.name+'" />'));
+					
+						removeFromGridById(tempO.id);
+						chapterTree.invalidateList();
+					}
+					else
+					{
+						Alert.show("Only one level can be added.");
+					}
+				}
+				else
+				{
+					Alert.show("Select chapter, level and abtest");
+				}
+			}
+			
+			private function removeFromGridById(id:int):Object
+			{
+				for(var i:int = 0; i<levelsAC.length; i++)
+				{
+					if(levelsAC.getItemAt(i).id == id)
+					{
+						var o:Object = levelsAC.removeItemAt(i);
+						levelsDG.invalidateDisplayList();
+						return o;
+					}
+				}
+				
+				return null;
+			}
+			
+			private function addToGridById(id:int):void
+			{
+				for(var i:int = 0; i<sourseArray.length; i++)
+				{
+					if(sourseArray[i].id == id)
+					{
+						levelsAC.addItem(sourseArray[i]);
+						levelsDG.invalidateDisplayList();
+						return;
+					}
+				}
+			}
+			
+			private function onRightClick():void
+			{
+				
+				var tempXML:XML = chapterTree.selectedItem as XML;
+				if((tempXML != null)&&(tempXML.@type == "level"))
+				{
+					var parentTempXML:XML = chapterTree.getParentItem(tempXML) as XML;
+					delete parentTempXML.node.(@id == tempXML.@id)[0];
+					
+					addToGridById(tempXML.@id);
+					chapterTree.invalidateList();
+
+				}
+				else
+				{
+					Alert.show("Select level");
+				}
+				
+			}
+			
+			
+			private function onAddLevel():void
+			{
+				var tempXML:XML = chapterTree.selectedItem as XML;
+				
+				while((tempXML != null)&&(tempXML.@type != "chapter"))
+				{
+					tempXML = chapterTree.getParentItem(tempXML);
+				}				
+				
+				if(tempXML != null)
+				{
+					
+					var levelNum:int = tempXML.node[0].children().length()+1;
+					tempXML.node[0].appendChild(new XML('<node type="levelTypes" name="Level'+levelNum.toString()+'">'+
+						'<node type="abtest" name="default">'+
+						'</node>'+		
+						'</node>'));
+					chapterTree.invalidateList();
+				}
+				else
+				{
+					Alert.show("Select chapter");
+				}
+			}	
+			
+			
+			private function tree_iconFunc(item:Object):Class {
+				var iconClass:Class;
+				var typeStr:String = XML(item).@type;
+				
+				
+				if (typeStr == "abtest")
+				{
+					iconClass = folderIcon;
+				}
+				else if(typeStr == "level")
+				{
+					iconClass = levelsIcon;
+				}				
+				else if(typeStr == "chapter")
+				{
+					
+				}
+				else if(typeStr == "levels")
+				{
+					
+				}
+				else if(typeStr == "levelTypes")
+				{
+					
+				}
+
+				return iconClass;
+			}			
+			
+			private function onDeleteLevel():void
+			{
+				var tempXML:XML = chapterTree.selectedItem as XML;
+				if((tempXML != null)&&(tempXML.@type == "levelTypes"))
+				{
+					insertLevelsIntoGrid(tempXML);
+					var parent:XML = chapterTree.getParentItem(tempXML);
+					var counter:int = 1;
+					for(var i:int = 0; i< parent.node.length(); i++)
+					{
+						if(parent.node[i] == tempXML)
+						{	
+							delete parent.node[i];
+							i--;
+						}
+						else
+						{
+							parent.node[i].@name = "Level"+counter.toString();
+							counter++;
+						}
+						
+						chapterTree.invalidateDisplayList();
+					}
+				}
+				else
+					Alert.show("Select level to delete");
+			}
+			
+			private function insertLevelsIntoGrid(value:XML):void
+			{
+				if((value.@type == "levelTypes")||(value.@type == "bonus"))
+				{
+					insertLevelsIntoGridFromList(value.node.node);
+				}
+				else if((value.@type == "abtest"))
+				{
+					insertLevelsIntoGridFromList(value.node);
+				}
+					
+			}
+			
+			private function insertLevelsIntoGridFromList(xmlist:XMLList):void
+			{
+				for(var i:int = 0 ; i< xmlist.length(); i++)
+				{
+					if(xmlist[i].@type == "level")
+					{
+						addToGridById(xmlist[i].@id);
+					}
+				}				
+			}
+			
+			
+			private function onAddABTest():void
+			{
+				var tempXML:XML = chapterTree.selectedItem as XML;
+
+				if((abTestTI == null)||(abTestTI.text == null)||(abTestTI.text == ""))
+				{
+					Alert.show("Select ABTest name");
+					return;
+				}
+				
+				var newAbTestName:String = abTestTI.text.toUpperCase();
+				
+				if((tempXML != null)&&((tempXML.@type != "levelTypes")||(tempXML.@type != "bonus")))
+				{
+					
+					var xmlist:XMLList = tempXML.node;
+					
+					for(var i:int =0; i< xmlist.length(); i++)
+					{
+						if(xmlist[i].@name == newAbTestName)
+						{
+							Alert.show("ABTest with same name alrady exits, select another one.");
+							return;
+						}
+					}
+						
+					tempXML.appendChild(new XML('<node type="abtest" name="'+newAbTestName+'"></node>'));
+					abTestTI.text = "";
+					chapterTree.invalidateDisplayList();				}
+				else
+				{
+					Alert.show("Select level or bonus");
+				}				
+				
+			}
+				
+			private function onDeleteABTest():void
+			{
+				var tempXML:XML = chapterTree.selectedItem as XML;
+				if((tempXML != null)&&(tempXML.@type == "abtest"))
+				{
+					if(tempXML.@name == "default")
+					{
+						return;
+					}
+					
+					insertLevelsIntoGrid(tempXML);
+					var parent:XML = chapterTree.getParentItem(tempXML);
+					var counter:int = 1;
+					for(var i:int = 0; i< parent.node.length(); i++)
+					{
+						if(parent.node[i] == tempXML)
+						{	
+							delete parent.node[i];
+							chapterTree.invalidateDisplayList();
+							return;
+						}
+					}
+				}
+				else
+					Alert.show("Select abtest to delete");				
+			}			
+			
+			
+			private function onOpenNodes():void
+			{
+				var tempXML:XML = chapterTree.selectedItem as XML;
+				
+				if(tempXML != null)
+				{
+					chapterTree.expandChildrenOf(tempXML, true);
+				}
+				else
+				{	
+					for(var i:int=0; i< xmllcTreeTestData.length; i++)
+					{
+						chapterTree.expandChildrenOf(xmllcTreeTestData.getItemAt(i), true);
+					}
+				}
+			}
+			
+			private function onCloseNodes():void
+			{
+				var tempXML:XML = chapterTree.selectedItem as XML;
+				if(tempXML != null)
+				{
+					chapterTree.expandChildrenOf(tempXML, false);
+				}
+				else
+				{				
+					for(var i:int=0; i< xmllcTreeTestData.length; i++)
+					{
+						chapterTree.expandChildrenOf(xmllcTreeTestData.getItemAt(i), false);
+					}
+				}
+				
+			}	
+			
+		]]>
+	</mx:Script>
+	<mx:HBox width="100%" height="100%">
+		<mx:VBox width="350" height="100%">
+			<mx:HBox width="100%">
+				<mx:Label text="Chapter:" width="100"/>
+				<mx:Button styleName="plusButton" click="onAddChapter()" />
+				<mx:Button styleName="minusButton" click="onDeleteChapter()"/>
+			</mx:HBox>
+			<mx:HBox width="100%">
+				<mx:Label text="Level:" width="100"/>
+				<mx:Button styleName="plusButton" click="onAddLevel()" />
+				<mx:Button styleName="minusButton" click="onDeleteLevel()"/>
+			</mx:HBox>	
+			<mx:HBox width="100%">
+				<mx:Label text="AB Test:" width="100"/>
+				<mx:TextInput id="abTestTI" width="80" />
+				<mx:Button styleName="plusButton" click="onAddABTest()" />
+				<mx:Button styleName="minusButton" click="onDeleteABTest()"/>
+			</mx:HBox>				
+			<mx:Tree id="chapterTree" width="100%" height="100%"
+					 showRoot="true"
+					 labelField="@name"
+					 doubleClickEnabled="true"
+					 iconFunction="tree_iconFunc"
+					 >
+			</mx:Tree>
+			
+			<mx:HBox width="100%">
+				<mx:Button label="Open nodes" click="onOpenNodes()" />
+				<mx:Button label="Close nodes" click="onCloseNodes()"/>
+			</mx:HBox>	
+			
+		</mx:VBox>	
+		<mx:VBox width="30" height="100%" verticalAlign="middle">
+			<mx:Button styleName="leftButton" click="onLeftClick()"/>
+			<mx:Button styleName="rightButton" click="onRightClick()"/>
+		</mx:VBox>
+		<mx:DataGrid id="levelsDG" width="100%" height="100%">
+			<mx:columns>
+				<mx:DataGridColumn dataField="name" headerText="Name"/>
+				<mx:DataGridColumn dataField="is_public" headerText="Public"/>
+				<mx:DataGridColumn dataField="owner_id" headerText="Issuer"/>
+				<mx:DataGridColumn dataField="created_at" headerText="Created"/>
+				<mx:DataGridColumn dataField="updated_at" headerText="Last Change"/>
+			</mx:columns>
+		</mx:DataGrid>		
+	</mx:HBox>
+	
+	<mx:ControlBar horizontalAlign="center">
+		<mx:Button id="saveNewBtn" label="Save" click="saveChapter()" />
+	</mx:ControlBar>
+</mx:TitleWindow>

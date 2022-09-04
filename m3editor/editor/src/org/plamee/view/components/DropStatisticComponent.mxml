@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" 
+		  xmlns:components="org.plamee.view.components.*" 
+		  layout="vertical" width="100%" height="100%">
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import org.plamee.managers.AssetsManager;
+			import mx.events.ItemClickEvent;
+			
+			private var fStatisticsEasy:ArrayCollection;
+			private var fStatisticsNormal:ArrayCollection;
+			
+			public function setDropStatistic(aStatisticsNormal:ArrayCollection, aStatisticsEasy:ArrayCollection):void
+			{
+				fStatisticsNormal = aStatisticsNormal;
+				fStatisticsEasy = aStatisticsEasy;
+				
+				onStatisticsChanged();
+			}
+			
+			public function getStatisticsByType(aType:String):ArrayCollection
+			{
+				switch(aType)
+				{
+					case "normal":
+					{
+						return fStatisticsNormal;
+					}
+					case "easy":	
+					{
+						return fStatisticsEasy;
+					}
+				}
+				showAlert("Drop statistic is not found by type: " + aType);
+				return new ArrayCollection();
+			}
+			
+			public function getSelectedStatistics():ArrayCollection
+			{
+				switch(statisticsComplexity.selectedIndex)
+				{
+					case 0:
+					{
+						return fStatisticsNormal;
+					}
+					case 1:	
+					{
+						return fStatisticsEasy;
+					}
+				}
+				showAlert("Current drop statistic is undefined");
+				return new ArrayCollection();
+			}
+			
+			private function setStatisticsList(aStatisticsList:ArrayCollection, aStatisticsSource:ArrayCollection):void
+			{
+				statisticsList.dataProvider = aStatisticsList;
+				statisticsCB.dataProvider = aStatisticsSource;
+				
+				initSelectedItem(0, 1);
+			}
+			
+			private function initSelectedItem(aSelectedIndex:int, aPercent:int):void
+			{
+				statisticsCB.selectedIndex = aSelectedIndex;
+				statisticPersentTI.text = aPercent.toString();
+				
+				statisticsCB.invalidateDisplayList();
+				statisticsList.invalidateDisplayList();
+			}
+				
+			private function onCreateStatisticsCB():void
+			{
+				var temp:ArrayCollection = new ArrayCollection();
+				statisticsCB.dataProvider = temp;
+			}
+			
+			private function onCreateStatisticsList():void
+			{
+				var temp:ArrayCollection = new ArrayCollection();
+				statisticsList.dataProvider = temp;
+			}			
+			
+			private function onPlusStatisticClick():void
+			{
+				var fromAC:ArrayCollection = statisticsCB.dataProvider as ArrayCollection;
+				if(fromAC.length==0) return;
+				var ob:Object = statisticsCB.selectedItem;
+				ob.col = int(statisticPersentTI.text);
+				if(ob.col<=0){ 
+					showAlert("Drop statistics NUMBER must be greater than zero");
+					return;
+				}
+				fromAC.removeItemAt(fromAC.getItemIndex(ob));
+				
+				var toAC:ArrayCollection = statisticsList.dataProvider as ArrayCollection;
+				toAC.addItem(ob);
+				
+				initSelectedItem(0, 1);
+				
+				statisticPersentTI.setFocus();
+			}
+			
+			public function removeStatisticsFromList(value:Object):void
+			{
+				var toAC:ArrayCollection = statisticsList.dataProvider as ArrayCollection;
+				toAC.removeItemAt(toAC.getItemIndex(value));
+				
+				var fromAC:ArrayCollection = statisticsCB.dataProvider as ArrayCollection;
+				fromAC.addItem(value);
+				
+				statisticsCB.invalidateDisplayList();
+				statisticsList.invalidateDisplayList();				
+			}
+			
+			private function showAlert(inText:String):Boolean
+			{
+				return this.parentDocument.showAlert(inText);
+			}
+			
+			private function dropStatisticChoosedHandler(evt:ItemClickEvent):void {
+				onStatisticsChanged();
+			}
+			
+			private function onStatisticsChanged():void
+			{
+				var lStatisticsSourceCollection:ArrayCollection = this.parentDocument.getStatisticsSourceCollection();
+				var lCurrentStatistic:ArrayCollection = getSelectedStatistics();
+				
+				removeDuplicatedItems(lCurrentStatistic, lStatisticsSourceCollection);
+				setStatisticsList(lCurrentStatistic, lStatisticsSourceCollection);				
+			}
+			
+			private function removeDuplicatedItems(aRemoveItems:ArrayCollection, aFrom:ArrayCollection):void
+			{
+				for each (var lObject:Object in aRemoveItems)
+				{
+					for each (var lSourceObject:Object in aFrom)
+					{
+						if (lObject.id == lSourceObject.id)
+						{
+							aFrom.removeItemAt(aFrom.getItemIndex(lSourceObject));
+							break;
+						}	
+					}	
+				}
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:ToggleButtonBar id="statisticsComplexity" itemClick="dropStatisticChoosedHandler(event);">
+		<mx:dataProvider>
+			<mx:Array>
+				<mx:String>Normal</mx:String>
+				<mx:String>Easy</mx:String>
+			</mx:Array>
+		</mx:dataProvider>
+	</mx:ToggleButtonBar>
+	
+	<mx:HBox>
+		<components:ImageComboBox id="statisticsCB" width="60" creationComplete="onCreateStatisticsCB()">
+			<components:itemRenderer>
+				<mx:Component>
+					<mx:Image source="{AssetsManager.getInstance().getImageClass(data.source)}" >
+						<mx:Script>
+							<![CDATA[
+							import org.plamee.managers.AssetsManager;
+							]]>
+						</mx:Script>
+					</mx:Image>
+					
+				</mx:Component>
+			</components:itemRenderer>
+		</components:ImageComboBox>
+		<mx:TextInput id="statisticPersentTI" width="60" text="1" change="this.parentDocument.textinputInt(event)"/>
+		<mx:Button styleName="plusButton" click="onPlusStatisticClick()" />
+	</mx:HBox>
+	
+	<mx:List id="statisticsList" selectable="false" borderColor="#3d3d3d" borderStyle="solid" width="100%" height="100%" creationComplete="onCreateStatisticsList()" itemRenderer="org.plamee.view.components.StatisticsListRenderer">
+	</mx:List>		
+</mx:Panel>	

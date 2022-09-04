@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="{Match3Editor.CELL_WIDTH}" height="{Match3Editor.CELL_HEIGHT}" creationComplete="onCreateComplete()">
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.controls.Image;
+			import mx.controls.Label;
+			
+			import org.plamee.logic.Splash;
+			import org.plamee.managers.*;
+			import org.plamee.model.inums.CellType;
+			import org.plamee.model.inums.StatisticType;
+			import org.plamee.model.vo.BlockerVO;
+			import org.plamee.model.vo.CellVO;
+			import org.plamee.model.vo.JellyVO;
+			import org.plamee.model.vo.PieceColorVO;
+			import org.plamee.model.vo.PieceVO;
+			
+			private var mImage:Image;
+			
+			public var mCellVO:CellVO=null;
+			public var mCellVector:Vector.<CellVO> = null;
+			
+			public var mType:int=0;
+			
+			public var mX:int, mY:int;
+			
+			private var mSpeedX:Number, mSpeedY:Number, mStep:int;
+			
+			private var bTapPoint:Point, eTapPoint:Point;
+			
+			private var mTime:int=0;
+			
+			public function setCellVO(inCellVO:CellVO, inType:int):void{
+				
+				mType = inType;
+				mCellVO = inCellVO;
+				//mCellVO.mCanvas = this;
+				refreshImage();
+			}
+			
+			public function refreshImage():void{
+				this.removeAllChildren();
+				
+				mImage = new Image();
+				mImage.width = Match3Editor.CELL_WIDTH;
+				mImage.height = Match3Editor.CELL_HEIGHT;
+				mImage.x = 0;
+				mImage.y = 0;
+				this.addChild(mImage);
+				
+				if(mType==0)//jelly
+					mImage.source = AssetsManager.getInstance().getImageClass(mCellVO.jellyReference.getSource());
+				else if(mType==1)//piece
+					mImage.source = AssetsManager.getInstance().getImageClass(mCellVO.pieceReference.getSource());
+				else if(mType==2)//blocker
+					mImage.source = AssetsManager.getInstance().getImageClass(mCellVO.blockerRefernce.getSource());
+			}
+			
+			public function onCreateComplete():void
+			{
+				addEventListener(MouseEvent.MOUSE_DOWN, downMouse);
+			}
+			private function downMouse(inEvent:MouseEvent):void{
+				if(!GameFieldManager.getStable()) return;
+				
+				var aPoint:Point = new Point(inEvent.stageX, inEvent.stageY);
+				bTapPoint = (aPoint);
+				addEventListener(MouseEvent.MOUSE_OUT, mouseOut);
+				root.addEventListener(MouseEvent.MOUSE_UP, mouseUp);
+			}
+			private function mouseOut(inEvent:MouseEvent):void{
+				removeEventListener(MouseEvent.MOUSE_OUT, mouseOut);
+				root.removeEventListener(MouseEvent.MOUSE_UP, mouseUp);
+				var aPoint:Point = new Point(inEvent.stageX, inEvent.stageY);
+				eTapPoint = (aPoint);
+				var aDP:Point = bTapPoint.subtract(eTapPoint);
+				
+				dragTo(aDP);
+			}
+			private function mouseUp(inEvent:MouseEvent):void{
+				removeEventListener(MouseEvent.MOUSE_OUT, mouseOut);
+				root.removeEventListener(MouseEvent.MOUSE_UP, mouseUp);
+			}
+			
+			
+			public function dragTo(inPoint:Point):void{
+				var aNowCell:CellVO = mCellVO;
+				
+				if(!(((aNowCell.pieceReference&&aNowCell.pieceReference.mGrounded)
+					||(aNowCell.blockerRefernce&&aNowCell.blockerRefernce.mGrounded&&aNowCell.blockerRefernce.canDrag())))) return;
+				var aX:int=0, aY:int=0;
+				if(Math.abs(inPoint.x)>Math.abs(inPoint.y)){
+					if(inPoint.x<0){
+						aX=1;
+					}else{
+						aX=-1;
+					}
+				}else{
+					if(inPoint.y<0){
+						aY=-1;
+					}else{
+						aY=1;
+					}
+				}
+				var aNextCell:CellVO = GameFieldManager.getInstance().getCell(aNowCell.mX+aX,aNowCell.mY+aY);
+				if(aNextCell&&aNextCell.type!=CellType.EMPTY
+					&&((aNextCell.pieceReference&&aNextCell.pieceReference.mGrounded)
+					||(aNextCell.blockerRefernce&&aNextCell.blockerRefernce.mGrounded&&aNextCell.blockerRefernce.canDrag()))){
+					var aMatchBefore:int = Splash.getSimpleSplash(GameFieldManager.getInstance().mCells).length;
+					
+					var aPiece1:PieceVO = aNowCell.pieceReference;
+					var aPiece2:PieceVO = aNextCell.pieceReference;
+					
+					var aBlocker1:BlockerVO = aNowCell.blockerRefernce;
+					var aBlocker2:BlockerVO = aNextCell.blockerRefernce;
+					
+					aNowCell.pieceReference = aPiece2;
+					aNowCell.blockerRefernce = aBlocker2;
+					aNextCell.pieceReference = aPiece1;
+					aNextCell.blockerRefernce = aBlocker1;
+					
+					
+					var aStep:Boolean = true;
+					if(aMatchBefore<Splash.getSimpleSplash(GameFieldManager.getInstance().mCells).length){
+						
+						var aNVCells2:Vector.<CellVO> = new Vector.<CellVO>();aNVCells2.push(aNowCell);
+						if(aPiece2) aPiece2.mCanvas.setMove(aNVCells2);
+						if(aBlocker2) aBlocker2.mCanvas.setMove(aNVCells2);
+						
+						var aNVCells1:Vector.<CellVO> = new Vector.<CellVO>();aNVCells1.push(aNextCell);
+						if(aPiece1)aPiece1.mCanvas.setMove(aNVCells1);
+						if(aBlocker1)aBlocker1.mCanvas.setMove(aNVCells1);
+						
+					}else{
+						aNowCell.pieceReference = aPiece1;
+						aNowCell.blockerRefernce = aBlocker1;
+						aNextCell.pieceReference = aPiece2;
+						aNextCell.blockerRefernce = aBlocker2;
+						
+						mStep=5;
+						mSpeedX = mX;
+						mSpeedY = mY;
+						if(aPiece2){
+							mX=(aPiece2.mCanvas.mX+mX)/2;
+							mY=(aPiece2.mCanvas.mY+mY)/2;
+						}else{
+							mX=(aBlocker2.mCanvas.mX+mX)/2;
+							mY=(aBlocker2.mCanvas.mY+mY)/2;
+						}
+						if(aPiece1)
+							aPiece1.mGrounded=false;
+						if(aBlocker1)
+							aBlocker1.mGrounded=false;
+						aStep=false;
+					}
+					if(GameFieldManager.getInstance().setSpecMove(aNextCell, aNowCell))
+						aStep=true;
+					if(aStep){
+						GameFieldManager.getStat().addVars(StatisticType.MOVE, -1);
+						GameFieldManager.setMove();
+					}
+				}
+			}
+			
+			
+			public function setPosition(inX:int, inY:int):void{
+				mX=inX;mY=-inY;
+				x=mX;y=mY;
+			}
+			
+			public function updateTime():void{
+				if(mTime<50)
+					mTime++;
+			}
+			public function getTime():int{
+				return mTime;
+			}
+			public function update():void{
+				if(mType==1||mType==2){
+				if(mStep>0){
+					mX+=(mSpeedX-mX)/mStep;
+					mY+=(mSpeedY-mY)/mStep;
+					x=mX;
+					y=mY;
+					mStep--;
+				}else{
+					if(mCellVector&&mCellVector.length>0){
+						var aCell:CellVO = mCellVector.shift();
+						if(aCell.type != CellType.EMPTY){
+							mSpeedX = aCell.mX*Match3Editor.CELL_WIDTH;
+							mSpeedY = -aCell.mY*Match3Editor.CELL_HEIGHT;
+							this.visible=true;
+						}else{
+							mSpeedX = mX;
+							mSpeedY = mY;
+							this.visible=false;
+						}
+						mStep=10;
+
+					}else{
+						setGrounded(true);
+					}
+				}
+				}
+			}
+			public function setMove(inCellVO:Vector.<CellVO>):void{
+				mCellVO = inCellVO[inCellVO.length-1];
+				mCellVector = inCellVO;
+				mStep=0;
+				setGrounded(false);
+			}
+			
+			private function isGrounded():Boolean{
+				if(mType==1)//piece
+					return mCellVO.pieceReference.mGrounded;
+				else if(mType==2)//blocker
+					return mCellVO.blockerRefernce.mGrounded;
+				return false;
+			}
+			public function setGrounded(inBool:Boolean):void{
+				if(mType==1)//piece
+					mCellVO.pieceReference.mGrounded=inBool;
+				else if(mType==2)//blocker
+					mCellVO.blockerRefernce.mGrounded=inBool;
+				if(inBool) mTime=0;
+			}
+			
+		]]>
+	</mx:Script>
+</mx:Canvas>

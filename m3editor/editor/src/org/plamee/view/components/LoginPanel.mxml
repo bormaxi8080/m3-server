@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ PureMVC Flex/WebORB Demo – Login
+ Copyright (c) 2007 Jens Krause <jens.krause@puremvc.org> <www.websector.de>
+ Your reuse is governed by the Creative Commons Attribution 3.0 License
+-->
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml"
+		  width="508" height="208" addedToStage="addedToStageHandler(event);"
+		  horizontalAlign="center"
+		  removedFromStage="removeToStageHandler(event);" title="Login"
+		  creationComplete="onCreateComplete()"> 
+
+    <mx:Script>
+    <![CDATA[
+
+    	import org.plamee.model.vo.LoginVO; 
+
+		public static const TRY_LOGIN: String = "tryLogin";
+		public var isShowed:Boolean = false;
+		
+		/*
+		*	Note: To avoid issues using this component as a view stack 
+		*	we have to add an event listener for key events after it added to stage 
+		*	because a keyDownHandler at the login Button or somewhere else needs a stage reference as well ;-)
+		* 
+		*/
+    	public function addedToStageHandler(event: Event):void
+		{			
+			this.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+		}
+
+    	public function removeToStageHandler(event: Event):void
+		{			
+			this.stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+		}
+		
+		override protected function keyDownHandler (event: KeyboardEvent): void
+		{
+			super.keyDownHandler(event);
+			if (event.keyCode == Keyboard.ENTER) loginUser();
+		}	
+		
+		private function loginUser(event: MouseEvent = null) : void
+		{
+		  	this.dispatchEvent(new Event(TRY_LOGIN));		
+		}
+		
+		private function onChangeTX():void
+		{
+			statusMessage.text = "";
+		}
+		
+		
+		private function onCreateComplete():void
+		{
+			var mySo:SharedObject = SharedObject.getLocal("match3_editor");
+			
+			if(mySo && mySo.data && mySo.data.user)
+			{
+				username.text = mySo.data.user;
+			}
+			
+			if(mySo && mySo.data && mySo.data.password)
+			{
+				password.text = mySo.data.password;
+			}
+			
+		}
+		
+		public function saveNewUser():void
+		{
+			var mySo:SharedObject = SharedObject.getLocal("match3_editor");
+			mySo.data.user = username.text;
+			mySo.data.password = password.text;
+			mySo.flush();
+		}
+		          
+    ]]>
+    </mx:Script>
+
+    <mx:Form id="loginForm">
+    
+        <mx:FormItem label="Username: ">
+            <mx:TextInput id="username" change="onChangeTX()" />
+        </mx:FormItem>
+
+        <mx:FormItem label="Password: ">
+            <mx:TextInput id="password" 
+            	displayAsPassword="true" change="onChangeTX()" />
+        </mx:FormItem>
+        
+    </mx:Form>
+
+    <mx:Text id="statusMessage"
+    	width="400" height="30" 
+    	textAlign="center" fontWeight="bold" color="#000000"
+    	text=""/>
+
+    <mx:ControlBar horizontalAlign="right">
+        <mx:Button id="loginButton"
+        	label="Login" 
+        	click="loginUser(event);"/>
+    </mx:ControlBar>
+   
+</mx:Panel>

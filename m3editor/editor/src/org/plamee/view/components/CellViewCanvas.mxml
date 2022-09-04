@@ -1,0 +1,1062 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="{Match3Editor.CELL_WIDTH}" height="{Match3Editor.CELL_HEIGHT}" creationComplete="onCreateComplete()">
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.controls.Image;
+			import mx.controls.Label;
+			
+			import org.plamee.managers.AssetsManager;
+			import org.plamee.managers.LevelManager;
+			import org.plamee.managers.SelectionManager;
+			import org.plamee.model.inums.CellType;
+			import org.plamee.model.vo.BlockerVO;
+			import org.plamee.model.vo.BusterVO;
+			import org.plamee.model.vo.CellOutVO;
+			import org.plamee.model.vo.CellVO;
+			import org.plamee.model.vo.JellyVO;
+			import org.plamee.model.vo.PieceColorVO;
+			import org.plamee.model.vo.PieceTeapotVO;
+			import org.plamee.model.vo.PieceVO;
+			import org.plamee.model.vo.RespawnVO;
+			import org.plamee.model.vo.ToyVO;
+			
+			private var _regulalBack:Image;
+			private var _overBack:Image;
+			private var _cell:Image;
+			private var _portalConnectLabel:Label;
+			private var _boosterAmountLabel:Label;
+			
+			private var _teapotCountLabel:Label;
+			private var _teapotMaxLabel:Label;
+			
+			private var _respawn:Image;
+			private var _jelly:Image;
+			private var _piece:Image;
+			private var _blocker:Image;
+			private var _booster:Image;
+			private var _toy:Image;
+			private var selectionManager:SelectionManager = SelectionManager.getInstance();
+			
+			public var cellVO:CellVO;
+			
+			public var cellX:int = 0; 
+			public var cellY:int = 0;
+			
+			public function onCreateComplete():void
+			{
+				if(cellVO) return;
+				cellVO = new CellVO();
+				cellVO.mCanvas = this;
+				
+				_regulalBack = new Image();
+				_regulalBack.width = Match3Editor.CELL_WIDTH;
+				_regulalBack.height = Match3Editor.CELL_HEIGHT;
+				_regulalBack.x = 0;
+				_regulalBack.y = 0;
+				
+				_regulalBack.source = AssetsManager.getInstance().getImageClass("../assets/back000.png");
+				this.addChild(_regulalBack);
+				
+				_overBack = new Image();
+				_overBack.width = Match3Editor.CELL_WIDTH;
+				_overBack.height = Match3Editor.CELL_HEIGHT;
+				_overBack.x = 0;
+				_overBack.y = 0;
+				_overBack.visible = false;
+				
+				_overBack.source = AssetsManager.getInstance().getImageClass("../assets/back01.png");
+				this.addChild(_overBack);
+				
+				
+				this.addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+				this.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+				this.addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+				this.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+				//this.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+				root.addEventListener(MouseEvent.MOUSE_UP, onMouseUp); //чтобы точно отловить отжатие мыши
+				
+				this.horizontalScrollPolicy="off";
+				this.verticalScrollPolicy="off";
+			}
+			
+			private function onMouseOver(e:MouseEvent):void
+			{
+				_overBack.width = Match3Editor.CELL_WIDTH;
+				_overBack.height = Match3Editor.CELL_HEIGHT;
+				if(_toy!=null){
+					//width = _toy.width;
+					//height = _toy.height;
+				}else{
+					width=_overBack.width = Match3Editor.CELL_WIDTH;
+					height=_overBack.height = Match3Editor.CELL_HEIGHT;
+				}
+				
+				if(selectionManager.selectedItemId != "" && selectionManager.state == SelectionManager.DROW_STATE)
+				{
+					var results:Array = selectionManager.selectedItemId.split(/_/);
+					var tempArray:Array = [2,3,4,-2,6,8,7];
+					var tempTypeOfDrow:int = int(results[0]);
+					if((tempTypeOfDrow == 1)||(tempTypeOfDrow == 8)||(tempTypeOfDrow == 5)||(tempTypeOfDrow == -1))
+					{
+						_overBack.source = AssetsManager.getInstance().getImageClass(selectionManager.selectedItemSource);
+					}else if(tempTypeOfDrow==-3&&(_toy!=null||cellVO.pieceReference is PieceTeapotVO)){
+						_overBack.source = AssetsManager.getInstance().getImageClass(selectionManager.selectedItemSource);
+					}
+					else if(( tempArray.indexOf(tempTypeOfDrow) >=0 )&&(_cell != null))
+					{
+						_overBack.source = AssetsManager.getInstance().getImageClass(selectionManager.selectedItemSource);	
+					}
+					else
+						_overBack.source = AssetsManager.getInstance().getImageClass("../assets/back01.png");
+					
+					if(tempTypeOfDrow==8){
+						var aToyVo:ToyVO = ToyVO.createToyFromSourceId(selectionManager.selectedItemId);
+						width=_overBack.width = Match3Editor.CELL_WIDTH*aToyVo.point.x;
+						height=_overBack.height = Match3Editor.CELL_HEIGHT*aToyVo.point.y;
+					}
+				}	
+				else
+					_overBack.source = AssetsManager.getInstance().getImageClass("../assets/back01.png");
+				
+				this.setChildIndex(_overBack, this.numChildren-1);
+				
+				
+				_overBack.visible = true;
+			}
+			
+			public function onMouseDown(e:MouseEvent=null):void
+			{
+				selectionManager.wasClicked = true;
+				
+				if(selectionManager.state == SelectionManager.DROW_STATE)
+				{
+					var results:Array = selectionManager.selectedItemId.split(/_/);
+				
+					switch(int(results[0]))
+					{
+						case 1:
+							addChangeCell();
+							break;
+						case 2:
+							addChangeJelly();
+							break;	
+						case 3:
+							addChangePiece();
+							break;				
+						case 4:
+							addChangeBlocker();
+							break;	
+						case 5:
+							addChangeRespawn();
+							break;	
+						case 6:
+							addChangeBooster(selectionManager.selectedItemAmount);
+							break;
+						case 7:
+							addChangeTeapot(selectionManager._selectedItemCount, selectionManager._selectedItemMax);
+							break;
+						case 8:
+							addChangeToy();
+							break;	
+						case -1:
+							deleteAll();
+							break;	
+						case -2:
+							erreseItem();
+							break;					
+						case -3:
+							rotateItem();
+							rotationTeapot();
+							break;					
+						default:
+						
+					}
+				}
+				else if(selectionManager.state == SelectionManager.PORTAL_IN_STATE || selectionManager.state == SelectionManager.PORTAL_OUT_STATE)
+				{
+					var connectionBefore:int = 0;
+					
+					if(selectionManager.state == SelectionManager.PORTAL_IN_STATE)
+					{
+						if(cellVO.type == CellType.PORTAL_IN)
+						{
+							connectionBefore = cellVO.portalConnectionNum;
+							cellVO.portalConnectionNum = selectionManager.portalLastNum;
+							selectionManager.state = SelectionManager.REGULAR_STATE;
+							selectionManager.mCellCanvasPortal.cellVO.mPortal = cellVO;
+							cellVO.mPortal = selectionManager.mCellCanvasPortal.cellVO;
+							selectionManager.mCellCanvasPortal = null;
+							addChangeDeleteCellByVO();
+						}
+						else
+						{
+							Alert.show("Please select cell portal in");
+						}
+					}
+					else if(selectionManager.state == SelectionManager.PORTAL_OUT_STATE)
+					{
+						if(cellVO.type == CellType.PORTAL_OUT)
+						{
+							connectionBefore = cellVO.portalConnectionNum;
+							cellVO.portalConnectionNum = selectionManager.portalLastNum;
+							selectionManager.state = SelectionManager.PORTAL_IN_STATE;
+							selectionManager.mCellCanvasPortal = this;
+							addChangeDeleteCellByVO();
+						}
+						else
+						{
+							Alert.show("Please select cell portal out");
+						}						
+					}
+					
+					if(connectionBefore > 0)
+						LevelManager.getInstance().removePortalConnect(connectionBefore);
+						
+				}
+			}
+			
+			public function deleteCellContent():void
+			{
+				deleteToy();
+				deleteBlocker();
+				deletePiece();
+				deleteJelly();
+				deleteBooster();
+			}
+			
+			public function deleteAll():void
+			{
+				deleteToy();
+				deleteBlocker();
+				deletePiece();
+				deleteJelly();
+				deleteRespawn();
+				deleteBooster();
+				deleteCell();	
+				
+			}
+			private function rotateItem():void{
+				if(_toy!=null){
+					cellVO.toyRefernce.rotation+=1;
+					setToyRotation(cellVO.toyRefernce.rotation);
+				}
+			}
+			private function erreseItem():void
+			{
+				if(!deleteToy())
+				if (!deleteBooster())
+					if(!deleteBlocker())
+						if(!deletePiece())
+							if(!deleteJelly())
+								deleteRespawn();
+			}
+			
+			public function removePortalConnection(portalConnectionNum:int):void
+			{
+				if((cellVO != null) && (cellVO.type == CellType.PORTAL_IN || cellVO.type == CellType.PORTAL_OUT) && (cellVO.portalConnectionNum != 0) && (cellVO.portalConnectionNum == portalConnectionNum))
+				{
+					cellVO.portalConnectionNum = 0; 
+					
+					if(_portalConnectLabel)
+						_portalConnectLabel.text = "";
+				}
+				
+			}
+				
+			
+			private function createCellView():void
+			{
+				if(!_cell)
+				{
+					_cell = new Image();
+					_cell.width = Match3Editor.CELL_WIDTH;
+					_cell.height = Match3Editor.CELL_HEIGHT;
+					_cell.x = 0;
+					_cell.y = 0;
+					this.addChild(_cell);
+					
+					_portalConnectLabel = new Label();
+					_portalConnectLabel.width = 14;
+					_portalConnectLabel.height = 14;
+					_portalConnectLabel.x = 5;
+					_portalConnectLabel.y = 5;
+					this.addChild(_portalConnectLabel);
+					
+					_boosterAmountLabel = new Label();
+					_boosterAmountLabel.width = 25;
+					_boosterAmountLabel.height = 15;
+					_boosterAmountLabel.x = 49;
+					_boosterAmountLabel.y = 55;
+					_boosterAmountLabel.setStyle('textAlign', 'center');
+					this.addChild(_boosterAmountLabel);
+					
+					_teapotCountLabel = new Label();
+					_teapotCountLabel.width = 25;
+					_teapotCountLabel.height = 15;
+					_teapotCountLabel.x = 5;
+					_teapotCountLabel.y = 55;
+					_teapotCountLabel.setStyle('textAlign', 'center');
+					this.addChild(_teapotCountLabel);
+					
+					_teapotMaxLabel = new Label();
+					_teapotMaxLabel.width = 25;
+					_teapotMaxLabel.height = 15;
+					_teapotMaxLabel.x = 49;
+					_teapotMaxLabel.y = 55;
+					_teapotMaxLabel.setStyle('textAlign', 'center');
+					this.addChild(_teapotMaxLabel);
+				}				
+			}
+				
+			public function setCellDef():void{
+				createCellView();
+				_cell.source = AssetsManager.getInstance().getImageClass("../assets/back1.png");
+				cellVO.setTypeByStringId("1_1");
+			}
+			public function addChangeCell(defaultCellSource:String = null, defaultType:int = -1):void
+			{
+				createCellView();
+				
+				if(_cell.source != AssetsManager.getInstance().getImageClass(selectionManager.selectedItemSource))
+					_cell.source = AssetsManager.getInstance().getImageClass((defaultCellSource == null) ? selectionManager.selectedItemSource : defaultCellSource);	
+				
+				if(defaultType == -1)
+					cellVO.setTypeByStringId(selectionManager.selectedItemId);
+				else
+					cellVO.type = defaultType;
+				
+				setRightOrder();
+			}
+			
+			private function addChangeDeleteCellByVO():void
+			{
+				if(cellVO.type == CellType.EMPTY)
+				{
+					deleteCell();
+				}
+				else
+				{
+					createCellView();
+					_cell.source = AssetsManager.getInstance().getImageClass(cellVO.getStringSource());
+					
+					if((cellVO.type == CellType.PORTAL_IN || cellVO.type == CellType.PORTAL_OUT)&&(cellVO.portalConnectionNum != 0))
+					{
+						_portalConnectLabel.text = cellVO.portalConnectionNum.toString();
+					}
+					else
+					{
+						_portalConnectLabel.text = "";
+					}
+					
+					setRightOrder();
+				}
+			}			
+			
+			private function deleteCell():Boolean
+			{
+				if(_cell)
+				{
+					if(_portalConnectLabel)
+						deletePortalConnect();
+					
+					this.removeChild(_cell);
+					_cell = null;
+					cellVO.setTypeByStringId(null);
+					return true;
+				}
+				
+				return false;
+			}
+			public function deletePortal():void{
+				if(_portalConnectLabel)
+					this.removeChild(_portalConnectLabel);
+				_portalConnectLabel = null;
+			}
+			private function deletePortalConnect():void{
+				if(cellVO){
+					if(cellVO.mPortal)
+						cellVO.mPortal.deletePortal();
+					cellVO.deletePortal();
+					deletePortal();
+				}
+			}
+			
+			private function createJellyView():void
+			{
+				if(!_jelly)
+				{
+					_jelly = new Image();
+					_jelly.width = Match3Editor.CELL_WIDTH;
+					_jelly.height = Match3Editor.CELL_HEIGHT;
+					_jelly.x = 0;
+					_jelly.y = 0;
+					this.addChild(_jelly);			
+				}				
+			}		
+			private function createRespawnView():void
+			{
+				if(!_respawn)
+				{
+					_respawn = new Image();
+					_respawn.width = Match3Editor.CELL_WIDTH;
+					_respawn.height = Match3Editor.CELL_HEIGHT;
+					_respawn.x = 0;
+					_respawn.y = 0;
+					this.addChild(_respawn);			
+				}				
+			}	
+			
+			public function addJelly(inType:int):void{
+				createJellyView();
+				cellVO.jellyReference = new JellyVO(inType);
+				_jelly.source = AssetsManager.getInstance().getImageClass(cellVO.jellyReference.getSource());
+				setRightOrder();
+			}
+			public function addRespawn():void{
+				createRespawnView();
+				cellVO.respawnRefence = new RespawnVO();
+				_respawn.source = AssetsManager.getInstance().getImageClass(cellVO.respawnRefence.getSource());
+				setRightOrder();
+			}
+			public function addCellOut():void{
+				createRespawnView();
+				cellVO.mOutIngredient = true;
+				_respawn.source = AssetsManager.getInstance().getImageClass(CellOutVO.getAllSource()[0].source);
+				setRightOrder();
+			}
+			
+			private function addChangeJelly():void
+			{
+				if(!_cell)
+				{
+					return;
+				}
+				
+				deleteBooster();
+				createJellyView();
+				
+				if(_jelly.source != AssetsManager.getInstance().getImageClass(selectionManager.selectedItemSource))
+				{
+					_jelly.source = AssetsManager.getInstance().getImageClass(selectionManager.selectedItemSource);
+					cellVO.jellyReference = JellyVO.createJellyFromSourceId(selectionManager.selectedItemId);
+				}
+				
+				setRightOrder();
+			}
+			private function addChangeRespawn():void{
+				if(!_cell){
+					addChangeCell("../assets/back1.png", CellType.FULL);
+				}
+				
+				createRespawnView();
+				
+				if(_respawn.source != AssetsManager.getInstance().getImageClass(selectionManager.selectedItemSource))
+				{
+					_respawn.source = AssetsManager.getInstance().getImageClass(selectionManager.selectedItemSource);
+					if(selectionManager.selectedItemId=="5_2"){
+						cellVO.respawnRefence = null;
+						cellVO.mOutIngredient = true;
+					}else{
+						cellVO.respawnRefence = RespawnVO.createRespawnFromSourceId(selectionManager.selectedItemId);
+						cellVO.mOutIngredient = false;
+					}
+				}
+				
+				setRightOrder();
+			}
+			
+			
+			private function addChangeDeleteJellyByVO():void
+			{
+				if(!cellVO.jellyReference)
+				{
+					deleteJelly();
+				}
+				else
+				{
+					createJellyView();
+					_jelly.source = AssetsManager.getInstance().getImageClass(cellVO.jellyReference.getSource());
+					setRightOrder();
+				}
+			}
+			private function addChangeDeleteRespawnByVO():void
+			{
+				if(!cellVO.respawnRefence&&!cellVO.mOutIngredient)
+				{
+					deleteRespawn();
+				}
+				else
+				{
+					createRespawnView();
+					if(cellVO.mOutIngredient){
+						_respawn.source = AssetsManager.getInstance().getImageClass(CellOutVO.getAllSource()[0].source);
+					}else{
+						_respawn.source = AssetsManager.getInstance().getImageClass(cellVO.respawnRefence.getSource());
+					}
+					setRightOrder();
+				}
+			}
+			
+			
+			private function deleteJelly():Boolean
+			{
+				if(_jelly)
+				{
+					this.removeChild(_jelly);
+					_jelly = null;
+					cellVO.jellyReference = null;
+					return true;
+				}
+				return false;
+			}	
+			private function deleteRespawn():Boolean
+			{
+				if(_respawn)
+				{
+					this.removeChild(_respawn);
+					_respawn = null;
+					cellVO.respawnRefence = null;
+					cellVO.mOutIngredient = false;
+					return true;
+				}
+				return false;
+			}
+			
+			
+			
+			//Piece-----------------------------------------
+			private function createPieceView():void
+			{
+				if(!_piece)
+				{
+					_piece = new Image();
+					_piece.width = Match3Editor.CELL_WIDTH;
+					_piece.height = Match3Editor.CELL_HEIGHT;
+					_piece.x = 0;
+					_piece.y = 0;
+					this.addChild(_piece);			
+				}				
+			}
+			public function addPiece(inPieceVO:PieceVO):void{
+				createPieceView();
+				cellVO.pieceReference = inPieceVO;
+				_piece.source = AssetsManager.getInstance().getImageClass(inPieceVO.getSource());
+			}
+			private function addChangePiece():void
+			{
+				if(!_cell)
+					return;	
+				
+				deletePiece();
+				deleteBooster();
+				createPieceView();
+				
+				if(_piece.source != AssetsManager.getInstance().getImageClass(selectionManager.selectedItemSource))
+				{
+					_piece.source = AssetsManager.getInstance().getImageClass(selectionManager.selectedItemSource);
+					cellVO.pieceReference = PieceVO.createPieceFromSourceId(selectionManager.selectedItemId);
+				}
+				
+				
+				setRightOrder();
+			}
+			
+			private function addChangeDeletePieceByVO():void
+			{
+				if(!cellVO.pieceReference)
+				{
+					deletePiece();
+				}
+				else
+				{
+					createPieceView();
+					_piece.source = AssetsManager.getInstance().getImageClass(cellVO.pieceReference.getSource());
+					setRightOrder();
+				}
+			}			
+			
+			private function deletePiece():Boolean
+			{
+				if(_piece)
+				{
+					this.removeChild(_piece);
+					_piece = null;
+					cellVO.pieceReference = null;
+					
+					_teapotCountLabel.htmlText = "";
+					_teapotMaxLabel.htmlText = "";
+					
+					return true;
+				}
+				return false;
+			}		
+			
+			
+			//Teapot-----------------------------------------
+			public function rotationTeapot():void{
+				if(cellVO.pieceReference is PieceTeapotVO){
+					var aPieceTeapotVO:PieceTeapotVO = cellVO.pieceReference as PieceTeapotVO;
+					aPieceTeapotVO.rotation++;
+					if(aPieceTeapotVO.rotation>3)aPieceTeapotVO.rotation=0;
+					setRotationPiece(aPieceTeapotVO.rotation);
+				}
+			}
+			public function setRotationPiece(inRotation:int):void{
+				if(_piece!=null){
+					_piece.rotation=90*inRotation;
+					
+					switch(inRotation){
+						case 0:
+							_piece.x=0;_piece.y=0;
+							break;
+						case 1:
+							width=_piece.x=_piece.height;
+							_piece.y=0;
+							break;
+						case 2:
+							_piece.x=_piece.width;
+							_piece.y=_piece.height;
+							break;
+						case 3:
+							_piece.x=0;
+							height=_piece.y=_piece.width;
+							break;
+					}
+				}
+			}
+			
+			public function addPieceTeapot(inPieceTeapotVO:PieceTeapotVO):void{
+				createPieceView();
+				cellVO.pieceReference = inPieceTeapotVO;
+				_piece.source = AssetsManager.getInstance().getImageClass(inPieceTeapotVO.getSource());
+				setRotationPiece(inPieceTeapotVO.rotation);
+			}
+			private function addChangeTeapot(inCount:int=0, inMax:int=5):void
+			{
+				if(!_cell)
+					return;
+				
+				deleteBooster();
+				createPieceView();
+				
+/*				if(_piece.source != AssetsManager.getInstance().getImageClass(selectionManager.selectedItemSource))
+				{*/
+					_piece.source = AssetsManager.getInstance().getImageClass(selectionManager.selectedItemSource);
+					var aPieceTeapotVO:PieceTeapotVO = PieceTeapotVO.createPieceFromSourceId(selectionManager.selectedItemId);
+					aPieceTeapotVO.count = inCount;
+					aPieceTeapotVO.max = inMax;
+					cellVO.pieceReference = aPieceTeapotVO;
+				//}
+				
+				_teapotCountLabel.htmlText = ""+inCount;
+				_teapotMaxLabel.htmlText = ""+inMax;
+				
+				
+				setRightOrder();
+			}
+			
+			
+			//Toy----------------------------------
+			private function deleteToyRef(inToyVO:ToyVO):void{
+				if(inToyVO==null) return;
+				var aLevelManager:LevelManager = LevelManager.getInstance();
+				for(var i:int =0;i<Match3Editor.BOARD_WIDTH;i++)
+					for(var j:int =0;j<Match3Editor.BOARD_HEIGHT;j++)
+						if((aLevelManager.gridArray[i][j] as CellViewCanvas).cellVO.toyRefernce == inToyVO){
+							(aLevelManager.gridArray[i][j] as CellViewCanvas).deleteToy();
+							(aLevelManager.gridArray[i][j] as CellViewCanvas).addChangeCell("../assets/back1.png",1);
+						}
+			}
+			private function destroyTheEnemy(inWidth:int, inHeight:int):void{
+				var aLevelManager:LevelManager = LevelManager.getInstance();
+				for(var i:int =0;i<Match3Editor.BOARD_WIDTH;i++)
+					for(var j:int =0;j<Match3Editor.BOARD_HEIGHT;j++)
+						if((aLevelManager.gridArray[i][j] as CellViewCanvas).cellVO.toyRefernce == cellVO.toyRefernce)
+							if((aLevelManager.gridArray[i][j] as CellViewCanvas).cellVO != cellVO){
+								(aLevelManager.gridArray[i][j] as CellViewCanvas).deleteToy();
+								(aLevelManager.gridArray[i][j] as CellViewCanvas).addChangeCell("../assets/back1.png",1);
+							}
+				for(var a:int=0;a<inWidth;a++)
+					for(var b:int=0;b<inHeight;b++)
+						if(!(a==0&&b==0)){
+							var aCellViewCanvas:CellViewCanvas = (aLevelManager.gridArray[cellX+a][cellY-b] as CellViewCanvas);
+							if(aCellViewCanvas!=null){
+								if((aLevelManager.gridArray[cellX+a][cellY-b] as CellViewCanvas).cellVO.toyRefernce!=cellVO.toyRefernce){
+									deleteToyRef((aLevelManager.gridArray[cellX+a][cellY-b] as CellViewCanvas).cellVO.toyRefernce);
+								}
+								(aLevelManager.gridArray[cellX+a][cellY-b] as CellViewCanvas).deleteAll();
+								(aLevelManager.gridArray[cellX+a][cellY-b] as CellViewCanvas).cellVO.toyRefernce = cellVO.toyRefernce;
+							}
+						}
+			}
+			private function createToyView():void
+			{
+				if(!_toy)
+				{
+					_toy = new Image();
+					_toy.width = Match3Editor.CELL_WIDTH;
+					_toy.height = Match3Editor.CELL_HEIGHT;
+					_toy.x = 0;
+					_toy.y = 0;
+					this.addChild(_toy);	
+				}				
+			}
+			public function resizeRotation():void{
+				if(_toy==null) return;
+				
+				var aWidth:int=cellVO.toyRefernce.point.x;
+				var aHeight:int=cellVO.toyRefernce.point.y;
+				
+				switch(cellVO.toyRefernce.rotation){
+					case 1:
+						aWidth=cellVO.toyRefernce.point.y;
+						aHeight=cellVO.toyRefernce.point.x;
+						break;
+					case 3:
+						aWidth=cellVO.toyRefernce.point.y;
+						aHeight=cellVO.toyRefernce.point.x;
+						break;
+				}
+				width = Match3Editor.CELL_WIDTH*aWidth;
+				height = Match3Editor.CELL_HEIGHT*aHeight;
+			}
+			public function setToyRotation(inRotation:int):void{
+				if(_toy!=null){
+					_toy.rotation=90*inRotation;
+					
+					var aWidth:int=cellVO.toyRefernce.point.x;
+					var aHeight:int=cellVO.toyRefernce.point.y;
+					
+					switch(inRotation){
+						case 0:
+							_toy.x=0;_toy.y=0;
+							break;
+						case 1:
+							width=_toy.x=_toy.height;
+							_toy.y=0;
+							aWidth=cellVO.toyRefernce.point.y;
+							aHeight=cellVO.toyRefernce.point.x;
+							break;
+						case 2:
+							_toy.x=_toy.width;
+							_toy.y=_toy.height;
+							break;
+						case 3:
+							_toy.x=0;
+							height=_toy.y=_toy.width;
+							aWidth=cellVO.toyRefernce.point.y;
+							aHeight=cellVO.toyRefernce.point.x;
+							break;
+					}
+					
+					width = Match3Editor.CELL_WIDTH*aWidth;
+					height = Match3Editor.CELL_HEIGHT*aHeight;
+					
+					destroyTheEnemy(aWidth, aHeight);
+				}
+			}
+			public function addToy(inToyVO:ToyVO):void{
+				deleteAll();
+				cellVO.toyRefernce = inToyVO;
+				addChangeDeleteToyByVO();
+			}
+			private function addChangeToy():void
+			{
+				
+				deleteAll();
+				createToyView();
+				
+				if(_toy.source != AssetsManager.getInstance().getImageClass(selectionManager.selectedItemSource))
+				{
+					cellVO.toyRefernce = ToyVO.createToyFromSourceId(selectionManager.selectedItemId);
+					addChangeDeleteToyByVO();
+					
+				}
+				
+				setRightOrder();
+			}
+			
+			private function addChangeDeleteToyByVO():void
+			{
+				if(!cellVO.toyRefernce)
+				{
+					deleteToy();
+				}
+				else
+				{
+					createToyView();
+					_toy.source = AssetsManager.getInstance().getImageClass(cellVO.toyRefernce.getSource());
+					_toy.width = Match3Editor.CELL_WIDTH*cellVO.toyRefernce.point.x;
+					_toy.height = Match3Editor.CELL_HEIGHT*cellVO.toyRefernce.point.y;
+					setRightOrder();
+					setToyRotation(cellVO.toyRefernce.rotation);
+				}
+			}			
+			
+			private function deleteToy():Boolean
+			{
+				if(_toy)
+				{
+					this.removeChild(_toy);
+					_toy = null;
+					deleteToyRef(cellVO.toyRefernce);
+					cellVO.toyRefernce = null;
+					return true;
+				}
+				return false;
+			}
+			
+			
+			//Blocker----------------------------------
+			private function createBlockerView():void
+			{
+				if(!_blocker)
+				{
+					_blocker = new Image();
+					_blocker.width = Match3Editor.CELL_WIDTH;
+					_blocker.height = Match3Editor.CELL_HEIGHT;
+					_blocker.x = 0;
+					_blocker.y = 0;
+					this.addChild(_blocker);	
+				}				
+			}
+			
+			public function addBlocker(inBlockerVO:BlockerVO):void{
+				createBlockerView();
+				cellVO.blockerRefernce = inBlockerVO;
+				_blocker.source = AssetsManager.getInstance().getImageClass(inBlockerVO.getSource());
+			}
+			private function addChangeBlocker():void
+			{
+				if(!_cell)
+					return;	
+				
+				deleteBooster();
+				createBlockerView();
+				
+				if(_blocker.source != AssetsManager.getInstance().getImageClass(selectionManager.selectedItemSource))
+				{
+					_blocker.source = AssetsManager.getInstance().getImageClass(selectionManager.selectedItemSource);
+					cellVO.blockerRefernce = BlockerVO.createBlockerFromSourceId(selectionManager.selectedItemId);
+					
+				}
+				
+				setRightOrder();
+			}
+			
+			private function addChangeDeleteBlockerByVO():void
+			{
+				if(!cellVO.blockerRefernce)
+				{
+					deleteBlocker();
+				}
+				else
+				{
+					createBlockerView();
+					_blocker.source = AssetsManager.getInstance().getImageClass(cellVO.blockerRefernce.getSource());
+					setRightOrder();
+				}
+			}			
+			
+			private function deleteBlocker():Boolean
+			{
+				if(_blocker)
+				{
+					this.removeChild(_blocker);
+					_blocker = null;
+					cellVO.blockerRefernce = null;
+					return true;
+				}
+				return false;
+			}
+			
+			//Booster------------------------------------
+			public function addBooster(inBoosterVO:BusterVO, aAmount:int = 1):void{
+				createBoosterView();
+				cellVO.boosterRefernce = inBoosterVO;
+				cellVO.boosterAmount = aAmount;
+				_booster.source = AssetsManager.getInstance().getImageClass(inBoosterVO.getSource());
+				_boosterAmountLabel.text = aAmount.toString();
+				setRightOrder();				
+			}
+			
+			private function createBoosterView():void
+			{
+				if(!_booster)
+				{
+					_booster = new Image();
+					_booster.width = Match3Editor.CELL_WIDTH;
+					_booster.height = Match3Editor.CELL_HEIGHT;
+					_booster.x = 0;
+					_booster.y = 0;
+					this.addChild(_booster);	
+				}				
+			}
+			
+			private function addChangeBooster(aAmount:int = 1):void
+			{
+				if(!_cell)
+					return;
+				
+				deleteCellContent();
+				createBoosterView();
+				
+				if(_booster.source != AssetsManager.getInstance().getImageClass(selectionManager.selectedItemSource))
+				{
+					_booster.source = AssetsManager.getInstance().getImageClass(selectionManager.selectedItemSource);
+					cellVO.boosterRefernce = BusterVO.createBoosterFromSourceId(selectionManager.selectedItemId);
+					cellVO.boosterAmount = aAmount;
+				}
+				
+				_boosterAmountLabel.text = aAmount.toString();
+				
+				setRightOrder();
+			}
+			
+			private function addChangeDeleteBoosterByVO():void
+			{
+				if(!cellVO.boosterRefernce)
+				{
+					deleteBooster();
+				}
+				else
+				{
+					createBoosterView();
+					_booster.source = AssetsManager.getInstance().getImageClass(cellVO.boosterRefernce.getSource());
+					setRightOrder();
+				}
+			}
+			
+			private function deleteBooster():Boolean
+			{
+				if(_booster)
+				{
+					this.removeChild(_booster);
+					_booster = null;
+					cellVO.boosterRefernce = null;
+					cellVO.boosterAmount = 0;
+					_boosterAmountLabel.text = "";
+					return true;
+				}
+				return false;
+			}
+			
+			private function setRightOrder():void
+			{
+				var i:int = 1;
+				if(_cell)
+				{
+					this.setChildIndex(_cell,i);					
+					i++;
+				}
+				
+				if(_respawn){
+					this.setChildIndex(_respawn,i);
+					i++;
+				}
+				
+				if(_portalConnectLabel)
+				{
+					this.setChildIndex(_portalConnectLabel,i);		
+					i++;
+				}
+				
+				if(_jelly)
+				{
+					this.setChildIndex(_jelly,i);
+					i++;
+				}
+				
+				if(_piece)
+				{
+					this.setChildIndex(_piece,i);
+					i++;
+				}
+				
+				if(_blocker)
+				{
+					this.setChildIndex(_blocker,i);
+					i++;
+				}
+				
+				if(_toy)
+				{
+					this.setChildIndex(_toy,i);
+					i++;
+				}
+				
+				if (_booster)
+				{
+					this.setChildIndex(_booster,i);
+					i++;
+				}
+				
+				if(_boosterAmountLabel)
+				{
+					this.setChildIndex(_boosterAmountLabel,i);		
+					i++;
+				}
+				
+				if(_teapotCountLabel){
+					this.setChildIndex(_teapotCountLabel,i);
+					i++;
+				}
+				
+				if(_teapotMaxLabel){
+					this.setChildIndex(_teapotMaxLabel,i);
+					i++;
+				}
+			}
+			
+			public function fillCell():void
+			{
+				if((cellVO)&&(cellVO.type != CellType.EMPTY))
+				{
+					if(cellVO.pieceReference == null)
+					{
+						cellVO.pieceReference = new PieceColorVO(PieceColorVO.getRandomType());
+						showCell(cellVO);
+					}
+				}
+			}
+			
+			public function showCell(value:CellVO):void
+			{
+				if(this.cellVO !== value)
+					this.cellVO = value;
+				
+				addChangeDeleteCellByVO();
+				addChangeDeleteRespawnByVO();
+				addChangeDeleteJellyByVO();
+				addChangeDeletePieceByVO();
+				addChangeDeleteBlockerByVO();
+				addChangeDeleteToyByVO();
+				addChangeDeleteBoosterByVO();
+			}
+			
+			
+			private function onMouseMove(e:MouseEvent):void
+			{
+				if(selectionManager.wasClicked && selectionManager.state == SelectionManager.DROW_STATE)
+					onMouseDown();
+			}			
+			
+			private function onMouseUp(e:MouseEvent):void
+			{
+				selectionManager.wasClicked = false;
+			}			
+			
+			private function onMouseOut(e:MouseEvent):void
+			{
+				_overBack.visible = false;
+				resizeRotation();
+				/*if(_toy!=null){
+					width = _toy.width;
+					height = _toy.height;
+				}*/
+			}			
+			
+		]]>
+	</mx:Script>
+</mx:Canvas>

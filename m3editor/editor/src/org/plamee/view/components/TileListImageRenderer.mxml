@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Image xmlns:mx="http://www.adobe.com/2006/mxml" source="{AssetsManager.getInstance().getImageClass(data.source)}" width="{Match3Editor.CELL_WIDTH/2}" height="{Match3Editor.CELL_HEIGHT/2}">
+	<mx:Script>
+		<![CDATA[
+			import org.plamee.managers.AssetsManager;
+		]]>
+	</mx:Script>
+	
+</mx:Image>

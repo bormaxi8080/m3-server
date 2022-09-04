@@ -1,0 +1,1786 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:components="org.plamee.view.components.*"
+	pageTitle="Match 3 Editor"
+	creationComplete="onCreateComplete()"
+ 	paddingLeft="0" paddingTop="0" paddingBottom="0" paddingRight="0"
+	>
+
+	<!--<mx:Style source="../style/AeonGraphical.css"/>-->
+
+	<mx:Style>
+
+		.backButton
+		{
+			upSkin: Embed(source='../assets/buttons/back_up.png');
+			overSkin:Embed(source='../assets/buttons/back_up.png');
+			downSkin: Embed(source='../assets/buttons/back_up.png');
+			disabledSkin: Embed(source='../assets/buttons/back_dis.png');
+		}
+
+		.saveButton
+		{
+			upSkin: Embed(source='../assets/buttons/save_up.png');
+			overSkin:Embed(source='../assets/buttons/save_over.png');
+			downSkin: Embed(source='../assets/buttons/save_up.png');
+			disabledSkin: Embed(source='../assets/buttons/save_dis.png');
+		}
+
+		.openButton
+		{
+			upSkin: Embed(source='../assets/buttons/open_up.png');
+			overSkin:Embed(source='../assets/buttons/open_over.png');
+			downSkin: Embed(source='../assets/buttons/open_up.png');
+			disabledSkin: Embed(source='../assets/buttons/open_dis.png');
+		}
+
+		.diceButton
+		{
+			upSkin: Embed(source='../assets/buttons/dice_up.png');
+			overSkin:Embed(source='../assets/buttons/dice_over.png');
+			downSkin: Embed(source='../assets/buttons/dice_up.png');
+			disabledSkin: Embed(source='../assets/buttons/dice_dis.png');
+		}
+
+		.playButton
+		{
+			upSkin: Embed(source='../assets/buttons/play_up.png');
+			overSkin:Embed(source='../assets/buttons/play_over.png');
+			downSkin: Embed(source='../assets/buttons/play_up.png');
+			disabledSkin: Embed(source='../assets/buttons/play_dis.png');
+			selectedUpSkin: Embed(source='../assets/buttons/play_up_selected.png');
+			selectedOverSkin:Embed(source='../assets/buttons/play_over_selected.png');
+			selectedDownSkin: Embed(source='../assets/buttons/play_up_selected.png');
+			selectedDisabledSkin: Embed(source='../assets/buttons/play_dis_selected.png');
+		}
+
+		.newButton
+		{
+			upSkin: Embed(source='../assets/buttons/new_up.png');
+			overSkin:Embed(source='../assets/buttons/new_over.png');
+			downSkin: Embed(source='../assets/buttons/new_up.png');
+			disabledSkin: Embed(source='../assets/buttons/new_dis.png');
+		}
+
+		.testButton
+		{
+			upSkin: Embed(source='../assets/buttons/test_up.png');
+			overSkin:Embed(source='../assets/buttons/test_over.png');
+			downSkin: Embed(source='../assets/buttons/test_up.png');
+			disabledSkin: Embed(source='../assets/buttons/test_dis.png');
+		}
+
+		.rotateButton
+		{
+			upSkin: Embed(source='../assets/buttons/rotate.png');
+			overSkin:Embed(source='../assets/buttons/rotate.png');
+			downSkin: Embed(source='../assets/buttons/rotate.png');
+			disabledSkin: Embed(source='../assets/buttons/rotate.png');
+		}
+		
+		.deleteButton
+		{
+			upSkin: Embed(source='../assets/buttons/delete_up.png');
+			overSkin:Embed(source='../assets/buttons/delete_over.png');
+			downSkin: Embed(source='../assets/buttons/delete_up.png');
+			disabledSkin: Embed(source='../assets/buttons/delete_dis.png');
+		}
+
+		.erreseButton
+		{
+			upSkin: Embed(source='../assets/buttons/errese_up.png');
+			overSkin:Embed(source='../assets/buttons/errese_over.png');
+			downSkin: Embed(source='../assets/buttons/errese_up.png');
+			disabledSkin: Embed(source='../assets/buttons/errese_dis.png');
+		}
+
+		.joinButton
+		{
+			upSkin: Embed(source='../assets/buttons/join_up.png');
+			overSkin:Embed(source='../assets/buttons/join_over.png');
+			downSkin: Embed(source='../assets/buttons/join_up.png');
+			disabledSkin: Embed(source='../assets/buttons/join_dis.png');
+		}
+
+		.plusButton
+		{
+			upSkin: Embed(source='../assets/buttons/plus_up.png');
+			overSkin:Embed(source='../assets/buttons/plus_over.png');
+			downSkin: Embed(source='../assets/buttons/plus_up.png');
+			disabledSkin: Embed(source='../assets/buttons/plus_dis.png');
+		}
+
+		.minusButton
+		{
+			upSkin: Embed(source='../assets/buttons/minus_up.png');
+			overSkin:Embed(source='../assets/buttons/minus_over.png');
+			downSkin: Embed(source='../assets/buttons/minus_up.png');
+			disabledSkin: Embed(source='../assets/buttons/minus_dis.png');
+		}
+
+		.logoutButton
+		{
+			upSkin: Embed(source='../assets/buttons/logout_up.png');
+			overSkin:Embed(source='../assets/buttons/logout_over.png');
+			downSkin: Embed(source='../assets/buttons/logout_up.png');
+			disabledSkin: Embed(source='../assets/buttons/logout_dis.png');
+		}
+
+		.chapterButton
+		{
+			upSkin: Embed(source='../assets/buttons/chapter_up.png');
+			overSkin:Embed(source='../assets/buttons/chapter_over.png');
+			downSkin: Embed(source='../assets/buttons/chapter_up.png');
+			disabledSkin: Embed(source='../assets/buttons/chapter_dis.png');
+		}
+
+		.leftButton
+		{
+			upSkin: Embed(source='../assets/buttons/left_up.png');
+			overSkin:Embed(source='../assets/buttons/left_over.png');
+			downSkin: Embed(source='../assets/buttons/left_up.png');
+		}
+
+		.rightButton
+		{
+			upSkin: Embed(source='../assets/buttons/right_up.png');
+			overSkin:Embed(source='../assets/buttons/right_over.png');
+			downSkin: Embed(source='../assets/buttons/right_up.png');
+		}
+
+		.infoButton
+		{
+			upSkin: Embed(source='../assets/buttons/info.png');
+			overSkin:Embed(source='../assets/buttons/info.png');
+			downSkin: Embed(source='../assets/buttons/info.png');
+		}
+
+	</mx:Style>
+
+	<mx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.controls.Image;
+			import mx.events.CloseEvent;
+			import mx.events.ListEvent;
+			import mx.skins.Border;
+			import mx.skins.spark.BorderSkin;
+
+			import org.plamee.ApplicationFacade;
+			import org.plamee.managers.AssetsManager;
+			import org.plamee.managers.GameFieldManager;
+			import org.plamee.managers.LevelManager;
+			import org.plamee.managers.SelectionManager;
+			import org.plamee.model.ApplicationProxy;
+			import org.plamee.model.inums.BlockerType;
+			import org.plamee.model.inums.CellType;
+			import org.plamee.model.inums.DefaultValues;
+			import org.plamee.model.inums.GoalTypes;
+            import org.plamee.model.inums.PieceColorProperty;
+            import org.plamee.model.inums.StatisticType;
+			import org.plamee.model.vo.BlockerVO;
+			import org.plamee.model.vo.BusterVO;
+			import org.plamee.model.vo.CellOutVO;
+			import org.plamee.model.vo.CellVO;
+			import org.plamee.model.vo.JellyVO;
+			import org.plamee.model.vo.LevelVO;
+			import org.plamee.model.vo.PieceBlueberryVO;
+			import org.plamee.model.vo.PieceColorVO;
+			import org.plamee.model.vo.PiecePastryBagVO;
+			import org.plamee.model.vo.PiecePhysalisVO;
+			import org.plamee.model.vo.PieceRainbowCupcakeVO;
+			import org.plamee.model.vo.PieceRandomVO;
+			import org.plamee.model.vo.PieceRaspberryVO;
+			import org.plamee.model.vo.PieceSpatulaVO;
+			import org.plamee.model.vo.PieceStrawberryVO;
+			import org.plamee.model.vo.PieceTeapotVO;
+			import org.plamee.model.vo.PieceVO;
+			import org.plamee.model.vo.RespawnVO;
+			import org.plamee.model.vo.ToyVO;
+			import org.plamee.view.components.CellViewCanvas;
+			import org.plamee.view.components.GameCellCanvas;
+			import org.plamee.view.components.GamePieceCanvas;
+			import org.plamee.view.components.JsonWindow;
+			import org.plamee.view.components.LevelStatisticWindow;
+			import org.plamee.view.components.StatisticsListRenderer;
+			import org.plamee.view.components.TileListImageRenderer;
+			//
+			// first initializing of the facade
+			private var facade: ApplicationFacade = ApplicationFacade.getInstance();
+
+			public static const CELL_WIDTH:Number = 75;
+			public static const CELL_HEIGHT:Number = 75;
+			public static const COLUMS_IN_TILE_LIST:Number = 4;
+			public static const COLUMS_IN_TILE_LIST_PIECES:Number = 5;
+			public static var BOARD_HEIGHT:int = DefaultValues.FIELD_HEIGHT;
+			public static var BOARD_WIDTH:int = DefaultValues.FIELD_WIDTH;
+
+			private var selectionManager:SelectionManager = SelectionManager.getInstance();
+			private var levelManager:LevelManager = LevelManager.getInstance();
+
+			private var mStatusEditor:int=0;
+
+			private var mCellsCanvas:Canvas;
+			private var mChipsCanvas:Canvas;
+			private var mJellyCanvas:Canvas;
+
+			private var mBackGround:Image = null;
+			private var mBackgroundName:String = "";
+			private var mArrayIngridientsList:ArrayCollection = null;
+
+			//public static var version:String = "11";
+			public static const buildNumber:String = CONFIG::build;
+
+			private var mArrayBackground:ArrayCollection = new ArrayCollection();
+
+			private var mMaxInfield:int = 1;
+			private var mMoveDelay:int = 1;
+
+			private var mLoaderClient:Loader = null;
+			private var fLevelVO:LevelVO;
+
+			public function onCreateComplete():void
+			{
+				Security.allowDomain("*");
+				Security.allowInsecureDomain("*");
+				facade.startup(this);
+				fillCells();
+				loadCFG();
+				lLabelVersion.text = "Version:"+buildNumber;
+				enabledNotPlayUI(true);
+
+				clearStatistics();
+			}
+
+			private function loadCFG():void{
+				var aLoader:URLLoader = new URLLoader();
+				aLoader.dataFormat=URLLoaderDataFormat.VARIABLES;
+				aLoader.addEventListener(Event.COMPLETE, function (e:Event):void{
+					if((e.target as URLLoader).data.host!=null)
+						ApplicationProxy.SERVER_URL =(e.target as URLLoader).data.host;
+				});
+				aLoader.addEventListener(IOErrorEvent.IO_ERROR, function (e:Event):void{trace(e);});
+				aLoader.load(new URLRequest("conf.txt"));
+
+
+				aLoader = new URLLoader();
+				aLoader.dataFormat=URLLoaderDataFormat.TEXT;
+				aLoader.addEventListener(Event.COMPLETE, function (e:Event):void{
+					var aNames:Array = ((e.target as URLLoader).data as String).split("&");
+					mArrayBackground = new ArrayCollection();
+					for each(var aName:String in aNames)
+						mArrayBackground.addItem({id:aName, source:"../assets/backgrounds/"+aName+".png", name:aName});
+					BackgorundsTileList.dataProvider = mArrayBackground;
+				});
+				aLoader.addEventListener(IOErrorEvent.IO_ERROR, function (e:Event):void{trace(e);});
+				aLoader.load(new URLRequest("../assets/backgrounds/backgrounds.txt"));
+			}
+			public function fillCells():void
+			{
+				var cell:CellViewCanvas;
+
+
+				levelManager.gridArray = new Array();
+
+				cellsCanvas.width = CELL_WIDTH*BOARD_WIDTH+15;
+				cellsCanvas.height = CELL_HEIGHT*DefaultValues.FIELD_HEIGHT+2;
+
+				mBackGround = new Image();
+				mCellsCanvas = new Canvas();
+				/*mBackGround.width = cellsCanvas.width;
+				mBackGround.height = cellsCanvas.width;*/
+				mBackGround.x = 0;
+				mBackGround.y = 0;
+				cellsCanvas.addChild(mBackGround);
+				cellsCanvas.addChild(mCellsCanvas);
+				mCellsCanvas.y=CELL_HEIGHT*(BOARD_HEIGHT-1);
+				mCellsCanvas.clipContent=false;
+
+				/*var aImg:Image = new Image();
+				aImg.graphics.beginFill(0xFFFFFF);
+				aImg.graphics.drawRect(0,0, cellsCanvas.width, cellsCanvas.height);
+				aImg.graphics.endFill();
+				cellsCanvas.addChild(aImg);
+				cellsCanvas.mask  = aImg;*/
+
+				for(var i:int=0; i<BOARD_WIDTH; i++)
+				{
+					levelManager.gridArray[i] = new Array();
+					for(var j:int = 0; j<BOARD_HEIGHT; j++)
+					{
+						cell = new CellViewCanvas();
+						cell.x = CELL_WIDTH*i;
+						cell.y = CELL_HEIGHT*(-j);
+						mCellsCanvas.addChild(cell);
+						levelManager.gridArray[i][j] = cell;
+						cell.cellX=i;
+						cell.cellY=j;
+					}
+				}
+
+				PieceTileList.dataProvider = PieceColorVO.getAllSource();
+
+				CellsTileList.dataProvider = CellVO.getAllSource();
+
+				RespawnTileList.dataProvider = RespawnVO.getAllSource();
+				(RespawnTileList.dataProvider as ArrayCollection).addAll(CellOutVO.getAllSource());
+
+				ToysTileList.dataProvider = ToyVO.getAllSource();
+
+				JellyTileList.dataProvider = JellyVO.getAllSource();
+
+				BlockersTileList.dataProvider = BlockerVO.getAllSource();
+
+				BoostersTileList.dataProvider = BusterVO.getAllSource();
+			}
+
+			public function onTeapotCreateComplete():void{
+				var temp:ArrayCollection = PieceTeapotVO.getAllSource();
+				TeapotTileList.dataProvider = temp;
+			}
+			public function onSpecialCreateComplete():void
+			{
+				var temp:ArrayCollection = PiecePastryBagVO.getAllSource();
+				temp.addAll(PieceRainbowCupcakeVO.getAllSource());
+				//temp.addAll(PieceSpatulaVO.getAllSource());
+				temp.addAll(PieceRandomVO.getAllSource());
+				SpecialPieceTileList.dataProvider = temp;
+			}
+
+			public function onIngredientsCreateComplete():void
+			{
+				var temp:ArrayCollection = PieceBlueberryVO.getAllSource();
+				temp.addAll(PieceRaspberryVO.getAllSource());
+				temp.addAll(PieceStrawberryVO.getAllSource());
+				temp.addAll(PiecePhysalisVO.getAllSource());
+
+				IngredientsPieceTileList.dataProvider = temp;
+			}
+
+			private function onCellClicked(e:ListEvent):void
+			{
+				if(e.currentTarget != CellsTileList && CellsTileList)
+					CellsTileList.selectedItem = null;
+
+				if(e.currentTarget != JellyTileList && JellyTileList)
+					JellyTileList.selectedItem = null;
+
+				if(e.currentTarget != RespawnTileList&& RespawnTileList)
+					RespawnTileList.selectedItem = null;
+
+				if(e.currentTarget != ToysTileList&& ToysTileList)
+					ToysTileList.selectedItem = null;
+
+				if(e.currentTarget != PieceTileList && PieceTileList)
+					PieceTileList.selectedItem = null;
+
+				if(e.currentTarget != SpecialPieceTileList && SpecialPieceTileList)
+					SpecialPieceTileList.selectedItem = null;
+
+				if(e.currentTarget != IngredientsPieceTileList && IngredientsPieceTileList)
+					IngredientsPieceTileList.selectedItem = null;
+
+				if(e.currentTarget != BlockersTileList && BlockersTileList)
+					BlockersTileList.selectedItem = null;
+
+				var lSelectedItemAmount:int = 1;
+				if (BoostersTileList)
+				{
+					if(e.currentTarget != BoostersTileList)
+					{
+						BoostersTileList.selectedItem = null;
+					}else {
+						lSelectedItemAmount = int(tiBoosterCount.text);
+					}
+				}
+
+				selectionManager.changeSelection(e.itemRenderer.data.id, e.itemRenderer.data.source, lSelectedItemAmount);
+			}
+
+			private function onCellClickedBackground(e:ListEvent):void{
+				setBackGround(e.itemRenderer.data.name);
+			}
+			private function setBackGround(inImage:String):void{
+				mBackgroundName = inImage;
+				if((mBackgroundName != null)&&(mBackgroundName != ""))
+				{
+					mBackGround.source = "../assets/backgrounds/"+mBackgroundName+".png";
+				}
+				else
+				{
+					mBackGround.source = "";
+				}
+			}
+
+			private function onDeleteSelected():void
+			{
+				selectionManager.changeSelection("-1", "../assets/buttons/delete_up.png");
+			}
+
+			private function onErreseSelected():void
+			{
+				selectionManager.changeSelection("-2", "../assets/buttons/errese_up.png");
+			}
+			private function onRotateSelected():void{
+				selectionManager.changeSelection("-3", "../assets/buttons/rotate.png");
+			}
+
+
+			public function onNewClick():void
+			{
+				levelManager.setNewGrid();
+				changeHeightArr(DefaultValues.FIELD_WIDTH, DefaultValues.FIELD_HEIGHT);
+				setBackGround("");
+				clearStatistics();
+
+				tiCountStar1.text = "0";
+				tiCountStar2.text = "0";
+				tiCountStar3.text = "0";
+
+				tiMovesLevel.text = "1";
+				tiTimeLevel.text = "1";
+				tiExtraTime.text = "0";
+
+				clearGoal();
+			}
+
+			/*private function onDiceClick():void{
+				//levelManager.fillEmptyCells();
+				GameFieldManager.getInstance().setLevelField(LevelManager.getInstance().gridArray);
+				var aChipsCanvas:Canvas = new Canvas();
+				GameFieldManager.getInstance().setChipsCanvas(aChipsCanvas);
+				GameFieldManager.getInstance().setDropItem(getDropArray());
+				GameFieldManager.getInstance().fillEmptyCells();
+
+				for(var i:int=0;i<GameFieldManager.getInstance().mCells.length;i++)
+					for(var j:int=0;j<GameFieldManager.getInstance().mCells[i].length;j++){
+						var aCell:CellVO = GameFieldManager.getInstance().mCells[i][j];
+						if(aCell.jellyReference)
+							(levelManager.gridArray[i][j] as CellViewCanvas).addJelly(aCell.jellyReference.type);
+						if(aCell.blockerRefernce)
+							(levelManager.gridArray[i][j] as CellViewCanvas).addBlocker(aCell.blockerRefernce);
+						if(aCell.pieceReference)
+							(levelManager.gridArray[i][j] as CellViewCanvas).addPiece(aCell.pieceReference);
+					}
+
+
+			}*/
+
+			public function showAlert(inText:String):Boolean{
+				Alert.show(inText, "ERROR", Alert.OK, this);
+				return false;
+			}
+
+			private function setObj(inParObj:Object, inObj:Object):void{
+				if(inParObj[inObj.x+":"+inObj.y]==null)
+					inParObj[inObj.x+":"+inObj.y]=new Object();
+				for(var aStr:String in inObj){
+					inParObj[inObj.x+":"+inObj.y][aStr]=inObj[aStr];
+				}
+			}
+
+			private function onTestClick(showDoneMsg:Boolean=true):Boolean{
+				var lLevelVO:LevelVO = new LevelVO();
+
+				if(mBackgroundName=="") return showAlert("Empty background");
+				lLevelVO.background = mBackgroundName;
+
+				var aCellsObjects:Object = new Object();
+
+
+				var aCountIngredient:int = 0;
+				//check spawn points
+				var aFindSpawn:Boolean = false;
+				var aFindSpawnOne:Boolean = false;
+				for(var i:int=0; i<BOARD_WIDTH; i++){
+					for(var j:int = 0; j<BOARD_HEIGHT; j++){
+						var cell:CellViewCanvas = levelManager.gridArray[i][j];
+						if(cell.cellVO.pieceReference&&cell.cellVO.pieceReference.isIngredient())aCountIngredient++;
+						if(cell.cellVO.respawnRefence!=null)aFindSpawnOne = true;
+						if(cell.cellVO.respawnRefence!=null&&cell.cellVO.blockerRefernce==null) aFindSpawn=true;
+						if(cell.cellVO.blockerRefernce!=null&&cell.cellVO.pieceReference!=null&&cell.cellVO.pieceReference.isIngredient())
+							return showAlert("Error level->One of the ingredient is blocked");
+
+                        if (cell.cellVO.blockerRefernce && cell.cellVO.blockerRefernce.type == BlockerType.SKYLIGHT) {
+                            var pieceColor:PieceColorVO = cell.cellVO.pieceReference as PieceColorVO;
+                            var randomColor: PieceRandomVO = cell.cellVO.pieceReference as PieceRandomVO;
+                            if (!randomColor && !(pieceColor && pieceColor.property == PieceColorProperty.REGULAR)) {
+                                return showAlert("Error level->Skylight can be placed only on regular piece");
+                            }
+                        }
+					}
+				}
+				if(!aFindSpawn){
+					if(aFindSpawnOne)
+						return showAlert("Error level->All spawn is blocked");
+					else
+						return showAlert("Error level->Spawn is not found");
+				}
+
+				//Выбран тип уровня
+				if(rbTime.selected)
+				{
+					if(int(tiTimeLevel.text) <=0)
+						return showAlert("Level type->Time is empty");
+					lLevelVO.setLimit("time", int(tiTimeLevel.text));
+					lLevelVO.setExtraTime(int(tiExtraTime.text));
+				} else{
+					if(int(tiMovesLevel.text) <=0)
+						return showAlert("Level type->Moves is empty");
+					lLevelVO.setLimit("moves", int(tiMovesLevel.text));
+				}
+
+				lLevelVO.setBoardSize(BOARD_WIDTH, DefaultValues.FIELD_HEIGHT);
+
+				//Заполнены цели уровня
+				var a:int;
+				switch (goalCB.selectedItem.id)
+				{
+					case GoalTypes.ID_GOAL_INGRIDIENTS:
+						//проверка Ingredients
+						var aArray1:ArrayCollection = goalIngridientsList.dataProvider as ArrayCollection;
+						var aNumberIngredient:int=0;
+						var aCountIngredients:int=0;
+						var lIngredients:Object = new Object();
+						for(a=0;a<aArray1.length;a++){
+							aNumberIngredient += int(aArray1[a].number);//3_9_1
+							var aArr:Array = (aArray1[a].id as String).split("_");
+							var aPieceVO:PieceVO = PieceVO.createPieceFromSourceId(aArray1[a].id);
+							if(int(aArray1[a].number)>0){
+								lIngredients[aPieceVO.getName()] = aArray1[a].number;
+								aCountIngredients++;
+							}
+						}
+						lLevelVO.setObjectiveGetIngredients(int(tiMaxInfield.text), int(tiMoveDelay.text), lIngredients);
+						if(!(aNumberIngredient>0))
+							return showAlert("Goal level->Ingredients is empty");
+						if(aCountIngredients>3)
+							return showAlert("More than three the ingredients in Goal Level");
+						if(aCountIngredient>aNumberIngredient)
+							return showAlert("Overmuch Ingredients on the board");
+
+						if(!rbTime.selected)
+							if(aNumberIngredient*int(tiMoveDelay.text)>int(tiMovesLevel.text))
+								return showAlert("Moves too little to do the GoalLevel Ingredients");
+						//Проверка на OUT
+
+						GameFieldManager.getInstance().setLevelField(LevelManager.getInstance().gridArray);
+						if(GameFieldManager.getInstance().createGraph()==false)
+							return showAlert("Error level->Need OutCell for Ingredients on the board");
+						break;
+					case GoalTypes.ID_GOAL_CLEARBACKS:
+						var aFindJelly:Boolean = false;
+						for(var i:int=0; i<BOARD_WIDTH&&aFindJelly==false; i++){
+							for(var j:int = 0; j<BOARD_HEIGHT&&aFindJelly==false; j++){
+								var cell:CellViewCanvas = levelManager.gridArray[i][j];
+								var aJellyVO:JellyVO = cell.cellVO.jellyReference;
+								if(aJellyVO!=null) aFindJelly=true;
+							}
+						}
+						if(!aFindJelly)
+							return showAlert("Goal level->Jelly is not found in board");
+						lLevelVO.setObjectiveClearbacks();
+						break;
+					case GoalTypes.ID_GOAL_TOYS:
+						var aFindToy:Boolean = false;
+						for(var i:int=0; i<BOARD_WIDTH&&aFindJelly==false; i++){
+							for(var j:int = 0; j<BOARD_HEIGHT&&aFindJelly==false; j++){
+								var cell:CellViewCanvas = levelManager.gridArray[i][j];
+								var aToyVO:ToyVO = cell.cellVO.toyRefernce;
+								if(aToyVO!=null) aFindToy=true;
+							}
+						}
+						if(!aFindToy)
+							return showAlert("Goal level->Toys is not found in board");
+						lLevelVO.setObjectiveToys();
+						break;
+					case GoalTypes.ID_GOAL_GET_COLORS:
+						var aArrayC:ArrayCollection = goalCollectionVB.collectionGetColorsList;
+
+						if(aArrayC.length==0)
+							return showAlert("Goal level->Collection is empty");
+						else{
+							var lGetColors:Array = [];
+							for(a=0;a<aArrayC.length;a++)
+							{
+								if(int(aArrayC[a].col<=0))
+									return showAlert("Goal level->Collection one item is empty");
+								var aPieceColorVO:PieceVO = PieceVO.createPieceFromSourceId(aArrayC[a].id) as PieceVO;
+								if (aPieceColorVO)
+								{
+									var lObject:Object = new Object();
+									lObject["piece"] = aPieceColorVO.getName();
+									if (aPieceColorVO is PieceColorVO && (aPieceColorVO as PieceColorVO).getPower() != "NONE")
+									{
+										lObject["power"] = (aPieceColorVO as PieceColorVO).getPower();
+									}
+									lObject["count"] = aArrayC[a].col;
+									lGetColors.push(lObject);
+								}
+							}
+							lLevelVO.setObjectiveGetColors(lGetColors);
+							if(aArrayC.length>3)
+								return showAlert("More than three the Collections in Goal Level");
+						}
+
+						if (goalCollectionVB.isBossSelected)
+						{
+							aArrayC = goalCollectionVB.collectionBossBlockersList;
+							if(aArrayC.length==0)
+							{
+								return showAlert("Goal level->Boss blockers statistic is empty");
+							}
+							else if (aArrayC.length==1 && BlockerVO.getTypeById(aArrayC[0].id) == BlockerType.SKYLIGHT)
+							{
+								return showAlert("Goal level->Boss blocker SKYLIGHT can't be the only one in list");
+							}
+							else{
+								var lBossBlockers:Object = new Object();
+								for(a=0;a<aArrayC.length;a++)
+								{
+									if(int(aArrayC[a].col<=0))
+										return showAlert("Goal level->Boss blocker statistic one item is empty");
+									var lBlocker:String = BlockerVO.getNameByType(BlockerVO.getTypeById(aArrayC[a].id));
+									if(lBlocker)
+										lBossBlockers[lBlocker] = aArrayC[a].col;
+								}
+							}
+							lLevelVO.setBoss(goalCollectionVB.bossFrequency, lBossBlockers);
+						}
+						break;
+					case GoalTypes.ID_GOAL_SCORE:
+						lLevelVO.setObjectiveScore();
+						break;
+					case GoalTypes.ID_GOAL_GLASS:
+						lLevelVO.setObjectiveGlass(BOARD_HEIGHT);
+						break;
+				}
+				//Заполнены кол-во очков для 1,2 и 3ёх звёзд.
+				var aS1:int = int(tiCountStar1.text);
+				var aS2:int = int(tiCountStar2.text);
+				var aS3:int = int(tiCountStar3.text);
+				if(aS1<=0||aS1>=aS2||aS2>=aS3)
+					return showAlert("Goal level->Stars score count incorrect");
+				lLevelVO.scores = [aS1, aS2, aS3];
+
+				//Statistics
+				var lNormalDropStatistic:Object = getDropStatisticAsObject(dropStatisticPanel.getStatisticsByType("normal"));
+				if (lNormalDropStatistic == null)
+				{
+					return showAlert("Normal drop statistics is empty");
+				}
+
+				var lEasyDropStatistic:Object = getDropStatisticAsObject(dropStatisticPanel.getStatisticsByType("easy"));
+				if (lEasyDropStatistic == null)
+				{
+					return showAlert("Easy drop statistics is empty");
+				}
+				lLevelVO.setStatistics(lNormalDropStatistic, lEasyDropStatistic);
+
+				//Порталы
+				var aPortals:Object = new Object();
+				var aPortalsCells:Object = new Object();
+
+				for(var i:int=0; i<BOARD_WIDTH; i++){
+					for(var j:int = 0; j<levelManager.gridArray[i].length; j++){
+						var cell:CellViewCanvas = levelManager.gridArray[i][j];
+						if(cell.cellVO.type!=CellType.PORTAL_IN&&cell.cellVO.type!=CellType.PORTAL_OUT)
+							continue;
+						var aStr:String = "x"+cell.cellVO.portalConnectionNum;
+						if(aPortalsCells[aStr]==null)
+							aPortalsCells[aStr] = new Object();
+						if(cell.cellVO.type==CellType.PORTAL_IN){
+							aPortalsCells[aStr]["x"]=i;
+							aPortalsCells[aStr]["y"]=j;
+						}else{
+							aPortalsCells[aStr]["dest_x"]=i;
+							aPortalsCells[aStr]["dest_y"]=j;
+						}
+						if(aPortals[cell.cellVO.portalConnectionNum]==null)
+							aPortals[cell.cellVO.portalConnectionNum]=1;
+						else
+							aPortals[cell.cellVO.portalConnectionNum]++;
+					}
+				}
+				//delete aPortals[0];
+				if(aPortals[0]!=null) return showAlert("Portals is not connected");
+				for each(var aC:int in aPortals){
+					if(aC!=2) return showAlert("Portals is not connected");
+				}
+				for each(var aObj:Object in aPortalsCells){
+					setObj(aCellsObjects, {x:aObj.x, y:aObj.y, dest_y:aObj.dest_y, dest_x:aObj.dest_x});
+				}
+
+				if(levelManager.testLevel())
+					return showAlert("There are chips that can explode");
+
+				var aToysCells:Array = new Array();
+				var aArray:Array = LevelManager.getInstance().gridArray;
+				if(aArray){
+					for(var i:int = 0 ; i<aArray.length; i++){
+						if(aArray[i]){
+							for(var j:int = 0; j<aArray[i].length; j++){
+
+								var lCellVO:CellVO = aArray[i][j] ? aArray[i][j].cellVO as CellVO : null;
+
+								if(lCellVO && lCellVO.toyRefernce){
+									var aIndexToy:int = aToysCells.indexOf(lCellVO.toyRefernce);
+									if(aIndexToy==-1){
+										aIndexToy = aToysCells.length;
+										aToysCells.push(lCellVO.toyRefernce);
+									}
+									setObj(aCellsObjects, {x:i, y:j, toy:aIndexToy});
+									continue;
+								}
+								if(lCellVO && lCellVO.type == CellType.EMPTY){
+									setObj(aCellsObjects, {x:i, y:j, disabled:true});
+								}else{
+									if(lCellVO && lCellVO.jellyReference){
+										setObj(aCellsObjects, {x:i, y:j, back: lCellVO.jellyReference.type});
+									}
+									if(lCellVO && lCellVO.respawnRefence){
+										setObj(aCellsObjects, {x:i, y:j, spawn:true});
+									}
+									if(lCellVO && lCellVO.mOutIngredient){
+										setObj(aCellsObjects, {x:i, y:j, ingredient_target:true});
+									}
+									if(lCellVO && lCellVO.pieceReference&&(lCellVO.blockerRefernce==null||lCellVO.blockerRefernce.type==BlockerType.SKYLIGHT)){
+										var aColorPieVO:PieceColorVO = lCellVO.pieceReference as PieceColorVO;
+										if(aColorPieVO){
+											setObj(aCellsObjects, {x:i, y:j, piece:aColorPieVO.getColorName(), power:aColorPieVO.getPower()});
+										}else if(lCellVO.pieceReference is PiecePastryBagVO){
+											setObj(aCellsObjects, {x:i, y:j, piece:"pastry_bag"});
+										}else if(lCellVO.pieceReference is PieceRainbowCupcakeVO){
+											setObj(aCellsObjects, {x:i, y:j, piece:"rainbow_cupcake"});
+										}else if(lCellVO.pieceReference is PieceSpatulaVO){
+											setObj(aCellsObjects, {x:i, y:j, piece:"spatula"});
+										}else if(lCellVO.pieceReference is PieceRandomVO){
+											setObj(aCellsObjects, {x:i, y:j, piece:"random"});
+										}else if(lCellVO.pieceReference is PieceBlueberryVO){
+											setObj(aCellsObjects, {x:i, y:j, piece:"blueberry"});
+										}else if(lCellVO.pieceReference is PieceRaspberryVO){
+											setObj(aCellsObjects, {x:i, y:j, piece:"raspberry"});
+										}else if(lCellVO.pieceReference is PieceStrawberryVO){
+											setObj(aCellsObjects, {x:i, y:j, piece:"strawberry"});
+										}else if(lCellVO.pieceReference is PiecePhysalisVO){
+											setObj(aCellsObjects, {x:i, y:j, piece:"physalis"});
+										}else if(lCellVO.pieceReference is PieceTeapotVO){
+											var aPieceTeapotVO:PieceTeapotVO = lCellVO.pieceReference as PieceTeapotVO;
+											setObj(aCellsObjects, {
+												x:i,
+												y:j,
+												piece:"teapot",
+												color:aPieceTeapotVO.getColorName(),
+												rotation:aPieceTeapotVO.rotation,
+												count:aPieceTeapotVO.count,
+												max:aPieceTeapotVO.max
+											});
+										}
+									}
+
+									if(lCellVO && lCellVO.blockerRefernce){
+										var aObjBlocker:Object = {x:i, y:j, blocker:lCellVO.blockerRefernce.mName};
+										if(lCellVO.blockerRefernce.mPower>1){
+											aObjBlocker["power"] = ""+lCellVO.blockerRefernce.mPower;
+										}
+										if(lCellVO.blockerRefernce.type!=BlockerType.SKYLIGHT||(lCellVO.blockerRefernce.type==BlockerType.SKYLIGHT&&lCellVO.pieceReference!=null))
+											setObj(aCellsObjects, aObjBlocker);
+									}
+
+									if(lCellVO && lCellVO.boosterRefernce){
+										setObj(aCellsObjects, {x:i, y:j, booster:{type: lCellVO.boosterRefernce.getName(), count: lCellVO.boosterAmount}});
+									}
+								}
+							}
+						}
+					}
+				}
+
+				var aArrayToy:Array = new Array();
+				for each(var aToy:ToyVO in aToysCells){
+					aArrayToy.push({id:aToy.name, rotation:aToy.rotation});
+				}
+				if(aArrayToy.length>0)
+					lLevelVO.toys = aArrayToy;
+
+				var aArrNameSort:Array = ["x", "y", "piece", "power", "spec", "ingredient", "blocker", "back", "spawn", "ingredient_target", "dest_x", "dest_y", "disabled", "booster", "toy", "rotation", "color", "count", "max"];
+				var lCells:Array = [];
+
+				for(var i:int = 0 ; i<aArray.length; i++)
+					for(var j:int = 0; j<aArray[i].length; j++)
+					{
+					 	var lCell:Object = new Object();
+					 	var aInObj:Object = aCellsObjects[i+":"+j];
+						if(aInObj==null) continue;
+
+						for each(var aAttr:String in aArrNameSort)
+						{
+							if(aInObj.hasOwnProperty(aAttr))
+							{
+								lCell[aAttr] = aInObj[aAttr];
+							}
+						}
+						lCells.push(lCell);
+					}
+				lLevelVO.cells = lCells;
+
+				//check bonus level glass
+				if (goalCB.selectedItem.id != GoalTypes.ID_GOAL_GLASS)
+				{
+					if (BOARD_HEIGHT != DefaultValues.FIELD_HEIGHT)
+					{
+						return showAlert("Level height is incorrect, it should be " + DefaultValues.FIELD_HEIGHT + " instead of " + BOARD_HEIGHT);
+					}
+					if (lLevelVO.calculateBoosterTypesOnField() > 0)
+					{
+						return showAlert("Boosters allowed only in Bonus Level Glass");
+					}
+				}
+
+				fLevelVO=lLevelVO;
+
+				if(showDoneMsg == true)
+					Alert.show("All done", "Complited", Alert.OK, this);
+
+				return true;
+			}
+
+			private function onCreateGoalIngridientsList():void
+			{
+				if(mArrayIngridientsList==null){
+					mArrayIngridientsList = PieceBlueberryVO.getAllSource();
+					mArrayIngridientsList.addAll(PieceRaspberryVO.getAllSource());
+					mArrayIngridientsList.addAll(PieceStrawberryVO.getAllSource());
+					mArrayIngridientsList.addAll(PiecePhysalisVO.getAllSource());
+				}
+				if(goalIngridientsList)
+					goalIngridientsList.dataProvider = mArrayIngridientsList;
+				if(tiMaxInfield){
+					tiMaxInfield.text = ""+mMaxInfield;
+					tiMoveDelay.text = ""+mMoveDelay;
+				}
+			}
+
+			private function onCreateGoalCB():void
+			{
+				goalCB.dataProvider = [	{id:GoalTypes.ID_GOAL_SCORE, label:"Score only"},
+										{id:GoalTypes.ID_GOAL_INGRIDIENTS, label:"Ingredients"},
+										{id:GoalTypes.ID_GOAL_CLEARBACKS, label:"Back"},
+										{id:GoalTypes.ID_GOAL_GET_COLORS, label:"Collection"},
+										{id:GoalTypes.ID_GOAL_GLASS, label:"Bonus Level Glass"},
+										{id:GoalTypes.ID_GOAL_TOYS, label:"Toys"}
+										];
+				goalCB.selectedIndex = 0;
+				onGlassTypeSelected(false);
+			}
+
+			private function onGoalCBChange(e:ListEvent):void
+			{
+				if(goalCB.selectedItem)
+				{
+					onGlassTypeSelected(false);
+					switch(goalCB.selectedItem.id)
+					{
+						case GoalTypes.ID_GOAL_INGRIDIENTS:
+							goalViewStack.selectedChild = goalIngrigientsVB;
+							break;
+						case GoalTypes.ID_GOAL_CLEARBACKS:
+							goalViewStack.selectedChild = goalJellyVB;
+							break;
+						case GoalTypes.ID_GOAL_TOYS:
+							goalViewStack.selectedChild = goalToysVB;
+							break;
+						case GoalTypes.ID_GOAL_GET_COLORS:
+							goalViewStack.selectedChild = goalCollectionVB;
+							break;
+						case GoalTypes.ID_GOAL_SCORE:
+							goalViewStack.selectedChild = goalScoreVB;
+							break;
+						case GoalTypes.ID_GOAL_GLASS:
+							goalViewStack.selectedChild = goalGlassVB;
+
+							rbTime.selected = true;
+							tiTimeLevel.text = "" + DefaultValues.GLASS_LIMIT_TIME;
+
+							onGlassTypeSelected(true);
+							break;
+					}
+					goalViewStack.invalidateDisplayList();
+					goalIngrigientsVB.invalidateDisplayList();
+					goalViewStack.invalidateDisplayList();
+				}
+			}
+
+			private function onGlassTypeSelected(aSelected:Boolean):void
+			{
+				tiTimeLevel.editable = !aSelected;
+				tiExtraTime.editable = !aSelected;
+				radiogroup1.enabled = !aSelected;
+
+				panelBoosters.visible = aSelected;
+				infoBtn.visible = aSelected;
+			}
+
+			private function clearStatistics():void
+			{
+				dropStatisticPanel.setDropStatistic(new ArrayCollection(), new ArrayCollection());
+			}
+
+			private function clearGoal():void
+			{
+				tiGoalGlassHeight && (tiGoalGlassHeight.text = "" + DefaultValues.GLASS_HEIGHT);
+				tiBoosterCount && (tiBoosterCount.text = "" + DefaultValues.BOOSTER_AMOUNT);
+
+				mMaxInfield = 1;
+				mMoveDelay = 1;
+
+				goalCollectionVB.clear();
+
+				mArrayIngridientsList = null;
+
+				onCreateGoalIngridientsList();
+
+				if (goalCB)
+				{
+					goalCB.selectedIndex = 0;
+					onGoalCBChange(null);
+				}
+			}
+
+			private function onJoinPortalsClick():void
+			{
+				selectionManager.state = SelectionManager.PORTAL_OUT_STATE;
+				selectionManager.portalLastNum++;
+			}
+
+			static public function addChips(inI:int, inJ:int, inType:int, inContainer:Canvas, inCellVO:CellVO):void{
+				var aPiece:GamePieceCanvas = new GamePieceCanvas();
+				aPiece.setPosition(CELL_WIDTH*inI, CELL_HEIGHT*(inJ));
+				aPiece.setCellVO(inCellVO, inType);
+				inContainer.addChild(aPiece);
+				if(inType==0){
+					inCellVO.jellyReference.mCanvas = aPiece;
+				}else if(inType==1){
+					inCellVO.pieceReference.mCanvas = aPiece;
+				}else if(inType==2){
+					inCellVO.blockerRefernce.mCanvas = aPiece;
+				}
+
+			}
+
+			protected function onBack(inEvent:MouseEvent):void{
+				GameFieldManager.getInstance().backTurn();
+			}
+
+			private function callback(inObject:Object):void{
+				if(inObject=="ready"){
+			 		(mLoaderClient.content["messageFromParent"] as Function)({"method":"setLevel","data":JSON.stringify(fLevelVO.export())});
+				}
+				trace("callback:"+inObject);
+			}
+			private function fComplite(inEvent:Event):void{
+				(inEvent.target.content["messageFromParent"] as Function)({"method":"setCallback","callback":callback});
+			}
+
+			protected function onPlayClick(event:MouseEvent):void{
+				if( mStatusEditor==0 && onTestClick(false)==false )
+				{
+					playBtn.selected = false;
+					return;
+				}
+
+				enabledNotPlayUI(testBtn.selected);
+				testBtn.selected = !testBtn.selected;
+
+				cellsCanvas.removeAllChildren();
+				cellsCanvas.addChild(mBackGround);
+				cellsCanvas.addChild(mCellsCanvas);
+				mCellsCanvas.removeAllElements();
+
+				mStatusEditor = 1-mStatusEditor;
+				if(mLoaderClient!=null&&this.stage.contains(mLoaderClient)){
+					this.stage.removeChild(mLoaderClient);
+				}
+				if(mStatusEditor==1){
+					if(mLoaderClient==null){
+						mLoaderClient = new Loader();
+						mLoaderClient.contentLoaderInfo.addEventListener(Event.COMPLETE, fComplite);
+						this.stage.addChild(mLoaderClient);
+						//var aUrl:String = "../../../m3flash/m3client/bin-debug/";
+						var aUrl:String = "http://match3test.plamee.com/facebook/client/";
+						mLoaderClient.load(new URLRequest(aUrl+"Match3Client.swf?url_path="+aUrl), new LoaderContext(false, new ApplicationDomain()));
+					}else{
+						this.stage.addChild(mLoaderClient);
+						(mLoaderClient.content["messageFromParent"] as Function)({"method":"setLevel","data":JSON.stringify(fLevelVO.content)});
+					}
+
+
+					var aPoint:Point = cellsCanvas.localToGlobal(new Point(0, 0));
+					mLoaderClient.x=aPoint.x;
+					mLoaderClient.y=aPoint.y*1.5;//o_O Даже не спрашивай зачем...
+					mCellsCanvas.width=760;
+					mCellsCanvas.height=640;
+
+					/*mChipsCanvas = new Canvas();
+					mJellyCanvas = new Canvas();
+					mChipsCanvas.clipContent=false;
+					mJellyCanvas.clipContent=false;
+					GameFieldManager.getInstance().setChipsCanvas(mChipsCanvas);
+					GameFieldManager.getInstance().setDropItem(getDropArray(dropStatisticPanel.getSelectedStatistics()));
+					GameFieldManager.getInstance().setCanvasStatistic(upperGoalStatistic);
+
+					if(rbTime.selected){
+						GameFieldManager.getStat().setVars(StatisticType.TIME,int(tiTimeLevel.text));
+					}else{
+						GameFieldManager.getStat().setVars(StatisticType.MOVE,int(tiMovesLevel.text));
+					}
+
+					var a:int=0;
+					switch(goalCB.selectedItem.id){
+						case 1:
+							GameFieldManager.getInstance().setSpawnPiece(goalIngridientsList.dataProvider as ArrayCollection);
+							break;
+						case 3:
+							var aArrayC:ArrayCollection = goalCollectionSpesialList.dataProvider as ArrayCollection;
+							for(a=0;a<aArrayC.length;a++){
+								var aPieceColorVO:PieceColorVO = PieceVO.createPieceFromSourceId(aArrayC[a].id) as PieceColorVO;
+								if(aPieceColorVO)
+									GameFieldManager.getStat().setVars(StatisticType.PIECE+aPieceColorVO.getColorName(),int(aArrayC[a].col));
+							}
+							break;
+						case 5:
+							GameFieldManager.getStat().setVars(StatisticType.GLASS,BOARD_HEIGHT);
+							break;
+					}
+					GameFieldManager.getStat().setVars(StatisticType.SCORE,int(tiCountStar1.text));
+					GameFieldManager.getInstance().setLevelField(LevelManager.getInstance().gridArray);
+					GameFieldManager.getInstance().preStart();
+					*/
+
+				}else{
+					if(mLoaderClient!=null){
+						(mLoaderClient.content["messageFromParent"] as Function)({"method":"destroy"});
+					}
+				}
+				for(var i:int=0; i<BOARD_WIDTH; i++)
+					for(var j:int = 0; j<BOARD_HEIGHT; j++)
+						if(mStatusEditor==1){
+						}else{
+							mCellsCanvas.addChild(levelManager.gridArray[i][j] );
+						}
+				if(mStatusEditor==1){
+					/*cellsCanvas.removeChild(mBackGround);
+					cellsCanvas.addChild(mJellyCanvas);
+					cellsCanvas.addChild(mChipsCanvas);
+					if(!GameFieldManager.getInstance().setGo()){
+						showAlert("Error change DropStatistics or board. Can't insert random piece");
+					};
+					mJellyCanvas.y=mChipsCanvas.y=mCellsCanvas.y=CELL_HEIGHT*8;*/
+				}else{
+					GameFieldManager.getInstance().setStop();
+					mCellsCanvas.y=CELL_HEIGHT*(BOARD_HEIGHT-1);
+				}
+
+			}
+
+			private function enabledNotPlayUI(value:Boolean):void
+			{
+				newLevelBtn.enabled = value;
+				openBtn.enabled = value;
+				saveBtn.enabled = value;
+				//diceBtn.enabled = value;
+				testBtn.enabled = value;
+				leftContainer.enabled = value;
+				rightConteiner.enabled = value;
+				dropStatisticPanel.enabled = value;
+				backBtn.enabled = !value;
+			}
+
+			public function getLevel():LevelVO{
+				if(onTestClick(false))
+				{
+					return fLevelVO;
+				}
+				return null;
+			}
+
+			public function textinputInt(event:Event):void{
+				var aTextInput:TextInput = (event.target as TextInput);
+				var aInt:int = int((event.target as TextInput).text);
+				if(aInt<=0) aInt=1;
+				aTextInput.text = ""+aInt;
+			}
+
+			public function textinputIntZer(event:Event):void{
+				var aTextInput:TextInput = (event.target as TextInput);
+				var aInt:int = int((event.target as TextInput).text);
+				if(aInt<0) aInt=0;
+				aTextInput.text = ""+aInt;
+			}
+
+			private function boostersTextInput(event:Event):void
+			{
+				textinputInt(event);
+
+				for each (var lObject:Object in BoostersTileList.dataProvider)
+				{
+					if (lObject.id == selectionManager.selectedItemId)
+					{
+						selectionManager.selectedItemAmount = int(tiBoosterCount.text);
+						return;
+					}
+				}
+			}
+
+			private function teapotCountTextInput(event:Event):void{
+				textinputIntZer(event);
+
+				selectionManager._selectedItemCount = int(tiTeapotCount.text);
+			}
+
+			private function teapotMaxTextInput(event:Event):void{
+				textinputInt(event);
+
+				selectionManager._selectedItemMax = int(tiTeapotMax.text);
+			}
+
+			public function changeHeightGlass(event:Event):void{
+				var aTextInput:TextInput = (event.target as TextInput);
+				var aInt:int = int((event.target as TextInput).text);
+				if(aInt<=0) aInt=1;
+				if(aInt>100) aInt=100;
+				aTextInput.text = ""+aInt;
+			}
+
+			private function onCreateGlassBox():void{
+				tiGoalGlassHeight.text = "" + DefaultValues.GLASS_HEIGHT_INIT_VALUE;
+			}
+
+			public function onHeightGlass(event:Event):void{
+				var aHeight:int = int(tiGoalGlassHeight.text);
+				var aWidth:int = BOARD_WIDTH;
+				changeHeightArr(aWidth, aHeight);
+			}
+
+			public function onWidthGlass(event:Event):void{
+				var aHeight:int = BOARD_HEIGHT;
+				var aWidth:int = int(tiLevelWidth.text);
+				changeHeightArr(aWidth, aHeight);
+			}
+
+			private function changeHeightArr(inWidth:int, inHeight:int):void{
+				BOARD_HEIGHT = inHeight;
+				BOARD_WIDTH = inWidth;
+				mCellsCanvas.y=CELL_HEIGHT*(BOARD_HEIGHT-1);
+
+				cellsCanvas.width = CELL_WIDTH*BOARD_WIDTH+15;
+
+
+				if((levelManager.gridArray as Array).length>BOARD_WIDTH){
+						var aCount:int = (levelManager.gridArray as Array).length-BOARD_WIDTH;
+						for(var i:int = 0; i<aCount; i++){
+							var aArray:Array = (levelManager.gridArray as Array).pop() as Array;
+							while(aArray.length>0){
+								var cell:CellViewCanvas = (aArray as Array).pop();
+								mCellsCanvas.removeChild(cell);
+							}
+						}
+				}else{
+					for(var i:int=(levelManager.gridArray as Array).length; i<BOARD_WIDTH; i++){
+						levelManager.gridArray[i] = new Array();
+						for(var j:int = 0; j<(levelManager.gridArray[0] as Array).length; j++){
+							cell = new CellViewCanvas();
+							cell.x = CELL_WIDTH*i;
+							cell.y = CELL_HEIGHT*(-j);
+							mCellsCanvas.addChild(cell);
+							levelManager.gridArray[i][j] = cell;
+							cell.cellX=i;
+							cell.cellY=j;
+
+						}
+					}
+				}
+
+				for(var i:int=0; i<BOARD_WIDTH; i++){
+					if((levelManager.gridArray[i] as Array).length>inHeight){
+						var aCount:int = (levelManager.gridArray[i] as Array).length-BOARD_HEIGHT;
+						for(var j:int = 0; j<aCount; j++){
+							var cell:CellViewCanvas = (levelManager.gridArray[i] as Array).pop();
+							mCellsCanvas.removeChild(cell);
+						}
+					}else{
+						for(var j:int = (levelManager.gridArray[i] as Array).length; j<BOARD_HEIGHT; j++){
+							var cell:CellViewCanvas = new CellViewCanvas();
+							cell.x = CELL_WIDTH*i;
+							cell.y = CELL_HEIGHT*(-j);
+							mCellsCanvas.addChild(cell);
+							//cell.onCreateComplete();
+							levelManager.gridArray[i][j] = cell;
+							cell.cellX=i;
+							cell.cellY=j;
+
+						}
+					}
+				}
+			}
+
+			public function showJsonMessage(data:String):void
+			{
+				var jsonWindow = new JsonWindow();
+				jsonWindow.openWindow(this as DisplayObject);
+				jsonWindow.setText(data);
+			}
+
+			public function setLevel(aObject:Object, aShowJsonMessage:Boolean = false):void
+			{
+				if (aShowJsonMessage)
+				{
+					showJsonMessage(JSON.stringify(aObject));
+				}
+
+				onNewClick();
+
+				var lLevelVO:LevelVO = new LevelVO(aObject);
+
+				lNameFile.text = lLevelVO.name;
+				levelManager.gridArray = new Array();
+
+				// BoardSize
+				var lBoardSize:Object = lLevelVO.getBoardSize();
+				if (lBoardSize)
+				{
+					BOARD_WIDTH = int(lBoardSize["width"]);
+
+					if (lLevelVO.getObjectiveGlass() > -1)
+					{
+						BOARD_HEIGHT = lLevelVO.getObjectiveGlass();
+					} else {
+						BOARD_HEIGHT = int(lBoardSize["height"]);
+					}
+
+					if (BOARD_WIDTH<=0) BOARD_WIDTH=DefaultValues.FIELD_WIDTH;
+					if (BOARD_HEIGHT<=0) BOARD_HEIGHT=DefaultValues.FIELD_HEIGHT;
+				}
+
+				tiLevelWidth.text = ""+BOARD_WIDTH;
+
+				cellsCanvas.width = CELL_WIDTH*BOARD_WIDTH+15;
+				cellsCanvas.height = CELL_HEIGHT*DefaultValues.FIELD_HEIGHT+2;
+
+				mCellsCanvas.removeAllChildren();
+				mCellsCanvas.y=CELL_HEIGHT*(BOARD_HEIGHT-1);
+
+				var cell:CellViewCanvas;
+				for(var i:int=0; i<BOARD_WIDTH; i++)
+				{
+					levelManager.gridArray[i] = new Array();
+					for(var j:int = 0; j<BOARD_HEIGHT; j++)
+					{
+						cell = new CellViewCanvas();
+						cell.x = CELL_WIDTH*i;
+						cell.y = CELL_HEIGHT*(-j);
+						mCellsCanvas.addChild(cell);
+						cell.onCreateComplete();
+						levelManager.gridArray[i][j] = cell;
+						cell.cellX=i;
+						cell.cellY=j;
+
+						cell.setCellDef();
+
+					}
+				}
+
+				selectionManager.portalLastNum=1;
+
+				// DropStatistic
+				var lStatisticsNormal:ArrayCollection = new ArrayCollection();
+				var lStatisticsEasy:ArrayCollection = new ArrayCollection();
+
+				var lTempStatistics:ArrayCollection;
+
+				var lStatisticsObject:Object = lLevelVO.getStatistics();
+				for (var lStatisticName in lStatisticsObject)
+				{
+					switch(lStatisticName)
+					{
+						case "easy":
+							lTempStatistics = lStatisticsEasy;
+							break;
+						case "normal":
+							lTempStatistics = lStatisticsNormal;
+							break;
+					}
+					for (var lColor:String in lStatisticsObject[lStatisticName])
+					{
+						var ob:Object = PieceColorVO.createDataObjectByName(lColor);
+						if (ob == null)
+						{
+							ob = BlockerVO.createDataObjectByName(lColor);
+						}
+						if (ob)
+						{
+							ob.col = int(lStatisticsObject[lStatisticName][lColor]);
+							lTempStatistics.addItem(ob);
+						}
+					}
+				}
+				dropStatisticPanel.setDropStatistic(lStatisticsNormal, lStatisticsEasy);
+
+				// BackGround
+				setBackGround(lLevelVO.background);
+
+				// Limit
+				if (lLevelVO.getLimitType() == "moves")
+				{
+					rbMoves.selected=true;
+					tiMovesLevel.text = lLevelVO.getLimitValue().toString();
+					tiTimeLevel.text = "1";
+					tiExtraTime.text = "0";
+				} else if (lLevelVO.getLimitType() == "time") {
+					rbTime.selected=true;
+					tiTimeLevel.text = lLevelVO.getLimitValue().toString();
+					tiExtraTime.text = lLevelVO.getExtraTime().toString();
+					tiMovesLevel.text = "1";
+				}
+
+				// Score
+				if (lLevelVO.scores)
+				{
+					tiCountStar1.text = lLevelVO.scores[0];
+					tiCountStar2.text = lLevelVO.scores[1];
+					tiCountStar3.text = lLevelVO.scores[2];
+				}
+
+				// Objectives
+				var lGetColors:Object = lLevelVO.getObjectiveGetColors();
+				var lGetIngridients:Object = lLevelVO.getObjectiveGetIngredients();
+				if (lGetColors)
+				{
+					goalCB.selectedIndex = 3;
+					onGoalCBChange(null);
+					goalCollectionVB.setGetColors(lGetColors);
+
+					if (lLevelVO.getBossSpawnDelay() > -1)
+					{
+						goalCollectionVB.setBossBlockers(lLevelVO.getBossSpawnDelay(), lLevelVO.getBossBlockers());
+					}
+
+					goalCollectionVB.onCollectionUpdated(0);
+				} else if (lLevelVO.getObjectiveClearbacks())
+				{
+					goalCB.selectedIndex = 2;
+				} else if (lLevelVO.getObjectiveToys()){
+					goalCB.selectedIndex = GoalTypes.ID_GOAL_TOYS;
+				} else if (lLevelVO.getObjectiveGlass() > -1)
+				{
+					goalCB.selectedIndex = 4;
+					onGoalCBChange(null);
+					if(goalViewStack){
+						goalViewStack.invalidateDisplayList();
+						goalViewStack.invalidateProperties();
+					}
+					if (tiGoalGlassHeight)
+					{
+						tiGoalGlassHeight.text = "" + BOARD_HEIGHT;
+					} else {
+						DefaultValues.GLASS_HEIGHT_INIT_VALUE = BOARD_HEIGHT;
+					}
+				} else if (lGetIngridients)
+				{
+					goalCB.selectedIndex = 1;
+					onGoalCBChange(null);
+					if(goalViewStack)
+					{
+						goalViewStack.invalidateDisplayList();
+						goalViewStack.invalidateProperties();
+					}
+					mMaxInfield = int(lGetIngridients["max_in_field"]);
+					mMoveDelay = int(lGetIngridients["spawn_delay"]);
+					if(tiMaxInfield){
+						tiMaxInfield.text = ""+mMaxInfield;
+						tiMoveDelay.text = ""+mMoveDelay;
+					}
+
+					var toIL:ArrayCollection = mArrayIngridientsList;
+					for (var lIngridient:String in lGetIngridients["ingredients"])
+					{
+						var aPiece1VO:PieceVO = PieceVO.createPieceFromName(lIngridient);
+						for each(var aObj in toIL)
+						{
+							if(aObj.id == "3_"+aPiece1VO.getType()+"_1")
+							{
+								aObj.number = int(lGetIngridients["ingredients"][lIngridient]);
+								break;
+							}
+						}
+					}
+
+					if(goalIngridientsList){
+						goalIngridientsList.invalidateDisplayList();
+						goalIngridientsList.invalidateList();
+					}
+				} else {
+					//score only
+					goalCB.selectedIndex = 0;
+				}
+				onGoalCBChange(null);
+
+				var aToysArray:Array = new Array();
+
+				for each(var aObj:Object in lLevelVO.toys){
+					var aToy:ToyVO = ToyVO.createToyFromSourceName(aObj["id"]);
+					aToy.rotation = aObj["rotation"];
+					aToysArray.push({toyVO:aToy});
+				}
+
+
+				var lCells:Array = lLevelVO.cells;
+				for each (var lCell:Object in lCells)
+				{
+					var aX:int = lCell["x"];
+					var aY:int = lCell["y"];
+
+					if(lCell["dest_x"])
+					{
+						var aX1:int = lCell["dest_x"];
+						var aY1:int = lCell["dest_y"];
+						(levelManager.gridArray[aX1][aY1] as CellViewCanvas).cellVO.type = CellType.PORTAL_OUT;
+						(levelManager.gridArray[aX][aY] as CellViewCanvas).cellVO.type = CellType.PORTAL_IN;
+
+						selectionManager.state = SelectionManager.PORTAL_OUT_STATE;
+						(levelManager.gridArray[aX1][aY1] as CellViewCanvas).onMouseDown();
+						(levelManager.gridArray[aX][aY] as CellViewCanvas).onMouseDown();
+						selectionManager.portalLastNum++;
+					}
+
+					if(lCell.hasOwnProperty("toy")){
+						var aObj:Object = aToysArray[lCell["toy"]];
+						if(aObj["x"]==null||aObj["x"]>aX) aObj["x"] = aX;
+						if(aObj["y"]==null||aObj["y"]<aY) aObj["y"] = aY;
+						(levelManager.gridArray[aX][aY] as CellViewCanvas).cellVO.toyRefernce = aObj["toyVO"];
+						continue;
+					}
+
+					if(lCell["piece"])
+					{
+						var aSPieceVO:PieceVO = null;
+						switch(lCell["piece"])
+						{
+							case "pastry_bag":
+								aSPieceVO = new PiecePastryBagVO();
+								break;
+							case "rainbow_cupcake":
+								aSPieceVO = new PieceRainbowCupcakeVO();
+								break;
+							case "spatula":
+								aSPieceVO = new PieceSpatulaVO();
+								break;
+							case "random":
+								aSPieceVO = new PieceRandomVO();
+								break;
+							case "blueberry":
+								aSPieceVO = new PieceBlueberryVO();
+								break;
+							case "raspberry":
+								aSPieceVO = new PieceRaspberryVO();
+								break;
+							case "strawberry":
+								aSPieceVO = new PieceStrawberryVO();
+								break;
+							case "physalis":
+								aSPieceVO = new PiecePhysalisVO();
+								break;
+							case "teapot":
+								aSPieceVO = new PieceTeapotVO(PieceTeapotVO.getTypeByName(lCell["color"]), lCell["rotation"]);
+								(aSPieceVO as PieceTeapotVO).count = lCell["count"];
+								(aSPieceVO as PieceTeapotVO).max = lCell["count"];
+								break;
+							default:
+							{
+								var aPieceVO:PieceColorVO = new PieceColorVO();
+								aPieceVO.setType(lCell["piece"]);
+								aPieceVO.setPower(lCell["power"]);
+								aSPieceVO = aPieceVO;
+							}
+						}
+						(levelManager.gridArray[aX][aY] as CellViewCanvas).addPiece(aSPieceVO);
+					}
+
+					if(lCell["blocker"])
+					{
+						var aBlockerVO:BlockerVO = new BlockerVO();
+						var aPower:int=1;
+						if(lCell["power"]>1) aPower = lCell["power"];
+						aBlockerVO.setName(lCell["blocker"], aPower);
+
+
+						(levelManager.gridArray[aX][aY] as CellViewCanvas).addBlocker(aBlockerVO);
+					}
+
+					if (lCell["booster"])
+					{
+						var aBoosterVO:BusterVO = new BusterVO(BusterVO.getTypeByName(lCell["booster"]["type"]));
+						(levelManager.gridArray[aX][aY] as CellViewCanvas).addBooster(aBoosterVO, lCell["booster"]["count"]);
+					}
+
+					if(lCell["back"])
+						(levelManager.gridArray[aX][aY] as CellViewCanvas).addJelly(lCell["back"]);
+					if(lCell["spawn"])
+						(levelManager.gridArray[aX][aY] as CellViewCanvas).addRespawn();
+					if(lCell["ingredient_target"])
+						(levelManager.gridArray[aX][aY] as CellViewCanvas).addCellOut();
+					if(lCell["disabled"])
+						(levelManager.gridArray[aX][aY] as CellViewCanvas).deleteAll();
+				}
+
+				for each(var aObj:Object in aToysArray){
+					var aToy:ToyVO = aObj["toyVO"] as ToyVO;
+					(levelManager.gridArray[aObj["x"]][aObj["y"]] as CellViewCanvas).addToy(aToy);
+				}
+			}
+
+			public function getStatisticsSourceCollection():ArrayCollection
+			{
+				var lStatisticsSourceCollection:ArrayCollection;
+
+				lStatisticsSourceCollection = PieceColorVO.getRegularSource();
+				//lStatisticsSourceCollection.addAll(PieceRainbowCupcakeVO.getAllSource());
+				//lStatisticsSourceCollection.addAll(PieceSpatulaVO.getAllSource());
+				lStatisticsSourceCollection.addAll((new BlockerVO(BlockerType.JELLY)).getAllSource());
+
+				return lStatisticsSourceCollection;
+			}
+
+			private function getDropArray(aStatisticList:ArrayCollection):Array
+			{
+				var aVec:Array= new Array();
+				var aArrayS:ArrayCollection = aStatisticList;
+				for(var a:int=0;a<aArrayS.length;a++)
+					if(int(aArrayS[a].col>0)){
+						aVec.push({col:aArrayS[a].col, id:aArrayS[a].id});
+					}
+				return aVec;
+			}
+
+			private function getDropStatisticAsObject(aStatisticList:ArrayCollection):Object
+			{
+				var lObject:Object;
+				var aArrayS:ArrayCollection = aStatisticList;
+
+				if(aArrayS.length)
+				{
+					lObject = new Object();
+					for(var a:int=0;a<aArrayS.length;a++)
+					{
+						if(int(aArrayS[a].col<=0))
+						{
+							showAlert("Drop statistics one item is empty");
+							return null;
+						}
+						var aPieceColorVO:PieceColorVO = PieceVO.createPieceFromSourceId(aArrayS[a].id) as PieceColorVO;
+						if(aPieceColorVO)
+							lObject[aPieceColorVO.getColorName()] = aArrayS[a].col;
+						else{
+							var aBlockerVO:BlockerVO = BlockerVO.createBlockerFromSourceId(aArrayS[a].id) as BlockerVO;
+							if(aBlockerVO)
+								lObject[aBlockerVO.getName()] = aArrayS[a].col;
+						}
+					}
+				}
+				return lObject;
+			}
+
+			private function onInfo(inEvent:MouseEvent):void
+			{
+				var lLevelVO:LevelVO = getLevel();
+				if (!lLevelVO) return;
+
+				var lLevelStatisticWindow:LevelStatisticWindow = new LevelStatisticWindow();
+				lLevelStatisticWindow.openWindow(this as DisplayObject);
+				lLevelStatisticWindow.setLevel(lLevelVO);
+			}
+
+		]]>
+	</mx:Script>
+	<mx:Canvas id="upperGoalStatistic"  width="100%" height="25" verticalScrollPolicy="off">
+	</mx:Canvas>
+	<mx:ApplicationControlBar width="100%" horizontalCenter="left" >
+		<mx:HBox width="100%">
+			<mx:Button styleName="newButton" id="newLevelBtn" click="onNewClick()"/>
+			<mx:Button styleName="openButton" id="openBtn" />
+			<mx:Button styleName="saveButton" id="saveBtn"/>
+			<mx:Button styleName="chapterButton" id="chapterBtn"/>
+			<mx:Button click="onTestClick()" id="testBtn" styleName="testButton"/>
+			<mx:Button click="onPlayClick(event)" id="playBtn" toggle="true" selected="false" styleName="playButton"/>
+			<mx:Button click="onBack(event)" id="backBtn" styleName="backButton"/>
+			<mx:Button click="onInfo(event)" id="infoBtn" styleName="infoButton"/>
+			<mx:Label id="lNameFile"/>
+		</mx:HBox>
+		<mx:Button id="logoutBtn" styleName="logoutButton"/>
+	</mx:ApplicationControlBar>
+	<mx:HBox width="100%">
+		<mx:VBox id="leftContainer">
+			<mx:Panel width="220" height="100" layout="horizontal" title="Cells" verticalScrollPolicy="off">
+				<mx:TileList width="100%" height="100%" id="CellsTileList" itemRenderer="org.plamee.view.components.TileListImageRenderer" columnCount="{COLUMS_IN_TILE_LIST}" verticalScrollPolicy="off" itemClick="onCellClicked(event)" >
+				</mx:TileList>
+				<mx:ControlBar width="100%" height="26" paddingTop="1" paddingBottom="1">
+					<mx:Button styleName="joinButton" click="onJoinPortalsClick()" />
+				</mx:ControlBar>
+			</mx:Panel>
+			<mx:Panel width="220" height="100" layout="horizontal" title="Respawn" verticalScrollPolicy="off">
+				<mx:TileList width="100%" height="100%" id="RespawnTileList" itemRenderer="org.plamee.view.components.TileListImageRenderer" columnCount="{COLUMS_IN_TILE_LIST}" verticalScrollPolicy="off" itemClick="onCellClicked(event)" >
+				</mx:TileList>
+			</mx:Panel>
+
+			<mx:Panel width="220" height="85" layout="horizontal" title="Back" verticalScrollPolicy="off">
+				<mx:TileList width="100%" height="100%" id="JellyTileList" itemRenderer="org.plamee.view.components.TileListImageRenderer" columnCount="{COLUMS_IN_TILE_LIST}" itemClick="onCellClicked(event)" >
+				</mx:TileList>
+			</mx:Panel>
+			
+			<mx:Panel width="220" height="85" layout="horizontal" title="Toys" verticalScrollPolicy="off">
+				<mx:TileList width="100%" height="100%" id="ToysTileList" itemRenderer="org.plamee.view.components.TileListImageRenderer" columnCount="{COLUMS_IN_TILE_LIST}" itemClick="onCellClicked(event)" >
+				</mx:TileList>
+			</mx:Panel>
+			
+			<mx:Panel width="220" height="220" layout="horizontal" title="Piece">
+				<mx:TabNavigator width="100%" height="100%">
+					<mx:Canvas width="100%" height="100%" label="Regular" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+						<mx:TileList x="0" y="0" width="100%" height="100%" id="PieceTileList" itemRenderer="org.plamee.view.components.TileListImageRenderer" columnCount="{COLUMS_IN_TILE_LIST_PIECES}" itemClick="onCellClicked(event)">
+						</mx:TileList>
+					</mx:Canvas>
+					<mx:Canvas width="100%" height="100%" label="Special" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+						<mx:TileList x="0" y="0" width="100%" height="100%" id="SpecialPieceTileList" itemRenderer="org.plamee.view.components.TileListImageRenderer" columnCount="{COLUMS_IN_TILE_LIST}" creationComplete="onSpecialCreateComplete()" itemClick="onCellClicked(event)">
+						</mx:TileList>
+					</mx:Canvas>
+					<mx:Canvas width="100%" height="100%" label="Ingredients" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+						<mx:TileList x="0" y="0" width="100%" height="100%" id="IngredientsPieceTileList" itemRenderer="org.plamee.view.components.TileListImageRenderer" columnCount="{COLUMS_IN_TILE_LIST}" creationComplete="onIngredientsCreateComplete()" itemClick="onCellClicked(event)">
+						</mx:TileList>
+					</mx:Canvas>
+					<mx:Canvas width="100%" height="100%" label="Teapot" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+						<mx:VBox width="100%" height="120">
+						<mx:HBox>
+							<mx:Label text="count:" width="40" />
+							<mx:TextInput id="tiTeapotCount" width="30" text="1" change="teapotCountTextInput(event)"/>
+							<mx:Label text="max:" width="40" />
+							<mx:TextInput id="tiTeapotMax" width="30" text="1" change="teapotMaxTextInput(event)"/>
+						</mx:HBox>
+						<mx:TileList width="100%" height="100%" id="TeapotTileList" itemRenderer="org.plamee.view.components.TileListImageRenderer" columnCount="{COLUMS_IN_TILE_LIST}" creationComplete="onTeapotCreateComplete()" itemClick="onCellClicked(event)">
+						</mx:TileList>
+						</mx:VBox>
+					</mx:Canvas>
+				</mx:TabNavigator>
+			</mx:Panel>
+
+			<mx:Panel width="220" height="120" layout="horizontal" title="Blockers" verticalScrollPolicy="off">
+				<mx:TileList width="100%" height="100%" id="BlockersTileList" itemRenderer="org.plamee.view.components.TileListImageRenderer" columnCount="{COLUMS_IN_TILE_LIST}" itemClick="onCellClicked(event)">
+				</mx:TileList>
+			</mx:Panel>
+
+			<mx:Panel width="220" height="103" layout="horizontal" title="Backgrounds" verticalScrollPolicy="off">
+				<mx:TileList width="100%" height="100%" id="BackgorundsTileList" itemRenderer="org.plamee.view.components.TileListImageRenderer" columnCount="{COLUMS_IN_TILE_LIST}" itemClick="onCellClickedBackground(event)">
+				</mx:TileList>
+			</mx:Panel>
+
+			<mx:HBox>
+				<mx:Button styleName="deleteButton" click="onDeleteSelected()" />
+				<mx:Button styleName="erreseButton" click="onErreseSelected()" />
+				<mx:Button styleName="rotateButton" click="onRotateSelected()" />
+			</mx:HBox>
+			<mx:Label id="lLabelVersion" text="Version:"/>
+
+		</mx:VBox>
+
+
+		<mx:Canvas id="cellsCanvas" horizontalScrollPolicy="off" verticalScrollPolicy="auto" borderColor="#000000" borderStyle="solid">
+		</mx:Canvas>
+		<mx:VBox id="rightConteiner">
+			<mx:Panel width="220" height="60" layout="vertical" title="Level width">
+				<mx:HBox>
+					<mx:Label text="Width:" />
+					<mx:TextInput id="tiLevelWidth" width="60" text="9" change="textinputInt(event)"/>
+					<mx:Button label="Create" click="onWidthGlass(event)" />
+				</mx:HBox>
+			</mx:Panel>
+			<mx:Panel width="220" height="92" layout="vertical" title="Level type">
+				<mx:RadioButtonGroup id="radiogroup1"/>
+				<mx:HBox>
+					<mx:RadioButton id="rbMoves" label="Moves" selected="true" width="60" groupName="radiogroup1"/>
+					<mx:TextInput id="tiMovesLevel" width="60" text="1" enabled="{rbMoves.selected}" change="textinputInt(event)"/>
+				</mx:HBox>
+				<mx:HBox>
+					<mx:RadioButton id="rbTime" label="Time" width="60" groupName="radiogroup1"/>
+					<mx:TextInput id="tiTimeLevel" width="30" text="1" enabled="{rbTime.selected}" change="textinputInt(event)"/>
+					<mx:Label text="(sec)" />
+					<mx:TextInput id="tiExtraTime" width="30" text="0" enabled="{rbTime.selected}" change="textinputIntZer(event)"/>
+					<mx:Label text="(+5)" />
+				</mx:HBox>
+			</mx:Panel>
+
+			<mx:Panel width="220" height="415" layout="vertical" title="Goal level">
+				<mx:ComboBox width="100%" id="goalCB" creationComplete="onCreateGoalCB()" change="onGoalCBChange(event)" />
+				<mx:ViewStack id="goalViewStack" width="100%" height="100%">
+					<mx:VBox id="goalScoreVB" width="100%" height="100%">
+
+					</mx:VBox>
+					<mx:VBox id="goalIngrigientsVB" width="100%" height="100%">
+						<mx:List id="goalIngridientsList" selectable="false" creationComplete="onCreateGoalIngridientsList()" width="100%" height="100%" itemRenderer="org.plamee.view.components.IngridientListRenderer">
+						</mx:List>
+						<mx:HBox>
+						<mx:Label text="Max Infield:" width="80" />
+						<mx:TextInput id="tiMaxInfield" width="60" text="1" change="textinputInt(event)"/>
+						</mx:HBox>
+						<mx:HBox>
+						<mx:Label text="Spawn Delay:" width="80" />
+						<mx:TextInput id="tiMoveDelay" width="60" text="1" change="textinputInt(event)"/>
+						</mx:HBox>
+					</mx:VBox>
+					<mx:VBox id="goalJellyVB" width="100%" height="100%">
+						<mx:Label text="You need to clear all the cells with the Back." />
+					</mx:VBox>
+					<mx:VBox id="goalToysVB" width="100%" height="100%">
+						<mx:Label text="You need to free all the toys." />
+					</mx:VBox>
+					<mx:HBox id="goalGlassVB" width="100%" height="100%" creationComplete="onCreateGlassBox()">
+						<mx:Label text="Glass height:"/>
+						<mx:TextInput id="tiGoalGlassHeight" width="60" text="50" change="changeHeightGlass(event)"/>
+						<mx:Button label="Create" click="onHeightGlass(event)" />
+					</mx:HBox>
+					
+					<components:GoalCollectionBox id="goalCollectionVB" width="100%" height="100%" />
+				</mx:ViewStack>
+
+				<mx:VBox width="100%" height="90">
+					<mx:HBox>
+						<mx:Image source="@Embed(source='../assets/star1.png')" />
+						<mx:TextInput id="tiCountStar1" width="118" text="0" change="textinputInt(event)"/>
+					</mx:HBox>
+					<mx:HBox>
+						<mx:Image source="@Embed(source='../assets/star2.png')" />
+						<mx:TextInput id="tiCountStar2" width="118" text="0" change="textinputInt(event)"/>
+					</mx:HBox>
+					<mx:HBox>
+						<mx:Image source="@Embed(source='../assets/star3.png')" />
+						<mx:TextInput id="tiCountStar3" width="118" text="0" change="textinputInt(event)"/>
+					</mx:HBox>
+				</mx:VBox>
+			</mx:Panel>
+			
+			<mx:Panel id="panelBoosters" width="220" height="100%" layout="horizontal" title="Boosters" verticalScrollPolicy="off">
+				<mx:VBox width="100%" height="120">
+					<mx:HBox>
+						<mx:Label text="In cell count:" width="100" />
+						<mx:TextInput id="tiBoosterCount" width="60" text="1" change="boostersTextInput(event)"/>
+					</mx:HBox>
+					<mx:TileList width="100%" height="100%" id="BoostersTileList" itemRenderer="org.plamee.view.components.TileListImageRenderer" columnCount="{COLUMS_IN_TILE_LIST}" itemClick="onCellClicked(event)">
+					</mx:TileList>					
+				</mx:VBox>
+			</mx:Panel>
+		</mx:VBox>
+
+		<components:DropStatisticComponent id="dropStatisticPanel" title="Drop statistics" width="220" height="513"/>
+
+	</mx:HBox>
+
+</mx:Application>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" verticalScrollPolicy="off" horizontalScrollPolicy="off" borderColor="#e2e2e2" borderStyle="solid">
+	
+	<mx:Script>
+		<![CDATA[
+			import org.plamee.managers.AssetsManager;
+			protected function textinput1_changeHandler(event:Event):void
+			{
+				data.number=Math.abs(int((event.target as TextInput).text));
+				(event.target as TextInput).text = data.number;
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Image width="{Match3Editor.CELL_WIDTH/2}" height="{Match3Editor.CELL_WIDTH/2}" source="{AssetsManager.getInstance().getImageClass(data.source)}"/>
+	<mx:VBox>
+		<mx:HBox>
+			<mx:Label text="Number" width="65" />
+			<mx:TextInput width="50" change="textinput1_changeHandler(event)" text="{data.number}"/>
+		</mx:HBox>
+		
+	</mx:VBox>	
+</mx:HBox>

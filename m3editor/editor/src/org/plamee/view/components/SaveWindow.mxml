@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" 
+				layout="vertical" 
+				title="Save level"
+				width="680" height="300" showCloseButton="true" close="closeWindow()"
+				creationComplete="onCreateComplete()">
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.CloseEvent;
+			import mx.events.ListEvent;
+			import mx.managers.PopUpManager;
+			
+			import org.plamee.view.events.SaveWindowEvent;
+			
+			public var opened:Boolean = false;
+			private var tempSavedId:int;
+			
+			public var levelsAC:ArrayCollection;
+			
+			private function onCreateComplete():void
+			{
+				exportXML.visible = false;
+				publicCB.visible = false;
+			}
+			
+			public function openWindow(app:DisplayObject):void
+			{
+				if(opened == false)
+				{
+					opened = true;
+					PopUpManager.addPopUp(this, app, true);
+					PopUpManager.centerPopUp(this);
+					this.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+					this.enabled = false;
+				}
+			}
+			
+			public function closeWindow():void
+			{
+				if(opened == true)
+				{
+					opened = false;
+					PopUpManager.removePopUp(this);
+					this.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+				}
+			}
+			
+			private function onKeyDown(e:KeyboardEvent):void
+			{
+				if(e.keyCode == 27) // ESC
+					closeWindow();
+			}
+			
+			
+			public function initList(value:Array):void
+			{
+				this.enabled = true;
+				levelsAC = new ArrayCollection(value);
+				levelsDG.dataProvider = levelsAC;
+			}
+			
+			private function saveLevel():void
+			{
+				if(levelsDG.selectedItem != null)
+				{
+					Alert.show("Are you sure?", "Overwrite level "+levelsDG.selectedItem.name, Alert.YES|Alert.NO, this, alertClickOverrideHandler);
+				}
+				else
+				{
+					if(saveNameTI != null && saveNameTI.text != "")
+					{
+						if(checkIfNameAlradyExits() == true)
+						{
+							Alert.show("Select another level name. This name alrady exits.");
+						}
+						else
+						{	
+							dispatchEvent(new SaveWindowEvent(SaveWindowEvent.SAVE_LEVEL, 0, saveNameTI.text, publicCB.selected, isShowJson));
+							this.enabled = false;
+						}
+						
+					}
+					else
+					{
+						Alert.show("Insert level name");
+					}
+				}
+				
+			}
+			
+			private function checkIfNameAlradyExits():Boolean
+			{
+				if(levelsAC == null)
+					return false;
+				
+				for(var i:int = 0 ; i< levelsAC.length; i++)
+					if(levelsAC.getItemAt(i).name == saveNameTI.text)
+						return true;
+				
+				return false;
+			}
+			
+			private function alertClickOverrideHandler(evt:CloseEvent):void 
+			{
+				if (evt.detail == Alert.YES) 
+				{
+					dispatchEvent(new SaveWindowEvent(SaveWindowEvent.OVERWRITE_LEVEL, levelsDG.selectedItem.id, levelsDG.selectedItem.name, publicCB.selected, isShowJson));
+					this.enabled = false;
+				}
+			}			
+			
+			
+			private function deleteLevel():void
+			{
+				if(levelsDG.selectedItem != null)
+				{
+					Alert.show("Are you sure?", "Delete level", Alert.YES|Alert.NO, this, alertClickHandler);
+				}
+				else
+				{
+					Alert.show("Select level first");
+				}				
+			}
+			
+			private function alertClickHandler(evt:CloseEvent):void 
+			{
+				if (evt.detail == Alert.YES) 
+				{
+					dispatchEvent(new SaveWindowEvent(SaveWindowEvent.DELETE_LEVEL, levelsDG.selectedItem.id));
+					this.enabled = false;
+				}
+			}
+			
+			public function levelDeletedSuccesfuly():void
+			{
+				this.enabled = true;
+				levelsAC.removeItemAt(levelsAC.getItemIndex(levelsDG.selectedItem));
+				levelsAC.refresh();
+			}
+			
+			private function onNameKeyDown():void
+			{
+				levelsDG.selectedItem = null;
+				levelsDG.invalidateDisplayList();
+			}
+			
+			private function onItemClicked(e:ListEvent):void
+			{
+				saveNameTI.text = levelsDG.selectedItem.name;
+				publicCB.selected = levelsDG.selectedItem.is_public;
+			}
+			
+			public function exportLevels(id:int = 0):void
+			{
+				if(exportXML.selected == false)
+					return;
+				
+				tempSavedId = id;
+				Alert.show("Level saved. Press OK for export", "", Alert.OK, null, onExport);
+			}
+			
+			public function onExport(e:Event):void
+			{
+				var levelIds:Array = new Array();
+				
+				if(tempSavedId != 0)
+					levelIds.push(tempSavedId);
+				else if(levelsDG.selectedItem != null)
+					levelIds.push(levelsDG.selectedItem.id);
+				else
+				{
+					Alert.show("Error#454. Try later");
+					return;
+				}
+				
+				var ev:SaveWindowEvent = new SaveWindowEvent(SaveWindowEvent.EXPORT_LEVELS, 0);
+				ev.exportLevelsIds = levelIds
+				dispatchEvent(ev);				
+			}
+			
+			private function get isShowJson():Boolean
+			{
+				return showJsonCB.selected;
+			}
+			
+			
+		]]>
+	</mx:Script>
+	<mx:DataGrid id="levelsDG" width="100%" height="100%" itemClick="onItemClicked(event)" allowMultipleSelection="true">
+		<mx:columns>
+			<mx:DataGridColumn dataField="name" headerText="Name"/>
+			<mx:DataGridColumn dataField="is_public" headerText="Public"/>
+			<mx:DataGridColumn dataField="owner_id" headerText="Issuer"/>
+			<mx:DataGridColumn dataField="created_at" headerText="Created"/>
+			<mx:DataGridColumn dataField="updated_at" headerText="Last Change"/>
+		</mx:columns>
+	</mx:DataGrid>
+	<mx:HBox width="100%">
+		<mx:TextInput text="" id="saveNameTI" width="50%" keyDown="onNameKeyDown()"/>
+		<mx:CheckBox label="Public" id="publicCB" />
+		<mx:CheckBox label="Export XML" id="exportXML" />
+	</mx:HBox>
+	
+	<mx:ControlBar>
+		<mx:Button label="Save" click="saveLevel()" />
+		<mx:Button label="Delete" click="deleteLevel()"/>		
+		<mx:Button label="Cancel" click="closeWindow()"/>
+		<mx:CheckBox label="Show JSON" id="showJsonCB" />
+	</mx:ControlBar>
+</mx:TitleWindow>

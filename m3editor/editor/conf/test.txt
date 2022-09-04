@@ -1,0 +1,1 @@
+host=http://m3e.test.nsk.plamee.com

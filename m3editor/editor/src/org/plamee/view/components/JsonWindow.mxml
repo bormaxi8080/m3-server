@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" 
+				layout="vertical" 
+				title="JSON"
+				width="680" height="500" showCloseButton="true" close="closeWindow()"
+				creationComplete="onCreateComplete()">
+	
+	<mx:Script>
+		<![CDATA[
+		import mx.managers.PopUpManager;
+			
+		public var opened:Boolean = false;
+			
+		private function onCreateComplete():void
+		{
+		
+		}
+		
+		public function openWindow(app:DisplayObject):void
+		{
+			if(opened == false)
+			{
+				opened = true;
+				PopUpManager.addPopUp(this, app, true);
+				PopUpManager.centerPopUp(this);
+				this.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+			}
+		}
+			
+		public function setText(aText:String):void
+		{
+			tf.text = aText;
+		}
+		
+		public function closeWindow():void
+		{
+			if(opened == true)
+			{
+				opened = false;
+				PopUpManager.removePopUp(this);
+				this.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+			}
+		}
+		
+		private function onKeyDown(e:KeyboardEvent):void
+		{
+			if(e.keyCode == 27) // ESC
+				closeWindow();
+		}
+		]]>
+	</mx:Script>
+	<mx:Text id="tf" width="100%" 
+			 text="..."/>
+	
+</mx:TitleWindow>

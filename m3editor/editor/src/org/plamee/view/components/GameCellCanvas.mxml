@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="{Match3Editor.CELL_WIDTH}" height="{Match3Editor.CELL_HEIGHT}" >
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.controls.Image;
+			import mx.controls.Label;
+			
+			import org.plamee.managers.AssetsManager;
+			import org.plamee.managers.SelectionManager;
+			import org.plamee.model.inums.CellType;
+			import org.plamee.model.vo.*;
+			
+			private var _regulalBack:Image;
+			private var _cell:Image;
+			private var _portalConnectLabel:Label;
+			
+			public var mCellVO:CellVO = null;
+			
+			public function setCellVO(inCellVO:CellVO):void
+			{
+				mCellVO = inCellVO;
+				mCellVO.mCanvas = this;
+				
+				_regulalBack = new Image();
+				_regulalBack.source = AssetsManager.getInstance().getImageClass("../assets/back0.png");
+				this.addChild(_regulalBack);
+				
+					_cell = new Image();
+					_cell.width = Match3Editor.CELL_WIDTH;
+					_cell.height = Match3Editor.CELL_HEIGHT;
+					_cell.x = 0;
+					_cell.y = 0;
+					this.addChild(_cell);
+					
+					_portalConnectLabel = new Label();
+					_portalConnectLabel.width = 14;
+					_portalConnectLabel.height = 14;
+					_portalConnectLabel.x = 5;
+					_portalConnectLabel.y = 5;
+					this.addChild(_portalConnectLabel);
+					
+					
+				
+				if(inCellVO.type != CellType.EMPTY){
+					_cell.source = AssetsManager.getInstance().getImageClass(inCellVO.getStringSource());
+				}
+			}			
+		]]>
+	</mx:Script>
+</mx:Canvas>

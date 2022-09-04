@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+		  xmlns:components="org.plamee.view.components.*" creationComplete="onCreateCollectionVB()" >
+	
+	<mx:Script>
+		<![CDATA[
+        import mx.collections.ArrayCollection;
+
+        import org.plamee.model.vo.BlockerVO;
+        import org.plamee.model.vo.PieceColorVO;
+        import org.plamee.model.vo.PieceRainbowCupcakeVO;
+        import org.plamee.model.vo.PieceSpecialCombinationVO;
+        import org.plamee.model.vo.PieceVO;
+        import org.plamee.model.inums.DefaultValues;
+
+        private var mArrayCollectionGetColorsCB:ArrayCollection = null;
+        private var mArrayCollectionBossBlockersCB:ArrayCollection = null;
+        private var mArrayCollectionGetColorsList:ArrayCollection = null;
+        private var mArrayCollectionBossBlockersList:ArrayCollection = null;
+        private var fCreated:Boolean;
+        private var fBossEnabledOnCreation:Boolean;
+
+        public function get collectionGetColorsList():ArrayCollection {
+            return mArrayCollectionGetColorsList;
+        }
+
+        public function get collectionBossBlockersList():ArrayCollection {
+            return mArrayCollectionBossBlockersList;
+        }
+
+        public function get isBossSelected():Boolean {
+            return bossCB.selected;
+        }
+
+        public function get bossFrequency():int {
+            if (tiBossFrequency) {
+                return int(tiBossFrequency.text);
+            }
+            return DefaultValues.BOSS_FREQUENCY_INIT_VALUE;
+        }
+
+        public function set bossFrequency(aValue:int):void {
+            if (tiBossFrequency) {
+                tiBossFrequency.text = aValue.toString();
+            } else {
+                DefaultValues.BOSS_FREQUENCY_INIT_VALUE = aValue;
+            }
+        }
+
+        public function clear():void {
+            mArrayCollectionGetColorsCB = null;
+            mArrayCollectionBossBlockersCB = null;
+            mArrayCollectionGetColorsList = null;
+            mArrayCollectionBossBlockersList = null;
+            onCreateGoalCollectionCB();
+            onCreateGoalCollectionGetColorsList();
+            onCreateGoalCollectionBossBlockersList();
+
+            if (!fCreated) return;
+
+            bossFrequency = DefaultValues.BOSS_FREQUENCY;
+            tiBossFrequency.enabled = false;
+            bossCB.selected = false;
+            collectionStatistic.selectedIndex = 0;
+            onCollectionUpdated(0);
+            collectionStatistic.enabled = false;
+        }
+
+        public function setGetColors(aGetColors:Object):void {
+            for each (var lGetColor:Object in aGetColors) {
+                var ob:Object = null;
+                for each(var aOb:Object in mArrayCollectionGetColorsCB) {
+                    var lPieceVO:PieceVO = PieceVO.createPieceFromSourceId(aOb.id);
+                    if (lPieceVO && lPieceVO.getName() == lGetColor["piece"]) {
+                        if (lGetColor["power"] && (lPieceVO as PieceColorVO).getPower() == lGetColor["power"] || !lGetColor["power"]) {
+                            ob = aOb;
+                            break;
+                        }
+                    }
+                }
+                mArrayCollectionGetColorsCB.removeItemAt(mArrayCollectionGetColorsCB.getItemIndex(ob));
+                ob.col = int(lGetColor["count"]);
+
+                mArrayCollectionGetColorsList.addItem(ob);
+            }
+        }
+
+        public function setBossBlockers(aBossFrequency:int, aBossBlockers:Object):void {
+            if (fCreated) {
+                collectionStatistic.enabled = true;
+                bossCB.selected = true;
+            } else {
+                fBossEnabledOnCreation = true;
+            }
+            bossFrequency = aBossFrequency;
+
+            for (var lBlocker:String in aBossBlockers) {
+                var ob:Object = null;
+                for each(var aOb:Object in mArrayCollectionBossBlockersCB) {
+                    var lBlockerVO:BlockerVO = BlockerVO.createBlockerFromSourceId(aOb.id);
+                    if (lBlockerVO && lBlockerVO.getName() == lBlocker) {
+                        ob = aOb;
+                        break;
+                    }
+                }
+                mArrayCollectionBossBlockersCB.removeItemAt(mArrayCollectionBossBlockersCB.getItemIndex(ob));
+                ob.col = int(aBossBlockers[lBlocker]);
+
+                mArrayCollectionBossBlockersList.addItem(ob);
+            }
+        }
+
+        private function onCreateGoalCollectionCB():void {
+            if (mArrayCollectionGetColorsCB == null) {
+                mArrayCollectionGetColorsCB = PieceColorVO.getAllSource();
+                mArrayCollectionGetColorsCB.addAll(PieceRainbowCupcakeVO.getAllSource());
+                mArrayCollectionGetColorsCB.addAll(PieceSpecialCombinationVO.getAllSource());
+            }
+            if (mArrayCollectionBossBlockersCB == null) {
+                mArrayCollectionBossBlockersCB = BlockerVO.getAllSource();
+            }
+            if (goalCollectionRegularCB)
+                goalCollectionRegularCB.dataProvider = mArrayCollectionGetColorsCB;
+        }
+
+        private function onCreateGoalCollectionGetColorsList():void {
+            if (mArrayCollectionGetColorsList == null)
+                mArrayCollectionGetColorsList = new ArrayCollection();
+
+            if (goalCollectionSpesialList)
+                goalCollectionSpesialList.dataProvider = mArrayCollectionGetColorsList;
+        }
+
+        private function onCreateGoalCollectionBossBlockersList():void {
+            if (mArrayCollectionBossBlockersList == null)
+                mArrayCollectionBossBlockersList = new ArrayCollection();
+
+            if (goalCollectionBossList)
+                goalCollectionBossList.dataProvider = mArrayCollectionBossBlockersList;
+        }
+
+        private function onPlusCollectionClick():void {
+            var fromAC:ArrayCollection = goalCollectionRegularCB.dataProvider as ArrayCollection;
+            if (fromAC.length == 0) return;
+            var ob:Object = goalCollectionRegularCB.selectedItem;
+            ob.col = int(collectionNumTI.text);
+            if (ob.col <= 0) {
+                parentDocument.showAlert("Collection NUMBER must be greater than zero");
+                return;
+            }
+            fromAC.removeItemAt(fromAC.getItemIndex(ob));
+
+            var toAC:ArrayCollection = (collectionStatistic.selectedIndex == 0) ? goalCollectionSpesialList.dataProvider as ArrayCollection : goalCollectionBossList.dataProvider as ArrayCollection;
+            toAC.addItem(ob);
+
+            goalCollectionRegularCB.selectedIndex = 0;
+            collectionNumTI.text = "1";
+
+            goalCollectionRegularCB.invalidateDisplayList();
+            goalCollectionSpesialList.invalidateDisplayList();
+            goalCollectionBossList.invalidateDisplayList();
+
+            collectionNumTI.setFocus();
+        }
+
+        public function removeCollectionFromList(value:Object):void {
+            var toAC:ArrayCollection = goalCollectionSpesialList.dataProvider as ArrayCollection;
+            toAC.removeItemAt(toAC.getItemIndex(value));
+
+            var fromAC:ArrayCollection = goalCollectionRegularCB.dataProvider as ArrayCollection;
+            fromAC.addItem(value);
+
+            goalCollectionRegularCB.selectedIndex = 0;
+
+            goalCollectionRegularCB.invalidateDisplayList();
+            goalCollectionSpesialList.invalidateDisplayList();
+        }
+
+        public function removeStatisticsFromList(value:Object):void {
+            var toAC:ArrayCollection = goalCollectionBossList.dataProvider as ArrayCollection;
+            toAC.removeItemAt(toAC.getItemIndex(value));
+
+            var fromAC:ArrayCollection = goalCollectionRegularCB.dataProvider as ArrayCollection;
+            fromAC.addItem(value);
+
+            goalCollectionRegularCB.selectedIndex = 0;
+
+            goalCollectionRegularCB.invalidateDisplayList();
+            goalCollectionBossList.invalidateDisplayList();
+        }
+
+        private function changeBoss(e:Event):void {
+            tiBossFrequency.enabled = bossCB.selected;
+
+            if (!bossCB.selected) {
+                collectionStatistic.selectedIndex = 0;
+                onCollectionUpdated(0);
+                collectionStatistic.enabled = false;
+            } else {
+                collectionStatistic.enabled = true;
+            }
+        }
+
+        private function collectionStatisticChoosedHandler(e:Event):void {
+            onCollectionUpdated(collectionStatistic.selectedIndex);
+        }
+
+        public function onCollectionUpdated(aSelected:int):void {
+            if (!fCreated) return;
+
+            switch (aSelected) {
+                case 0:
+                {
+                    if (this.contains(goalCollectionBossList)) removeElement(goalCollectionBossList);
+                    addElement(goalCollectionSpesialList);
+                    goalCollectionRegularCB.dataProvider = mArrayCollectionGetColorsCB;
+                    break;
+                }
+                case 1:
+                {
+                    addElement(goalCollectionBossList);
+                    if (this.contains(goalCollectionSpesialList)) removeElement(goalCollectionSpesialList);
+                    goalCollectionRegularCB.dataProvider = mArrayCollectionBossBlockersCB;
+                    break;
+                }
+            }
+            collectionNumTI.text = "1";
+            goalCollectionRegularCB.selectedIndex = 0;
+            goalCollectionRegularCB.invalidateDisplayList();
+        }
+
+        private function onCreateCollectionVB():void {
+            fCreated = true;
+
+            if (fBossEnabledOnCreation) {
+                collectionStatistic.enabled = true;
+                bossCB.selected = true;
+                fBossEnabledOnCreation = false;
+            } else {
+                bossCB.selected = false;
+                tiBossFrequency.enabled = false;
+                collectionStatistic.enabled = false;
+            }
+
+            bossFrequency = DefaultValues.BOSS_FREQUENCY_INIT_VALUE;
+
+            if (this.contains(goalCollectionBossList)) {
+                removeElement(goalCollectionBossList);
+            }
+        }
+        ]]>
+	</mx:Script>
+	
+		<mx:HBox>
+			<mx:CheckBox label="Boss" id="bossCB" change="changeBoss(event)" />
+			
+			<mx:Label text="Blocker freq:" width="80" />
+			<mx:TextInput id="tiBossFrequency" width="60" text="1" change="parentDocument.textinputInt(event)"/>
+		</mx:HBox>
+		
+		<mx:ToggleButtonBar id="collectionStatistic" itemClick="collectionStatisticChoosedHandler(event);">
+			<mx:dataProvider>
+				<mx:Array>
+					<mx:String>Combinations</mx:String>
+					<mx:String>Boss</mx:String>
+				</mx:Array>
+			</mx:dataProvider>
+		</mx:ToggleButtonBar>
+		
+		<mx:HBox>
+			<components:ImageComboBox id="goalCollectionRegularCB" width="60" creationComplete="onCreateGoalCollectionCB()">
+				<components:itemRenderer>
+					<mx:Component>
+						<mx:Image source="{AssetsManager.getInstance().getImageClass(data.source)}" >
+							<mx:Script>
+								<![CDATA[
+									import org.plamee.managers.AssetsManager;
+								]]>
+							</mx:Script>
+						</mx:Image>
+						
+					</mx:Component>
+				</components:itemRenderer>
+			</components:ImageComboBox>
+			<mx:TextInput id="collectionNumTI" width="60" text="1" change="parentDocument.textinputInt(event)"/>
+			<mx:Button styleName="plusButton" click="onPlusCollectionClick()" />
+		</mx:HBox>
+		
+		<mx:List id="goalCollectionSpesialList" selectable="false" borderColor="#3d3d3d" borderStyle="solid" width="100%" height="100%" creationComplete="onCreateGoalCollectionGetColorsList()" itemRenderer="org.plamee.view.components.CollectionListRenderer"/>
+		<mx:List id="goalCollectionBossList" selectable="false" borderColor="#3d3d3d" borderStyle="solid" width="100%" height="100%" creationComplete="onCreateGoalCollectionBossBlockersList()" itemRenderer="org.plamee.view.components.StatisticsListRenderer"/>
+		
+	</mx:VBox>
+
+
